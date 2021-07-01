@@ -1,0 +1,14 @@
+{
+	"Targets": [
+		{
+			"Name": "Template",
+			"Path": "D:\\Other\\Template\\Source\\Template.Target.cs",
+			"Type": "Game"
+		},
+		{
+			"Name": "TemplateEditor",
+			"Path": "D:\\Other\\Template\\Source\\TemplateEditor.Target.cs",
+			"Type": "Editor"
+		}
+	]
+}
