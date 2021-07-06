@@ -1,129 +1,65 @@
+<!--
+    THIS EXAMPLE WAS DOWNLOADED FROM https://echarts.apache.org/examples/zh/editor.html?c=line-smooth
+-->
 <!DOCTYPE html>
-<html lang="en">
+<html style="height: 100%">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body style="height: 100%; margin: 0">
+        <div id="container" style="height: 100%"></div>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>统计图表</title>
-  <script src="echarts.min.js"></script>
-  <script src="getQueryVariable.js"></script>
-</head>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+        <!-- Uncomment this line if you want to dataTool extension
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/extension/dataTool.min.js"></script>
+        -->
+        <!-- Uncomment this line if you want to use gl extension
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-gl@2/dist/echarts-gl.min.js"></script>
+        -->
+        <!-- Uncomment this line if you want to echarts-stat extension
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-stat@latest/dist/ecStat.min.js"></script>
+        -->
+        <!-- Uncomment this line if you want to use map
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/map/js/china.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/map/js/world.js"></script>
+        -->
+        <!-- Uncomment these two lines if you want to use bmap extension
+        <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=<Your Key Here>"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/extension/bmap.min.js"></script>
+        -->
 
-<body style="overflow: hidden;">
-  <!-- 页面主体部分 -->
-  <div id="panel" style="position: absolute;width: 100%;height: 100%;
-    top: 50%;left: 50%;transform: translate(-50%, -50%);">
-  </div>
-  <script>
-    var myChart = echarts.init(document.getElementById("panel"));
-    var DataXAxis = getQueryVariable("DataXAxis");
-    var DataYAxis = getQueryVariable("DataYAxis");
-    // 2. 指定配置项和数据
-    var option = {
-      //color: "#4682B4",
-      tooltip: {
-        trigger: "axis",
-        axisPointer: {
-          // 坐标轴指示器，坐标轴触发有效
-          type: "shadow" // 默认为直线，可选为：'line' | 'shadow'
-        }
-      },
-      // legend: {
-      // },
-      // 修改图表的大小
-      grid: {
-        left: "3%",
-        top: "4%",
-        right: "3%",
-        bottom: "4%",
-        containLabel: true
-      },
-      xAxis: [
-        {
-          type: "category",
-          data: DataXAxis.split(','),
-          axisTick: {
-            alignWithLabel: false
-          },
-          // 修改刻度标签 相关样式
-          axisLabel: {
-            color: "rgba(255,255,255,.8) ",
-            interval: 0,
-            // rotate: 20,
-            fontSize: "12"
-          },
-          // 不显示x坐标轴的样式
-          axisLine: {
-            show: false
-          },
-          axisTick: {
-            //x轴刻度相关设置
-            show: false
-          }
-        }
-      ],
-      yAxis: [
-        {
-          type: "value",
-          // 修改刻度标签相关样式
-          axisLabel: {
-            color: "rgba(255,255,255,.8) ",
-            fontSize: 12
-          },
-          // y轴的线条改为了2像素
-          axisLine: {
-            lineStyle: {
-              color: "rgba(255,255,255,.1)",
-              width: 2
-            }
-          },
-          // y轴分割线的颜色
-          splitLine: {
-            lineStyle: {
-              color: "rgba(255,255,255,.1)"
-            }
-          },
-          axisTick: {
-            //y轴刻度相关设置
-            show: false
-          }
-        }
-      ],
-      series: [
-        {
-          name: "销量",
-          type: "bar",
-          barWidth: "50%",
-          data: DataYAxis.split(','),
-          itemStyle: {
-            normal: {
-              // 修改柱子圆角
-              barBorderRadius: [0, 0, 10, 10],
-              //自定义柱形渐变色
-              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                offset: 0,
-                color: "rgb(0,255,255)"
-              }, {
-                offset: 1,
-                color: "rgb(89,0,233)"
-              }]),
-            }
-          },
-          showBackground: true,
-          backgroundStyle: {
-            borderRadius: [0, 0, 10, 10],
-            color: 'rgba(180, 180, 180, 0.1)'
-          }
-        }
-      ]
-    };
-    // 3. 把配置项给实例对象
+        <script type="text/javascript">
+var dom = document.getElementById("container");
+var myChart = echarts.init(dom);
+var app = {};
+
+var option;
+option = {
+    grid:
+{
+top:0,bottom:0
+},
+
+
+    xAxis: {
+        type: 'category',
+        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    },
+    yAxis: {
+        type: 'value'
+    },
+    series: [{
+        data: [820, 932, 901, 934, 1290, 1330, 1320],
+        type: 'line',
+        smooth: true,
+	areaStyle: {}
+    }]
+};
+
+if (option && typeof option === 'object') {
     myChart.setOption(option);
-    // 4. 让图表跟随屏幕自动的去适应
-    window.addEventListener("resize", function () {
-      myChart.resize();
-    });
-  </script>
-</body>
+}
 
+        </script>
+    </body>
 </html>
