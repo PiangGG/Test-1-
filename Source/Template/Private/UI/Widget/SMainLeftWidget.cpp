@@ -2,17 +2,22 @@
 
 
 #include "UI/Widget/SMainLeftWidget.h"
-
 #include "SlateOptMacros.h"
 
 BEGIN_SLATE_FUNCTION_BUILD_OPTIMIZATION
 void SMainLeftWidget::Construct(const FArguments& InArgs)
 {
-	/*
+	
 	ChildSlot
 	[
 		// Populate the widget
+		SNew(SOverlay)
+		+SOverlay::Slot()//Left
+		[
+			SNew(SVerticalBox)
+			//.
+		]
 	];
-	*/
+	
 }
 END_SLATE_FUNCTION_BUILD_OPTIMIZATION
