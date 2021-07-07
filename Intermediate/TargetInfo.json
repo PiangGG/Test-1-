@@ -1,0 +1,14 @@
+{
+	"Targets": [
+		{
+			"Name": "LFS",
+			"Path": "D:\\Code\\unrealengine\\LFS\\Source\\LFS.Target.cs",
+			"Type": "Game"
+		},
+		{
+			"Name": "LFSEditor",
+			"Path": "D:\\Code\\unrealengine\\LFS\\Source\\LFSEditor.Target.cs",
+			"Type": "Editor"
+		}
+	]
+}
