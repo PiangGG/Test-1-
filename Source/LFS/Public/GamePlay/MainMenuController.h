@@ -9,9 +9,22 @@
 /**
  * 
  */
+UENUM()
+enum ControllerLocation
+{
+	Main,
+	Todao
+};
 UCLASS()
 class LFS_API AMainMenuController : public APlayerController
 {
 	GENERATED_BODY()
+public:
+	AMainMenuController();
+
+	void ChangeControllerLocation(ControllerLocation NewLocation);
 	
+private:
+	
+	ControllerLocation controllerLocation=ControllerLocation::Main;
 };

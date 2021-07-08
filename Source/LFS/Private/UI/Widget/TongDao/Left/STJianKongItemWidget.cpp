@@ -16,6 +16,8 @@ void STJianKongItemWidget::Construct(const FArguments& InArgs)
 	ChildSlot
 	[
 		SNew(SBox)
+		.WidthOverride(300.0f)
+		.HeightOverride(300.0f)
 		[
 			SNew(SOverlay)
 			+SOverlay::Slot()

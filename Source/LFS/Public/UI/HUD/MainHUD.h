@@ -17,4 +17,6 @@ public:
 	AMainHUD();
 	
 	TSharedPtr<class SMainWidget> MainWidget;
+	
+	TSharedPtr<class STodaoMainWidget> TodaoMainWidget;
 };
