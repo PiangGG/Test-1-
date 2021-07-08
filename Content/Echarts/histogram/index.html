@@ -1,0 +1,44 @@
+<html>
+ <head>
+ <meta charset ="utf-8">
+ <!-- char字符 set集  字符集，使用UTF-8编码，浏览器上可以显示各国语言的文字，不必下载相关语言支持包 -->
+ <meta name="viewport" content="width=device-width,initial-scale=1.0">
+ <!--viewport窗口，width设置网页布局宽度，device-width为设备物理宽度，initial-scale设置初始缩放值  -->
+ <style>
+     .box{
+         width: 100%;
+         height: 100%;
+     }
+ </style>
+ </head>
+ <body>
+     <div class="box"></div>
+     <!-- 引入echarts 图表 -->
+     <script src='echarts.min.js'></script>
+     <script>
+        //  初始化实例对象 echarts.init(DOM容器)
+         var xtesla = echarts.init(document.querySelector(".box"));
+         //指定配置项和数据
+
+     option = {
+    xAxis: {
+        type: 'category',
+        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    },
+    yAxis: {
+        type: 'value'
+    },
+    series: [{
+        data: [820, 932, 901, 934, 1290, 1330, 1320],
+        type: 'line',
+  	areaStyle: {},
+        smooth: true
+    }]
+};
+         // 将配置项设置给echarts实例对象
+          xtesla.setOption(option);
+
+       
+     </script>
+ </body>
+</html>

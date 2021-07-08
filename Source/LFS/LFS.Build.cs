@@ -9,7 +9,7 @@ public class LFS : ModuleRules
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 	
 		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore","Json",
-			"JsonUtilities"});
+			"JsonUtilities","WebBrowser","WebBrowserWidget"});
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
 

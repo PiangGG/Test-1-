@@ -2,7 +2,8 @@
 
 
 #include "UI/HUD/MainHUD.h"
-#include "UI/Widget/Mian/SMainWidget.h"
+
+#include "UI/Widget/Main/SMainWidget.h"
 
 AMainHUD::AMainHUD()
 {

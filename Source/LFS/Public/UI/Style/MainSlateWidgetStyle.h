@@ -56,13 +56,29 @@ public:
 	FSlateBrush StateIcon_2;
 	UPROPERTY(EditAnywhere,Category=Image)
 	FSlateBrush StateIcon_3;
+	UPROPERTY(EditAnywhere,Category=Image)
+	FSlateBrush HuanImmageSlateBrush;
 	
 	//Main Right
 	UPROPERTY(EditAnywhere,Category=Image)
 	FSlateBrush Main_Right_BG;
+	UPROPERTY(EditAnywhere,Category=Image)
+	FSlateBrush Main_Right_Infotitle;
+	UPROPERTY(EditAnywhere,Category=Image)
+	FSlateBrush Main_Right_Buttom_Icon;
+	
 	//Main Bottom
 	UPROPERTY(EditAnywhere,Category=Image)
 	FSlateBrush Main_Bottom_BG;
+	UPROPERTY(EditAnywhere,Category=Image)
+	FSlateBrush ButtomIcon_1;
+	UPROPERTY(EditAnywhere,Category=Image)
+	FSlateBrush ButtomIcon_2;
+	UPROPERTY(EditAnywhere,Category=Image)
+	FSlateBrush ButtomIcon_3;
+	UPROPERTY(EditAnywhere,Category=Image)
+	FSlateBrush ButtomIcon_4;
+	
 	//Main Windows
 	UPROPERTY(EditAnywhere,Category=Image)
 	FSlateBrush Main_Window;
