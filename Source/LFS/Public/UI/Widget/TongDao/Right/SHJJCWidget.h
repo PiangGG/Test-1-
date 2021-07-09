@@ -8,24 +8,20 @@
 /**
  * 
  */
-class LFS_API SHuanWidget : public SCompoundWidget
+class LFS_API SHJJCWidget : public SCompoundWidget
 {
 public:
-	SLATE_BEGIN_ARGS(SHuanWidget)
+	SLATE_BEGIN_ARGS(SHJJCWidget)
 	{}
-	SLATE_ATTRIBUTE(FString,Name)
-	SLATE_ATTRIBUTE(float,number)
 	SLATE_END_ARGS()
 
 	/** Constructs this widget with InArgs */
 	void Construct(const FArguments& InArgs);
+
 	//引入Sytle|获取MenuStyle
 	const struct FMainSlateStyle* MainStyle;
-	
-	UMaterialInstance* MaterialInstance;
 
-	float number=0.0f;
-	FString Name;
-	TSharedPtr<class SImage> HuanImage;
-	FSlateBrush* SlateBrush;
+	TSharedPtr<class SHuanWidget> HuanWidget_Wendu;
+	TSharedPtr<class SHuanWidget> HuanWidget_ShuiWei;
+	TSharedPtr<class SHuanWidget> HuanWidget_Yangan;
 };

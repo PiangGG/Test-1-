@@ -17,4 +17,11 @@ public:
 
 	/** Constructs this widget with InArgs */
 	void Construct(const FArguments& InArgs);
+
+	//引入Sytle|获取MenuStyle
+	const struct FMainSlateStyle* MainStyle;
+
+	TSharedPtr<class SHJJCWidget> HJJCWidget;
+	TSharedPtr<class SSBZXWidget> SBZXWidget;
+	TSharedPtr<class SGJZTWidget> GJZTWidget;
 };

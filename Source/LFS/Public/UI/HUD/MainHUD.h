@@ -9,6 +9,11 @@
 /**
  * 
  */
+UENUM()
+enum HUDStateEnum
+{
+	Null,Main,TongDao
+};
 UCLASS()
 class LFS_API AMainHUD : public AHUD
 {
@@ -19,4 +24,9 @@ public:
 	TSharedPtr<class SMainWidget> MainWidget;
 	
 	TSharedPtr<class STodaoMainWidget> TodaoMainWidget;
+	HUDStateEnum CurrentState=HUDStateEnum::Null;
+	void ChangeHUDState(HUDStateEnum newState);
+
+	protected:
+	virtual void BeginPlay() override;
 };
