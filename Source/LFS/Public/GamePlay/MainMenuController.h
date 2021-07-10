@@ -25,6 +25,23 @@ public:
 	void ChangeControllerLocation(ControllerLocation NewLocation);
 	
 private:
-	
 	ControllerLocation controllerLocation=ControllerLocation::Main;
+protected:
+	virtual void BeginPlay() override;
+	virtual void SetupInputComponent() override;
+	void MoveForward(float var);
+	void MoveRight(float var);
+	void Turn(float var);
+	void Lookup(float var);
+
+	void ShowMouse();
+	void MouseOnclick_Left();
+	void FocusActor(AActor *actor);
+
+	//鼠标位置发射一个射线
+	class AActorObject* GetMouseOnClicActor();
+	
+	class AActorObject* MouseOnClicActor = nullptr;
+
 };
+

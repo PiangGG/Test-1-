@@ -87,6 +87,12 @@ public:
 
 	UPROPERTY(EditAnywhere,Category=ButtonStyle)
 	FButtonStyle ButtonStyle_DMY;
+
+	//ButtonStyle
+	UPROPERTY(EditAnywhere,Category=ButtonStyle)
+	FButtonStyle SelecdButtonStyle;
+	UPROPERTY(EditAnywhere,Category=ButtonStyle)
+	FButtonStyle NotSelecdButtonStyle;
 };
 
 /**
