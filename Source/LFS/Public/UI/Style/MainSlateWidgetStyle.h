@@ -93,6 +93,14 @@ public:
 	FButtonStyle SelecdButtonStyle;
 	UPROPERTY(EditAnywhere,Category=ButtonStyle)
 	FButtonStyle NotSelecdButtonStyle;
+
+	//InRoom
+	UPROPERTY(EditAnywhere,Category=Image)
+	FSlateBrush InRoomplan;
+
+	//ObjectActorInfo
+	UPROPERTY(EditAnywhere,Category=Image)
+	FSlateBrush ObjectActorInfo_BG;
 };
 
 /**

@@ -26,7 +26,6 @@ void SMainLeftWidget::Construct(const FArguments& InArgs)
 				.Image(&MainStyle->Main_Left_BG)
 			]
 			+SOverlay::Slot()
-			
 			.VAlign(VAlign_Top)
 			.HAlign(HAlign_Fill)
 			.Padding(FMargin(30,20,0,0))

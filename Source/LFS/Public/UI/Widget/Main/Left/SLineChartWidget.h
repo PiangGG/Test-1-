@@ -40,7 +40,9 @@ public:
 	float GetCurrentTotalload_Num();
 	void SetCurrentTotalload_Num(float var);
 
-	void ButtonOnclick();
+	//void ButtonOnclick();
 
-
+	FReply Button_Day_OnClick();
+	FReply Button_Month_OnClick();
+	FReply Button_Year_OnClick();
 };

@@ -110,7 +110,7 @@ void SLineChartWidget::Construct(const FArguments& InArgs)
 			[
 				SAssignNew(Button_Day,SButton)
 				.ButtonStyle(&MainStyle->ButtonStyle_DMY)
-				//.OnClicked(this,&SLineChartWidget::ButtonOnclick)
+				.OnClicked(this,&SLineChartWidget::Button_Day_OnClick)
 			]
 		];
 		DMY_GridPanel->AddSlot(1,0)
@@ -128,6 +128,7 @@ void SLineChartWidget::Construct(const FArguments& InArgs)
 			[
 				SAssignNew(Button_Day,SButton)
 				.ButtonStyle(&MainStyle->ButtonStyle_DMY)
+				.OnClicked(this,&SLineChartWidget::Button_Month_OnClick)
 			]
 		];
 		DMY_GridPanel->AddSlot(2,0)
@@ -145,6 +146,7 @@ void SLineChartWidget::Construct(const FArguments& InArgs)
 			[
 				SAssignNew(Button_Day,SButton)
 				.ButtonStyle(&MainStyle->ButtonStyle_DMY)
+				.OnClicked(this,&SLineChartWidget::Button_Year_OnClick)
 			]
 		];
 		if (EChart_WebBrowser)
@@ -153,15 +155,6 @@ void SLineChartWidget::Construct(const FArguments& InArgs)
 			EChart_WebBrowser->LoadURL(URL);
 			UE_LOG(LogTemp,Warning,TEXT("%s"),*URL);
 		}
-	}
-}
-
-void SLineChartWidget::ButtonOnclick()
-{
-	//switch (EXPRESSION) {  }
-	if (GEngine)
-	{
-		GEngine->AddOnScreenDebugMessage(-1,3.0,FColor::Yellow,FString("OnClick"));
 	}
 }
 
@@ -174,6 +167,33 @@ void SLineChartWidget::SetCurrentTotalload_Num(float var)
 {
 	CurrentTotalload_Num=var;
 	return;
+}
+
+FReply SLineChartWidget::Button_Day_OnClick()
+{
+	if (GEngine)
+	{
+		GEngine->AddOnScreenDebugMessage(-1,3.0,FColor::Yellow,FString("当日"));
+	}
+	return FReply::Handled();
+}
+
+FReply SLineChartWidget::Button_Month_OnClick()
+{
+	if (GEngine)
+	{
+		GEngine->AddOnScreenDebugMessage(-1,3.0,FColor::Yellow,FString("月度"));
+	}
+	return FReply::Handled();
+}
+
+FReply SLineChartWidget::Button_Year_OnClick()
+{
+	if (GEngine)
+	{
+		GEngine->AddOnScreenDebugMessage(-1,3.0,FColor::Yellow,FString("年度"));
+	}
+	return FReply::Handled();
 }
 
 END_SLATE_FUNCTION_BUILD_OPTIMIZATION

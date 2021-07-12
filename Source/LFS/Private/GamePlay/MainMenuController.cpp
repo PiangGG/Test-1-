@@ -53,7 +53,21 @@ void AMainMenuController::MouseOnclick_Left()
 		MouseOnClicActor=GetMouseOnClicActor();
 		if (MouseOnClicActor)
 		{
-			Cast<AMainHUD>(GetHUD())->ShowInfoWidget();
+			switch (MouseOnClicActor->GetObjectEnum())
+			{
+				case Cable:
+					Cast<AMainHUD>(GetHUD())->ShowCableInfoWidget();
+					break;
+				
+				case BatteryModule:
+					Cast<AMainHUD>(GetHUD())->ShowBatteryModuleInfoWidget();
+					break;
+					
+				default:
+					Cast<AMainHUD>(GetHUD())->ShowInfoWidget();
+				 break;
+			}
+			
 		}else
 		{
 			Cast<AMainHUD>(GetHUD())->HideInfoWidget();

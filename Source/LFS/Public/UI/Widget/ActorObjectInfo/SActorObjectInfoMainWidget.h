@@ -27,6 +27,19 @@ public:
 	TSharedPtr<class SButton> Button_YXSJ;
 	TSharedPtr<class SButton> Button_DLGZ;
 
+	//容器面板
+	TSharedPtr<class SOverlay> Content;
 	//信息面板
-	TSharedPtr<class SDLXXWidget> DLXXWidget;
+	TSharedPtr<class SDLXXWidget> DLXXWidget;//电缆信息
+	//TSharedPtr<class SDLXXWidget> DLXXWidget;//台账信息
+	TSharedPtr<class SYXSJWidget> YXSJWidget;//运行数据
+	TSharedPtr<class SDLGZWidget> DLGZWidget;//运行数据
+
+	
+	public:
+	//标签栏鼠标点击
+	FReply BuuttonOnClick_1();
+	FReply BuuttonOnClick_2();
+	FReply BuuttonOnClick_3();
+	FReply BuuttonOnClick_4();
 };

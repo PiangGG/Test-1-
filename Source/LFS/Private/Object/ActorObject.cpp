@@ -8,10 +8,8 @@ AActorObject::AActorObject()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-	ConstructorHelpers::FObjectFinder<UStaticMesh>StaticMesh(TEXT("StaticMesh'/Game/guanlang/Geometries/Line001.Line001'"));
+
 	StaticMeshComponent=CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaticMeshComponent"));
-	StaticMeshComponent->SetStaticMesh(StaticMesh.Object);
-	
 	RootComponent=StaticMeshComponent;
 	//StaticMeshComponent->OnClicked.AddDynamic(this,&AActorObject::BlockClicked);
 
@@ -41,11 +39,16 @@ void AActorObject::NotifyActorOnClicked(FKey ButtonPressed)
 {
 	Super::NotifyActorOnClicked(ButtonPressed);
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("NotifyActorOnClicked"), false);
-	UE_LOG(LogTemp,Warning,TEXT("Onclick"));
+	UE_LOG(LogTemp,Warning,TEXT("NotifyActorOnClicked"));
 }
 
 void AActorObject::BlockClicked(UPrimitiveComponent* ClickedComp)
 {
-	UE_LOG(LogTemp,Warning,TEXT("Onclick"));
+	UE_LOG(LogTemp,Warning,TEXT("BlockClicked"));
+}
+
+EActorObjectEnum AActorObject::GetObjectEnum()
+{
+	return EActorObjectEnum::Cable;
 }
 
