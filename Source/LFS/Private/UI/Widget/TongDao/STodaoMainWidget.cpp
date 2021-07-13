@@ -31,6 +31,7 @@ void STodaoMainWidget::Construct(const FArguments& InArgs)
 		+SOverlay::Slot()
 		.VAlign(VAlign_Fill)
 		.HAlign(HAlign_Right)
+		.Padding(0,0,5,0)
 		[
 			SAssignNew(Right_Main,SRight_Main)
 		]

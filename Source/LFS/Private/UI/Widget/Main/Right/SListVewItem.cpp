@@ -21,18 +21,28 @@ void SListViewItem::Construct(const FArguments& InArgs)
 			[
 				SNew(SHorizontalBox)
 				+SHorizontalBox::Slot()
+				.Padding(0,5,5,0)
+				.HAlign(HAlign_Left)
+				.VAlign(VAlign_Center)
 				[
 					SNew(STextBlock)
 					.Font(MainStyle->FontInfo_Size_12_White)
 					.Text(FText::FromString(name))
 				]
 				+SHorizontalBox::Slot()
+				.Padding(0,5,5,0)
+				.HAlign(HAlign_Center)
+				.VAlign(VAlign_Center)
+				.FillWidth(0.5f)
 				[
 					SNew(STextBlock)
 					.Font(MainStyle->FontInfo_Size_12_Blue)
 					.Text(FText::FromString(state))
 				]
 				+SHorizontalBox::Slot()
+				.Padding(0,5,5,0)
+				.HAlign(HAlign_Left)
+				.VAlign(VAlign_Center)
 				[
 					SNew(STextBlock)
 					.Font(MainStyle->FontInfo_Size_12_White)

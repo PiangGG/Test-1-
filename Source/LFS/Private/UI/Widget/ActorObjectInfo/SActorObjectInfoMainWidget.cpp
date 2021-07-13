@@ -17,52 +17,59 @@ void SActorObjectInfoMainWidget::Construct(const FArguments& InArgs)
 	ChildSlot
 	[
 		// Populate the widget
-		SNew(SOverlay)
-		+SOverlay::Slot()
+		SNew(SBox)
 		[
-			SNew(SVerticalBox)
-			+SVerticalBox::Slot()
+			SNew(SOverlay)
+			+SOverlay::Slot()
+			.Padding(300,300,500,300)
 			[
-				SNew(SOverlay)
-				+SOverlay::Slot()
+				SNew(SVerticalBox)
+				+SVerticalBox::Slot()
+				.AutoHeight()
 				[
-					SNew(SHorizontalBox)
-					+SHorizontalBox::Slot()
+					SNew(SOverlay)
+					+SOverlay::Slot()
 					[
-						SAssignNew(Button_DLXX,SButton)
-						.ButtonStyle(&MainStyle->NotSelecdButtonStyle)
-						.Text(FText::FromString(TEXT("电缆信息")))
-						.OnClicked(this,&SActorObjectInfoMainWidget::BuuttonOnClick_1)
-					]
-					+SHorizontalBox::Slot()
-					[
-						SAssignNew(Button_DLXX,SButton)
-						.ButtonStyle(&MainStyle->NotSelecdButtonStyle)
-						.Text(FText::FromString(TEXT("台账信息")))
-						.OnClicked(this,&SActorObjectInfoMainWidget::BuuttonOnClick_2)
-					]
-					+SHorizontalBox::Slot()
-					[
-						SAssignNew(Button_DLXX,SButton)
-						.ButtonStyle(&MainStyle->NotSelecdButtonStyle)
-						.Text(FText::FromString(TEXT("运行数据")))
-						.OnClicked(this,&SActorObjectInfoMainWidget::BuuttonOnClick_3)
-					]
-					+SHorizontalBox::Slot()
-					[
-						SAssignNew(Button_DLXX,SButton)
-						.ButtonStyle(&MainStyle->NotSelecdButtonStyle)
-						.Text(FText::FromString(TEXT("电缆感知")))
-						.OnClicked(this,&SActorObjectInfoMainWidget::BuuttonOnClick_4)
-					]
-				]	
-			]
-			+SVerticalBox::Slot()
-			[
-				SNew(SBox)
+						SNew(SHorizontalBox)
+						+SHorizontalBox::Slot()
+						[
+							SAssignNew(Button_DLXX,SButton)
+							.ButtonStyle(&MainStyle->NotSelecdButtonStyle)
+							.Text(FText::FromString(TEXT("电缆信息")))
+							.OnClicked(this,&SActorObjectInfoMainWidget::BuuttonOnClick_1)
+						]
+						+SHorizontalBox::Slot()
+						[
+							SAssignNew(Button_DLXX,SButton)
+							.ButtonStyle(&MainStyle->NotSelecdButtonStyle)
+							.Text(FText::FromString(TEXT("台账信息")))
+							.OnClicked(this,&SActorObjectInfoMainWidget::BuuttonOnClick_2)
+						]
+						+SHorizontalBox::Slot()
+						[
+							SAssignNew(Button_DLXX,SButton)
+							.ButtonStyle(&MainStyle->NotSelecdButtonStyle)
+							.Text(FText::FromString(TEXT("运行数据")))
+							.OnClicked(this,&SActorObjectInfoMainWidget::BuuttonOnClick_3)
+						]
+						+SHorizontalBox::Slot()
+						[
+							SAssignNew(Button_DLXX,SButton)
+							.ButtonStyle(&MainStyle->NotSelecdButtonStyle)
+							.Text(FText::FromString(TEXT("电缆感知")))
+							.OnClicked(this,&SActorObjectInfoMainWidget::BuuttonOnClick_4)
+						]
+					]	
+				]
+				+SVerticalBox::Slot()
 				[
-					SAssignNew(Content,SOverlay)
-					
+					SNew(SBox)
+					.WidthOverride(600.f)
+					.HeightOverride(800.f)
+					[
+						SAssignNew(Content,SOverlay)
+						
+					]
 				]
 			]
 		]

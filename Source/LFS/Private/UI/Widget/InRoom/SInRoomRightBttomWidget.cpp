@@ -17,53 +17,66 @@ void SInRoomRightBttomWidget::Construct(const FArguments& InArgs)
 	[
 		// Populate the widget
 		SNew(SBox)
+		.HeightOverride(470)
+		.WidthOverride(350)
 		[
 			SNew(SOverlay)
 			+SOverlay::Slot()
 			[
 				SNew(SImage)
-				.Image(&MainStyle->InRoomplan)
-				
+				.Image(&MainStyle->InRoomplan)	
 			]
 			+SOverlay::Slot()
 			[
 				SNew(SVerticalBox)
 				+SVerticalBox::Slot()
+				.Padding(20,20,0,0)
+				.AutoHeight()
 				[
 					SNew(STextBlock)
 					.Text(FText::FromString(TEXT("缺陷状态管理")))
 					.Font(MainStyle->FontInfo_Size_16_Blue)
 				]
 				+SVerticalBox::Slot()
+				.AutoHeight()
+				.Padding(10,20,10,0)
 				[
 					SNew(SOverlay)
 					+SOverlay::Slot()
 					[
 						SNew(SImage)
-						.Image(&MainStyle->ButtonStyle_DMY)
+						.Image(&MainStyle->Main_Right_Infotitle)
 					]
 					+SOverlay::Slot()
 					[
 						SNew(SHorizontalBox)
 						+SHorizontalBox::Slot()
+						.HAlign(HAlign_Center)
+						.VAlign(VAlign_Center)
 						[
 							SNew(STextBlock)
 							.Font(MainStyle->FontInfo_Size_12_White)
 							.Text(FText::FromString(TEXT("设备")))
 						]
 						+SHorizontalBox::Slot()
+						.HAlign(HAlign_Center)
+						.VAlign(VAlign_Center)
 						[
 							SNew(STextBlock)
 							.Font(MainStyle->FontInfo_Size_12_White)
 							.Text(FText::FromString(TEXT("缺陷")))
 						]
 						+SHorizontalBox::Slot()
+						.HAlign(HAlign_Center)
+						.VAlign(VAlign_Center)
 						[
 							SNew(STextBlock)
 							.Font(MainStyle->FontInfo_Size_12_White)
 							.Text(FText::FromString(TEXT("时间")))
 						]
 						+SHorizontalBox::Slot()
+						.HAlign(HAlign_Center)
+						.VAlign(VAlign_Center)
 						[
 							SNew(STextBlock)
 							.Font(MainStyle->FontInfo_Size_12_White)
@@ -72,6 +85,7 @@ void SInRoomRightBttomWidget::Construct(const FArguments& InArgs)
 					]
 				]
 				+SVerticalBox::Slot()
+				.Padding(10,20,10,0)
 				[
 					SAssignNew(List,SScrollBox)
 				]
@@ -82,7 +96,7 @@ void SInRoomRightBttomWidget::Construct(const FArguments& InArgs)
 	if (List)
 	{
 		List->ClearChildren();
-		for (int i=0;i<20;i++)
+		for (int i=0;i<25;i++)
 		{
 			List->AddSlot()
 			[

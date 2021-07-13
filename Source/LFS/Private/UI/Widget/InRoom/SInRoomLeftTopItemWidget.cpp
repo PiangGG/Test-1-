@@ -20,21 +20,28 @@ void SInRoomLeftTopItemWidget::Construct(const FArguments& InArgs)
 		[
 			SNew(SOverlay)
 			+SOverlay::Slot()
+			.Padding(0,5,0,0)
 			[
 				SNew(SHorizontalBox)
 				+SHorizontalBox::Slot()
+				.HAlign(HAlign_Fill)
+				.VAlign(VAlign_Center)
 				[
 					SNew(STextBlock)
 					.Font(MainStyle->FontInfo_Size_12_White)
 					.Text(FText::FromString(name))
 				]
 				+SHorizontalBox::Slot()
+				.HAlign(HAlign_Fill)
+				.VAlign(VAlign_Center)
 				[
 					SNew(STextBlock)
 					.Font(MainStyle->FontInfo_Size_12_White)
 					.Text(FText::FromString(level))
 				]
 				+SHorizontalBox::Slot()
+				.HAlign(HAlign_Fill)
+				.VAlign(VAlign_Center)
 				[
 					SNew(STextBlock)
 					.Font(MainStyle->FontInfo_Size_12_White)

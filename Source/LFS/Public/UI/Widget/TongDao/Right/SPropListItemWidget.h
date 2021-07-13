@@ -30,5 +30,6 @@ public:
 	FString Time=TEXT("警告时间");
 	FString PropHandle=TEXT("未处理");
 	bool bHandle=false;
+	
 	FSlateFontInfo SlateFontInfo;
 };

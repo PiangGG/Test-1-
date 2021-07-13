@@ -23,12 +23,17 @@ void SMainRight_Center::Construct(const FArguments& InArgs)
 		[
 			SNew(SVerticalBox)
 			+SVerticalBox::Slot()
+			.AutoHeight()
+			.Padding(30,60,0,0)
 			[
 				SNew(STextBlock)
 				.Font(MainStyle->FontInfo_Size_16_Blue)
 				.Text(FText::FromString(TEXT("全配网运行状态")))
 			]
 			+SVerticalBox::Slot()
+			.Padding(15,10,15,0)
+			.AutoHeight()
+			.HAlign(HAlign_Fill)
 			[
 				SNew(SOverlay)
 				+SOverlay::Slot()
@@ -42,26 +47,34 @@ void SMainRight_Center::Construct(const FArguments& InArgs)
 				[
 					SNew(SHorizontalBox)
 					+SHorizontalBox::Slot()
+					.HAlign(HAlign_Center)
+					.VAlign(VAlign_Center)
 					[
 						SNew(STextBlock)
-						.Font(MainStyle->FontInfo_Size_12_Blue)
+						.Font(MainStyle->FontInfo_Size_12_White)
 						.Text(FText::FromString(TEXT("名称")))
 					]
 					+SHorizontalBox::Slot()
+					.HAlign(HAlign_Center)
+					.VAlign(VAlign_Center)
 					[
 						SNew(STextBlock)
-						.Font(MainStyle->FontInfo_Size_12_Blue)
+						.Font(MainStyle->FontInfo_Size_12_White)
 						.Text(FText::FromString(TEXT("状态")))
 					]
 					+SHorizontalBox::Slot()
+					.HAlign(HAlign_Center)
+					.VAlign(VAlign_Center)
 					[
 						SNew(STextBlock)
-						.Font(MainStyle->FontInfo_Size_12_Blue)
+						.Font(MainStyle->FontInfo_Size_12_White)
 						.Text(FText::FromString(TEXT("详情")))
 					]
 				]
 			]
 			+SVerticalBox::Slot()
+			.Padding(15,10,10,0)
+			.MaxHeight(520.f)
 			[
 				SAssignNew(listView,SScrollBox)
 			]
@@ -70,7 +83,7 @@ void SMainRight_Center::Construct(const FArguments& InArgs)
 	if (listView)
 	{
 		listView->ClearChildren();
-		for (int i=0;i<20;i++)
+		for (int i=0;i<50;i++)
 		{
 			listView->AddSlot()
 			[

@@ -21,6 +21,7 @@ public:
 	//引入Sytle|获取MenuStyle
 	const struct FMainSlateStyle* MainStyle;
 
+	TSharedPtr<class SUniformGridPanel>UniformGridPanel;
 	TSharedPtr<class SHuanWidget> HuanWidget_Wendu;
 	TSharedPtr<class SHuanWidget> HuanWidget_ShuiWei;
 	TSharedPtr<class SHuanWidget> HuanWidget_Yangan;

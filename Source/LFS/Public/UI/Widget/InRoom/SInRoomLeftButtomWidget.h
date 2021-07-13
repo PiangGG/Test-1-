@@ -37,4 +37,7 @@ public:
 	FReply BuuttonOnClick_2();
 	FReply BuuttonOnClick_3();
 	FReply BuuttonOnClick_4();
+
+	void ShowHJJCWidegt();
+	void HideHJJCWidget();
 };

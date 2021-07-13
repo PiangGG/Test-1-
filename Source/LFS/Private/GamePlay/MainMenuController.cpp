@@ -43,6 +43,13 @@ void AMainMenuController::SetupInputComponent()
 void AMainMenuController::ShowMouse()
 {
 	bShowMouseCursor=!bShowMouseCursor;
+	if (bShowMouseCursor)
+	{
+		SetInputMode(FInputModeGameAndUI());
+	}else
+	{
+		SetInputMode(FInputModeGameOnly());
+	}
 }
 
 void AMainMenuController::MouseOnclick_Left()

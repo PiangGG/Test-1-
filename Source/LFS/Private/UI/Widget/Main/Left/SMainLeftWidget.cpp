@@ -19,75 +19,77 @@ void SMainLeftWidget::Construct(const FArguments& InArgs)
 		// Populate the widget
 		SNew(SBox)
 		[
-			SNew(SOverlay)
-			+SOverlay::Slot()
+			SNew(SBorder)
 			[
-				SNew(SImage)
-				.Image(&MainStyle->Main_Left_BG)
-			]
-			+SOverlay::Slot()
-			.VAlign(VAlign_Top)
-			.HAlign(HAlign_Fill)
-			.Padding(FMargin(30,20,0,0))
-			[
-				SNew(STextBlock)
-				.Font(MainStyle->FontInfo_Size_16_Blue)
-				.Text(FText::FromString(TEXT("状态监测")))
-			]
-			+SOverlay::Slot()
-			[
-				SNew(SVerticalBox)
-				+SVerticalBox::Slot()
-				.AutoHeight()
-				.VAlign(VAlign_Top)
-				.HAlign(HAlign_Fill)
-				.Padding(FMargin(30,90,20,0))
+				SNew(SOverlay)
+				+SOverlay::Slot()
 				[
-					SAssignNew(Yujing_State,SMain_Left_State_Widget)
-					.ProbarSize(0.4)
-					.ShowText(TEXT("预警状态"))
-					.StateImageIcon(MainStyle->StateIcon_1)
-					.ProgressBarText(TEXT("配网状态正常"))
+					SNew(SImage)
+					.Image(&MainStyle->Main_Left_BG)
 				]
-				+SVerticalBox::Slot()
-				.AutoHeight()
+				+SOverlay::Slot()
 				.VAlign(VAlign_Top)
 				.HAlign(HAlign_Fill)
-				.Padding(FMargin(30,35,20,0))
+				.Padding(FMargin(30,20,0,0))
 				[
-					SAssignNew(Yunwei_State,SMain_Left_State_Widget)
-					.ProbarSize(0.5)
-					.ShowText(TEXT("运维状态"))
-					.StateImageIcon(MainStyle->StateIcon_2)
-					.ProgressBarText(TEXT("运维状态正常"))
+					SNew(STextBlock)
+					.Font(MainStyle->FontInfo_Size_16_Blue)
+					.Text(FText::FromString(TEXT("状态监测")))
 				]
-				+SVerticalBox::Slot()
-				.AutoHeight()
-				.VAlign(VAlign_Top)
-				.HAlign(HAlign_Fill)
-				.Padding(FMargin(30,35,20,0))
+				+SOverlay::Slot()
 				[
-					SAssignNew(Gongdian_State,SMain_Left_State_Widget)
-					.ProbarSize(0.45)
-					.ShowText(TEXT("供电状态"))
-					.StateImageIcon(MainStyle->StateIcon_2)
-					.ProgressBarText(TEXT("供电状态正常"))
-				]
-				+SVerticalBox::Slot()
-				.AutoHeight()
-				.VAlign(VAlign_Top)
-				.HAlign(HAlign_Fill)
-				.Padding(FMargin(30,0,20,0))
-				[
-					SAssignNew(LineChartWidget,SLineChartWidget)
-				]
-				+SVerticalBox::Slot()
-				.AutoHeight()
-				.VAlign(VAlign_Top)
-				.HAlign(HAlign_Fill)
-				.Padding(FMargin(30,120,20,0))
-				[
-					SAssignNew(HXZBWidget,SHXZBWidget)
+					SNew(SVerticalBox)
+					+SVerticalBox::Slot()
+					.AutoHeight()
+					.VAlign(VAlign_Top)
+					.HAlign(HAlign_Fill)
+					.Padding(FMargin(30,90,20,0))
+					[
+						SAssignNew(Yujing_State,SMain_Left_State_Widget)
+						.ProbarSize(0.4)
+						.ShowText(TEXT("预警状态"))
+						.StateImageIcon(MainStyle->StateIcon_1)
+						.ProgressBarText(TEXT("配网状态正常"))
+					]
+					+SVerticalBox::Slot()
+					.AutoHeight()
+					.VAlign(VAlign_Top)
+					.HAlign(HAlign_Fill)
+					.Padding(FMargin(30,35,20,0))
+					[
+						SAssignNew(Yunwei_State,SMain_Left_State_Widget)
+						.ProbarSize(0.5)
+						.ShowText(TEXT("运维状态"))
+						.StateImageIcon(MainStyle->StateIcon_2)
+						.ProgressBarText(TEXT("运维状态正常"))
+					]
+					+SVerticalBox::Slot()
+					.AutoHeight()
+					.VAlign(VAlign_Top)
+					.HAlign(HAlign_Fill)
+					.Padding(FMargin(30,35,20,0))
+					[
+						SAssignNew(Gongdian_State,SMain_Left_State_Widget)
+						.ProbarSize(0.45)
+						.ShowText(TEXT("供电状态"))
+						.StateImageIcon(MainStyle->StateIcon_2)
+						.ProgressBarText(TEXT("供电状态正常"))
+					]
+					+SVerticalBox::Slot()
+					//.AutoHeight()
+					.VAlign(VAlign_Fill)
+					.HAlign(HAlign_Fill)
+					.Padding(FMargin(0,0,-5,0))
+					[
+						SAssignNew(LineChartWidget,SLineChartWidget)
+					]
+					+SVerticalBox::Slot()
+					.VAlign(VAlign_Bottom)
+					.HAlign(HAlign_Fill)
+					.Padding(FMargin(0,0,0,50))
+					[
+						SAssignNew(HXZBWidget,SHXZBWidget)
+					]
 				]
 			]
 		]

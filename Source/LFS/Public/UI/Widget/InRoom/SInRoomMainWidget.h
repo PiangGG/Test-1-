@@ -32,7 +32,11 @@ public:
 	TSharedPtr<class SInRoomLeftButtomWidget> InRoomLeftButtomWidget;
 	
 	TSharedPtr<class SInRoomLeftTopWidget> InRoomLeftTopWidget;
+
 	TSharedPtr<class SInRoomLeftButtom_HJJCWidget> InRoomLeftButtom_HJJCWidget;
+	void ShowHHJCWidget();
+	void HideHJJCWidget();
+	
 	TSharedPtr<class SInRoomRightTopWidget> InRoomRightTopWidget;
 	TSharedPtr<class SInRoomRightBttomWidget> InRoomRightBttomWidget;
 };

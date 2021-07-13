@@ -85,6 +85,10 @@ public:
 	UPROPERTY(EditAnywhere,Category=Image)
 	FSlateBrush Main_Window;
 
+	//center window
+	UPROPERTY(EditAnywhere,Category=Image)
+	FSlateBrush Center_Window;
+	
 	UPROPERTY(EditAnywhere,Category=ButtonStyle)
 	FButtonStyle ButtonStyle_DMY;
 
@@ -93,7 +97,14 @@ public:
 	FButtonStyle SelecdButtonStyle;
 	UPROPERTY(EditAnywhere,Category=ButtonStyle)
 	FButtonStyle NotSelecdButtonStyle;
-
+	UPROPERTY(EditAnywhere,Category=ButtonStyle)//下拉框风格
+	FButtonStyle ComboBoxButtonStyle;
+	UPROPERTY(EditAnywhere,Category=ButtonStyle)
+	FComboBoxStyle ComboBoStyle;
+	UPROPERTY(EditAnywhere,Category=ButtonStyle)
+	FColor ComboBoStyleColor;
+		
+	
 	//InRoom
 	UPROPERTY(EditAnywhere,Category=Image)
 	FSlateBrush InRoomplan;

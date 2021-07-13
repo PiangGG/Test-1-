@@ -23,7 +23,7 @@ void SMainWidget::Construct(const FArguments& InArgs)
 		[
 			SNew(SOverlay)
 			+SOverlay::Slot()//Left
-			.Padding(FMargin(0,35,0,0))
+			.Padding(FMargin(0,30,0,0))
 			.HAlign(HAlign_Left)
 			.VAlign(VAlign_Center)
 			[
@@ -36,7 +36,7 @@ void SMainWidget::Construct(const FArguments& InArgs)
 				SAssignNew(MainTopWidget,SMainTopWidget)
 			]
 			+SOverlay::Slot()//Right
-			.Padding(FMargin(0,35,0,0))
+			.Padding(FMargin(0,30,0,0))
 			.HAlign(HAlign_Right)
 			.VAlign(VAlign_Center)
 			[

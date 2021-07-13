@@ -22,20 +22,30 @@ void SMainRight_Buttom::Construct(const FArguments& InArgs)
 			[
 				SNew(SVerticalBox)
           		+SVerticalBox::Slot()
+          		.Padding(30,50,0,0)
           		[
 					SNew(STextBlock)
 					.Font(MainStyle->FontInfo_Size_16_Blue)
 					.Text(FText::FromString(TEXT("管辖统计")))
           		]
           		+SVerticalBox::Slot()
+          		.VAlign(VAlign_Center)
+          		.Padding(30,-20,0,0)
           		[
 					SNew(SHorizontalBox)
 					+SHorizontalBox::Slot()
+					.AutoWidth()
 					[
-						SNew(SImage)
-						.Image(&MainStyle->Main_Right_Buttom_Icon)
+						SNew(SBox)
+						.WidthOverride(64)
+						.HeightOverride(128)
+						[
+							SNew(SImage)
+							.Image(&MainStyle->Main_Right_Buttom_Icon)
+						]
 					]
 					+SHorizontalBox::Slot()
+					.Padding(10,0,0,0)
 					[
 						SNew(SVerticalBox)
 						+SVerticalBox::Slot()
@@ -45,12 +55,14 @@ void SMainRight_Buttom::Construct(const FArguments& InArgs)
 							.Text(FText::FromString(TEXT("重庆市渝中区")))
 						]
 						+SVerticalBox::Slot()
+						.Padding(0,10,0,0)
 						[
 							SNew(STextBlock)
 							.Font(MainStyle->FontInfo_Size_12_Blue)
 							.Text(FText::FromString(TEXT("管辖范围:18.54平方千米")))
 						]
 						+SVerticalBox::Slot()
+						.Padding(0,10,0,0)
 						[
 							SNew(STextBlock)
 							.Font(MainStyle->FontInfo_Size_12_Blue)

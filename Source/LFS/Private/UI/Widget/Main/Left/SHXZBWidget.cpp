@@ -17,6 +17,7 @@ void SHXZBWidget::Construct(const FArguments& InArgs)
 	[
 		// Populate the widget
 		SNew(SBox)
+		.WidthOverride(345.0f)
 		[
 			SNew(SOverlay)
 			+SOverlay::Slot()
@@ -27,7 +28,7 @@ void SHXZBWidget::Construct(const FArguments& InArgs)
 				+SVerticalBox::Slot()
 				.HAlign(HAlign_Fill)
 				.VAlign(VAlign_Top)
-				.Padding(FMargin(0,0,0,0))
+				.Padding(FMargin(30,0,0,0))
 				[
 					SNew(STextBlock)
 					.Font(MainStyle->FontInfo_Size_16_Blue)
@@ -36,10 +37,10 @@ void SHXZBWidget::Construct(const FArguments& InArgs)
 				+SVerticalBox::Slot()
 				.HAlign(HAlign_Fill)
 				.VAlign(VAlign_Fill)
-				.Padding(FMargin(10,-20,10,0))
+				.Padding(FMargin(30,0,50,10))
 				[
 					SAssignNew(HXZB_GridPanel,SUniformGridPanel)
-					.SlotPadding(10.0f)
+					.SlotPadding(5.0f)
 				]
 			]
 		]

@@ -22,6 +22,8 @@ void SHuanWidget::Construct(const FArguments& InArgs)
 	[
 		// Populate the widget
 		SNew(SBox)
+		.WidthOverride(128.0f)
+		.HeightOverride(128.0f)
 		[
 			SNew(SOverlay)
 			+SOverlay::Slot()

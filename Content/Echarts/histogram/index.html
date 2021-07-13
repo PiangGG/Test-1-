@@ -1,44 +1,108 @@
-<html>
- <head>
- <meta charset ="utf-8">
- <!-- char字符 set集  字符集，使用UTF-8编码，浏览器上可以显示各国语言的文字，不必下载相关语言支持包 -->
- <meta name="viewport" content="width=device-width,initial-scale=1.0">
- <!--viewport窗口，width设置网页布局宽度，device-width为设备物理宽度，initial-scale设置初始缩放值  -->
- <style>
-     .box{
-         width: 100%;
-         height: 100%;
-     }
- </style>
- </head>
- <body>
-     <div class="box"></div>
-     <!-- 引入echarts 图表 -->
-     <script src='echarts.min.js'></script>
-     <script>
-        //  初始化实例对象 echarts.init(DOM容器)
-         var xtesla = echarts.init(document.querySelector(".box"));
-         //指定配置项和数据
+<!--
+    THIS EXAMPLE WAS DOWNLOADED FROM https://echarts.apache.org/examples/zh/editor.html?c=line-pen
+-->
+<!DOCTYPE html>
+<html style="height: 90%; width:90%margin: 0">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body style="height: 100%;  width:90%;margin: 0">
+        <div id="container" style="height: 100%"></div>
 
-     option = {
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+        <!-- Uncomment this line if you want to dataTool extension
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/extension/dataTool.min.js"></script>
+        -->
+        <!-- Uncomment this line if you want to use gl extension
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-gl@2/dist/echarts-gl.min.js"></script>
+        -->
+        <!-- Uncomment this line if you want to echarts-stat extension
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-stat@latest/dist/ecStat.min.js"></script>
+        -->
+        <!-- Uncomment this line if you want to use map
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/map/js/china.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/map/js/world.js"></script>
+        -->
+        <!-- Uncomment these two lines if you want to use bmap extension
+        <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=<Your Key Here>"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/extension/bmap.min.js"></script>
+        -->
+
+        <script type="text/javascript">
+var dom = document.getElementById("container");
+var myChart = echarts.init(dom);
+var app = {};
+
+var option;
+
+
+
+var symbolSize = 6;
+var data = [[0, 200], [6, 250], [12, 300], [18, 240], [20,200]];
+var points = [];
+
+option = {
+    tooltip: {
+        formatter: function (params) {
+            var data = params.data || [0, 0];
+            return data[0].toFixed(2) + ', ' + data[1].toFixed(2);
+        }
+    },
+    grid: {
+        containLabel: true
+    },
     xAxis: {
-        type: 'category',
-        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+        min: 0,
+        max: 24,
+        type: 'value',
+        axisLine: {onZero: false}
     },
     yAxis: {
-        type: 'value'
+        min: 0,
+        max: 600,
+        type: 'value',
+        axisLine: {onZero: false}
     },
-    series: [{
-        data: [820, 932, 901, 934, 1290, 1330, 1320],
-        type: 'line',
-  	areaStyle: {},
-        smooth: true
-    }]
+    series: [
+        {
+            id: 'a',
+            type: 'line',
+            smooth: true,
+            symbolSize: symbolSize,
+            data: data,
+        	areaStyle: {}
+        }
+    ]
 };
-         // 将配置项设置给echarts实例对象
-          xtesla.setOption(option);
 
-       
-     </script>
- </body>
+var zr = myChart.getZr();
+
+
+zr.on('click', function (params) {
+    var pointInPixel = [params.offsetX, params.offsetY];
+    var pointInGrid = myChart.convertFromPixel('grid', pointInPixel);
+
+    if (myChart.containPixel('grid', pointInPixel)) {
+        data.push(pointInGrid);
+
+        myChart.setOption({
+            series: [{
+                id: 'a',
+                data: data
+            }]
+        });
+    }
+});
+
+zr.on('mousemove', function (params) {
+    var pointInPixel = [params.offsetX, params.offsetY];
+    zr.setCursorStyle(myChart.containPixel('grid', pointInPixel) ? 'copy' : 'default');
+});
+
+if (option && typeof option === 'object') {
+    myChart.setOption(option);
+}
+
+        </script>
+    </body>
 </html>

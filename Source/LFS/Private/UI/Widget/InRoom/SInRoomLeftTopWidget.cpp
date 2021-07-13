@@ -17,9 +17,13 @@ void SInRoomLeftTopWidget::Construct(const FArguments& InArgs)
 	[
 		// Populate the widget
 		SNew(SBox)
+		.HeightOverride(470)
+		.WidthOverride(350)
 		[
 			SNew(SOverlay)
 			+SOverlay::Slot()
+			.HAlign(HAlign_Fill)
+			.VAlign(VAlign_Fill)
 			[
 				SNew(SImage)
 				.Image(&MainStyle->InRoomplan)
@@ -29,35 +33,49 @@ void SInRoomLeftTopWidget::Construct(const FArguments& InArgs)
 			[
 				SNew(SVerticalBox)
 				+SVerticalBox::Slot()
+				.AutoHeight()
+				.Padding(10,0,0,0)
 				[
 					SNew(STextBlock)
 					.Text(FText::FromString(TEXT("设备管理")))
 					.Font(MainStyle->FontInfo_Size_16_Blue)
 				]
 				+SVerticalBox::Slot()
+				.AutoHeight()
+				.Padding(10,20,10,0)
 				[
 					SNew(SOverlay)
 					+SOverlay::Slot()
+					.HAlign(HAlign_Fill)
+					.VAlign(VAlign_Center)
 					[
 						SNew(SImage)
-						.Image(&MainStyle->ButtonStyle_DMY)
+						.Image(&MainStyle->Main_Right_Infotitle)
 					]
 					+SOverlay::Slot()
+					.HAlign(HAlign_Fill)
+					.VAlign(VAlign_Center)
 					[
 						SNew(SHorizontalBox)
 						+SHorizontalBox::Slot()
+						.HAlign(HAlign_Fill)
+						.VAlign(VAlign_Center)
 						[
 							SNew(STextBlock)
 							.Font(MainStyle->FontInfo_Size_12_White)
 							.Text(FText::FromString(TEXT("名称")))
 						]
 						+SHorizontalBox::Slot()
+						.HAlign(HAlign_Fill)
+						.VAlign(VAlign_Center)
 						[
 							SNew(STextBlock)
 							.Font(MainStyle->FontInfo_Size_12_White)
 							.Text(FText::FromString(TEXT("电压等级")))
 						]
 						+SHorizontalBox::Slot()
+						.HAlign(HAlign_Fill)
+						.VAlign(VAlign_Center)
 						[
 							SNew(STextBlock)
 							.Font(MainStyle->FontInfo_Size_12_White)
@@ -66,6 +84,7 @@ void SInRoomLeftTopWidget::Construct(const FArguments& InArgs)
 					]
 				]
 				+SVerticalBox::Slot()
+				.Padding(10,0,10,0)
 				[
 					SAssignNew(List,SScrollBox)
 				]

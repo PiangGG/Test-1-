@@ -30,24 +30,28 @@ void SInRoomMainWidget::Construct(const FArguments& InArgs)
 			+SOverlay::Slot()
 			.HAlign(HAlign_Left)
 			.VAlign(VAlign_Top)
+			.Padding(0,70,0,0)
 			[
 				SAssignNew(InRoomLeftTopWidget,SInRoomLeftTopWidget)
 			]
 			+SOverlay::Slot()
 			.HAlign(HAlign_Left)
 			.VAlign(VAlign_Bottom)
+			.Padding(0,0,0,60)
 			[
 				SAssignNew(InRoomLeftButtom_HJJCWidget,SInRoomLeftButtom_HJJCWidget)
 			]
 			+SOverlay::Slot()
 			.HAlign(HAlign_Right)
 			.VAlign(VAlign_Top)
+			.Padding(0,70,0,0)
 			[
 				SAssignNew(InRoomRightTopWidget,SInRoomRightTopWidget)
 			]
 			+SOverlay::Slot()
 			.HAlign(HAlign_Right)
 			.VAlign(VAlign_Bottom)
+			.Padding(0,0,0,60)
 			[
 				SAssignNew(InRoomRightBttomWidget,SInRoomRightBttomWidget)
 			]
@@ -55,6 +59,7 @@ void SInRoomMainWidget::Construct(const FArguments& InArgs)
 			+SOverlay::Slot()
 			.HAlign(HAlign_Left)
 			.VAlign(VAlign_Bottom)
+			.Padding(0,0,0,0)
 			[
 				SAssignNew(InRoomLeftButtomWidget,SInRoomLeftButtomWidget)
 			]
@@ -63,4 +68,24 @@ void SInRoomMainWidget::Construct(const FArguments& InArgs)
 	];
 	
 }
+
+void SInRoomMainWidget::ShowHHJCWidget()
+{
+	
+	if (InRoomLeftButtom_HJJCWidget)
+	{
+		InRoomLeftButtom_HJJCWidget->SetVisibility(EVisibility::Visible);
+		UE_LOG(LogTemp,Warning,TEXT("ShowHHJCWidget"));
+	}
+}
+
+void SInRoomMainWidget::HideHJJCWidget()
+{
+	if (InRoomLeftButtom_HJJCWidget)
+	{
+		InRoomLeftButtom_HJJCWidget->SetVisibility(EVisibility::Hidden);
+		UE_LOG(LogTemp,Warning,TEXT("HideHJJCWidget"));
+	}
+}
+
 END_SLATE_FUNCTION_BUILD_OPTIMIZATION

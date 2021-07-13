@@ -28,6 +28,9 @@ void SMainBottomWidget::Construct(const FArguments& InArgs)
 			[
 				SNew(SVerticalBox)
 				+SVerticalBox::Slot()
+				.HAlign(HAlign_Fill)
+				.AutoHeight()
+				.Padding(FMargin(40,20,0,0))
 				[
 					SNew(STextBlock)
 					.Font(MainStyle->FontInfo_Size_16_Blue)
@@ -35,11 +38,11 @@ void SMainBottomWidget::Construct(const FArguments& InArgs)
 				]
 				+SVerticalBox::Slot()
 				.HAlign(HAlign_Fill)
-				.VAlign(VAlign_Fill)
-				.Padding(FMargin(00,0,0,0))
+				.VAlign(VAlign_Bottom)
+				.Padding(FMargin(40,0,0,40))
 				[
 					SAssignNew(Jiankong_GridPanel,SUniformGridPanel)
-					.SlotPadding(0.0f)
+					.SlotPadding(10.0f)
 				]
 			]
 		]

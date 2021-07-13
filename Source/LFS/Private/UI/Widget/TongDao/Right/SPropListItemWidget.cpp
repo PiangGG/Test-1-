@@ -16,7 +16,7 @@ void SPropListItemWidget::Construct(const FArguments& InArgs)
 	Time=InArgs._Time.Get();
 	PropHandle=InArgs._PropHandle.Get();
 	bHandle=InArgs._bHandle.Get();
-	if (PropState.Equals("正常"))
+	if (PropState==TEXT("正常"))
 	{
 		SlateFontInfo=MainStyle->FontInfo_Size_12_White;
 	}else
@@ -32,21 +32,29 @@ void SPropListItemWidget::Construct(const FArguments& InArgs)
 		[
 			SNew(SOverlay)
 			+SOverlay::Slot()
+			.HAlign(HAlign_Fill)
+			.Padding(0,5,0,0)
 			[
 				SNew(SHorizontalBox)
 				+SHorizontalBox::Slot()
+				.HAlign(HAlign_Fill)
+				.VAlign(VAlign_Center)
 				[
 					SNew(STextBlock)
 					.Font(MainStyle->FontInfo_Size_12_White)
 					.Text(FText::FromString(PropName))
 				]
 				+SHorizontalBox::Slot()
+				.HAlign(HAlign_Fill)
+				.VAlign(VAlign_Center)
 				[
 					SNew(STextBlock)
 					.Font(SlateFontInfo)
 					.Text(FText::FromString(PropState))
 				]
 				+SHorizontalBox::Slot()
+				.HAlign(HAlign_Fill)
+				.VAlign(VAlign_Center)
 				[
 					SNew(STextBlock)
 					.Font(MainStyle->FontInfo_Size_12_White)

@@ -19,23 +19,25 @@ void SLineChartWidget::Construct(const FArguments& InArgs)
 		[
 			SNew(SOverlay)
 			+SOverlay::Slot()
-			.HAlign(HAlign_Center)
-			.VAlign(VAlign_Center)
+			.HAlign(HAlign_Fill)
+			.VAlign(VAlign_Top)
 			[
 				SNew(SVerticalBox)
 				+SVerticalBox::Slot()
-				.HAlign(HAlign_Center)
+				.HAlign(HAlign_Fill)
 				.VAlign(VAlign_Top)
-				.Padding(FMargin(0,20,0,0))
+				.AutoHeight()
+				.Padding(FMargin(30,40,10,0))
 				[
 					SNew(SHorizontalBox)
 					+SHorizontalBox::Slot()
-					.HAlign(HAlign_Center)
+					.HAlign(HAlign_Fill)
 					.VAlign(VAlign_Top)
 					[
 						SNew(STextBlock)
 						.Font(MainStyle->FontInfo_Size_16_Blue)
 						.Text(FText::FromString(TEXT("负荷曲线")))
+						
 					]
 					+SHorizontalBox::Slot()
 					.HAlign(HAlign_Center)
@@ -46,48 +48,59 @@ void SLineChartWidget::Construct(const FArguments& InArgs)
 					]
 				]
 				+SVerticalBox::Slot()
-				.HAlign(HAlign_Center)
-				.VAlign(VAlign_Top)
-				.Padding(FMargin(0,-55,0,0))
+				.HAlign(HAlign_Right)
+				.VAlign(VAlign_Center)
+				.AutoHeight()
+				.Padding(FMargin(0,10,10,0))
 				[
-					SNew(SHorizontalBox)
-					+SHorizontalBox::Slot()
-					.HAlign(HAlign_Right)
-					.VAlign(VAlign_Top)
-					.Padding(FMargin(30,0,0,0))
+					SNew(SOverlay)
+					+SOverlay::Slot()
 					[
-						SNew(STextBlock)
-						.Text(FText::FromString(TEXT("当前总负荷:")))
-						.Font(MainStyle->FontInfo_Size_16_White)
-					]
-					+SHorizontalBox::Slot()
-					.HAlign(HAlign_Right)
-					.VAlign(VAlign_Top)
-					.Padding(FMargin(0,0,0,0))
-					[
-						SAssignNew(TextBlock_CurrentTotalload,STextBlock)
-						.Font(MainStyle->FontInfo_Size_12_Blue)
-						.Text(FText::FromString(FString::SanitizeFloat(CurrentTotalload_Num)+"W"))//显示当前总负荷
-						//.MinDesiredWidth(20.0f)
+						SNew(SHorizontalBox)
+						+SHorizontalBox::Slot()
+						.HAlign(HAlign_Right)
+						.VAlign(VAlign_Center)
+						.AutoWidth()
+						.Padding(FMargin(0,0,0,0))
+						[
+							SNew(STextBlock)
+							.Text(FText::FromString(TEXT("当前总负荷:")))
+							.Font(MainStyle->FontInfo_Size_12_White)
+							.MinDesiredWidth(120.0f)
+						]
+						+SHorizontalBox::Slot()
+						.HAlign(HAlign_Right)
+						.VAlign(VAlign_Center)
+						.AutoWidth()
+						.Padding(FMargin(0,0,10,0))
+						[
+							SAssignNew(TextBlock_CurrentTotalload,STextBlock)
+							.Font(MainStyle->FontInfo_Size_12_Blue)
+							.Text(FText::FromString(FString::SanitizeFloat(CurrentTotalload_Num)+"W"))//显示当前总负荷
+							//.MinDesiredWidth(20.0f)
+						]
 					]
 				]
 				+SVerticalBox::Slot()
-				.HAlign(HAlign_Fill)
-				.VAlign(VAlign_Fill)
-				.Padding(FMargin(0,-50,0,0))
+				.AutoHeight()
+				.HAlign(HAlign_Left)
+				.VAlign(VAlign_Top)
+				.Padding(FMargin(13,-30,0,0))
 				[
 					SNew(SBox)
-					.HeightOverride(300.0f)
-					.WidthOverride(300.0f)
+					.WidthOverride(340.f)
 					[
-						SAssignNew(EChart_WebBrowser, SWebBrowser)
-						.ViewportSize(300.0)
-						.ShowAddressBar(false)
-						.ShowControls(false)
-						.ShowInitialThrobber(false)
-						.SupportsTransparency(true)
+						SNew(SBorder)
+						.ContentScale(FVector2D(1.0,1.5f))
+						.BorderImage(&MainStyle->ProbarBGBrush)
+						[
+							SAssignNew(EChart_WebBrowser, SWebBrowser)
+							.ShowAddressBar(false)
+							.ShowControls(false)
+							.ShowInitialThrobber(false)
+							.SupportsTransparency(true)
+						]
 					]
-					
 				]
 			]
 		]

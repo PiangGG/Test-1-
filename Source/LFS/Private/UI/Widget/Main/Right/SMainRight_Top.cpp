@@ -21,12 +21,16 @@ void SMainRight_Top::Construct(const FArguments& InArgs)
 			[
 				SNew(SVerticalBox)
 				+SVerticalBox::Slot()
+				.Padding(30,25,0,0)
+				.AutoHeight()
 				[
 					SNew(STextBlock)
 					.Font(MainStyle->FontInfo_Size_16_Blue)
 					.Text(FText::FromString(TEXT("综合看板")))
 				]
 				+SVerticalBox::Slot()
+				.Padding(30,10,0,0)
+				.AutoHeight()
 				[
 					SNew(SHorizontalBox)
 					+SHorizontalBox::Slot()
@@ -43,6 +47,8 @@ void SMainRight_Top::Construct(const FArguments& InArgs)
 					]
 				]
 				+SVerticalBox::Slot()
+				.Padding(30,5,0,0)
+				.AutoHeight()
 				[
 					SNew(SHorizontalBox)
 					+SHorizontalBox::Slot()

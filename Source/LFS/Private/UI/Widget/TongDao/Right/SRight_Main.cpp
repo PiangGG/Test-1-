@@ -20,30 +20,39 @@ void SRight_Main::Construct(const FArguments& InArgs)
 
 		SNew(SOverlay)
 		+SOverlay::Slot()
-		.VAlign(VAlign_Fill)
-		.HAlign(HAlign_Fill)
+		.HAlign(HAlign_Left)
+		.VAlign(VAlign_Center)
+		.Padding(FMargin(0,25,0,0))
 		[
 			SNew(SImage)
 			.Image(&MainStyle->Main_Right_BG)
 		]
 		+SOverlay::Slot()
+		.VAlign(VAlign_Top)
+		.HAlign(HAlign_Fill)
 		[
 			SNew(SVerticalBox)
 			+SVerticalBox::Slot()
+			.Padding(FMargin(30,90,0,0))
+			.AutoHeight()
 			[
 				SNew(STextBlock)
 				.Font(MainStyle->FontInfo_Size_16_Blue)
 				.Text(FText::FromString(TEXT("环境监测")))
 			]
 			+SVerticalBox::Slot()
+			.AutoHeight()
+			.Padding(FMargin(30,0,0,0))
 			[
 				SAssignNew(HJJCWidget,SHJJCWidget)
 			]
 			+SVerticalBox::Slot()
+			.AutoHeight()
 			[
 				SAssignNew(SBZXWidget,SSBZXWidget)
 			]
 			+SVerticalBox::Slot()
+			.AutoHeight()
 			[
 				SAssignNew(GJZTWidget,SGJZTWidget)
 			]

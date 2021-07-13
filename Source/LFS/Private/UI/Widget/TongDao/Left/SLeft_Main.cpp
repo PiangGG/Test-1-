@@ -30,46 +30,64 @@ void SLeft_Main::Construct(const FArguments& InArgs)
 			+SOverlay::Slot()
 			.HAlign(HAlign_Left)
 			.VAlign(VAlign_Center)
-			.Padding(FMargin(0,20,0,0))
+			.Padding(FMargin(0,25,0,0))
 			[
 				SNew(SImage)
 				.Image(&MainStyle->Main_Left_BG)
 			]
 			+SOverlay::Slot()
+			.VAlign(VAlign_Top)
+			.HAlign(HAlign_Fill)
+			.Padding(FMargin(0,105,0,0))
 			[
 				SNew(SVerticalBox)
 				+SVerticalBox::Slot()
-				.HAlign(HAlign_Left)
-				.VAlign(VAlign_Top)
-				.Padding(FMargin(0,70,0,0))
+				.AutoHeight()
 				[
 					SNew(SHorizontalBox)
 					+SHorizontalBox::Slot()
-					.HAlign(HAlign_Center)
+					.HAlign(HAlign_Left)
 					.VAlign(VAlign_Center)
+					.Padding(FMargin(10,0,0,0))
 					[
 						SNew(STextBlock)
-						.Font(MainStyle->FontInfo_Size_16_White)
+						.Font(MainStyle->FontInfo_Size_16_Blue)
 						.Text(FText::FromString(TEXT("监控总览")))
 					]
 					+SHorizontalBox::Slot()
 					.HAlign(HAlign_Center)
 					.VAlign(VAlign_Center)
 					[
-						SAssignNew(TextComboBox_floor,STextComboBox)
-						.OptionsSource(&Array_floor)
+						SNew(SBorder)
+						[
+							SAssignNew(TextComboBox_floor,STextComboBox)
+							.OptionsSource(&Array_floor)
+							.Font(MainStyle->FontInfo_Size_12_White)
+							.ComboBoxStyle(&MainStyle->ComboBoStyle)
+							.ColorAndOpacity(MainStyle->ComboBoStyleColor)
+							.ButtonStyle(&MainStyle->ComboBoxButtonStyle)
+						]
 					]
 					+SHorizontalBox::Slot()
 					.HAlign(HAlign_Center)
 					.VAlign(VAlign_Center)
 					[
-						SAssignNew(TextComboBox_Location,STextComboBox)
-						.OptionsSource(&Array_Location)
+						SNew(SBorder)
+						[
+							SAssignNew(TextComboBox_Location,STextComboBox)
+							.OptionsSource(&Array_Location)
+							.Font(MainStyle->FontInfo_Size_12_White)
+							.ComboBoxStyle(&MainStyle->ComboBoStyle)
+							.ColorAndOpacity(MainStyle->ComboBoStyleColor)
+							.ButtonStyle(&MainStyle->ComboBoxButtonStyle)
+						]
 					]
 				]
 				+SVerticalBox::Slot()
 				.HAlign(HAlign_Center)
 				.VAlign(VAlign_Fill)
+				.MaxHeight(850.f)
+				.Padding(FMargin(0,20,0,0))
 				[
 					SAssignNew(JiankongList,SScrollBox)
 				]

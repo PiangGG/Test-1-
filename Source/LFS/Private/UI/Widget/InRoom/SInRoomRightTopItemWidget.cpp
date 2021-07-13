@@ -21,6 +21,7 @@ void SInRoomRightTopItemWidget::Construct(const FArguments& InArgs)
 		[
 			SNew(SOverlay)
 			+SOverlay::Slot()
+			.Padding(10,20,10,0)
 			[
 				SNew(SHorizontalBox)
 				+SHorizontalBox::Slot()

@@ -35,6 +35,7 @@ void SLFSProgressbar::Construct(const FArguments& InArgs)
 			+SHorizontalBox::Slot()
 			.VAlign(VAlign_Center)
 			.HAlign(HAlign_Right)
+			.Padding(0,0,10,0)
 			[
 				SNew(STextBlock)
 				.Font(MainStyle->FontInfo_Size_12_White)
@@ -43,10 +44,13 @@ void SLFSProgressbar::Construct(const FArguments& InArgs)
 		]
 		+SOverlay::Slot()
 		[
-			SAssignNew(ProgressBar,SProgressBar)
-			.Percent(percent)
-			.BackgroundImage(&MainStyle->ProbarBGBrush)
-			.FillImage(&MainStyle->ProbarFillImageBrush)
+			SNew(SBorder)
+			[
+				SAssignNew(ProgressBar,SProgressBar)
+				.Percent(percent)
+				.BackgroundImage(&MainStyle->ProbarBGBrush)
+				.FillImage(&MainStyle->ProbarFillImageBrush)
+			]
 		]
 	];
 	

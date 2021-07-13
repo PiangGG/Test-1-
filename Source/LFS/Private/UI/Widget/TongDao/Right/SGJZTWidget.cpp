@@ -23,49 +23,71 @@ void SGJZTWidget::Construct(const FArguments& InArgs)
 			[
 				SNew(SVerticalBox)
 				+SVerticalBox::Slot()
+				.HAlign(HAlign_Fill)
+				.VAlign(VAlign_Center)
+				.AutoHeight()
+				.Padding(20,20,0,0)
 				[
 					SNew(STextBlock)
 					.Font(MainStyle->FontInfo_Size_16_Blue)
 					.Text(FText::FromString(TEXT("告警状态")))
 				]
 				+SVerticalBox::Slot()
+				.AutoHeight()
+				.Padding(20,20,0,0)
 				[
+					
 					SNew(SOverlay)
 					+SOverlay::Slot()
+					.Padding(0,0,30,0)
 					[
-						SNew(SImage)
-						.Image(&MainStyle->ButtonStyle_DMY)
+						SNew(SBox)
+						[
+							SNew(SImage)
+							.Image(&MainStyle->Main_Right_Infotitle)
+						]
 					]
 					+SOverlay::Slot()
+					.Padding(0,0,30,0)
 					[
 						SNew(SHorizontalBox)
 						+SHorizontalBox::Slot()
+						.HAlign(HAlign_Left)
+						.VAlign(VAlign_Center)
 						[
 							SNew(STextBlock)
 							.Font(MainStyle->FontInfo_Size_12_White)
 							.Text(FText::FromString(TEXT("隐患")))
 						]
 						+SHorizontalBox::Slot()
+						.HAlign(HAlign_Center)
+						.VAlign(VAlign_Center)
 						[
 							SNew(STextBlock)
 							.Font(MainStyle->FontInfo_Size_12_White)
 							.Text(FText::FromString(TEXT("状态")))
 						]
 						+SHorizontalBox::Slot()
+						.HAlign(HAlign_Center)
+						.VAlign(VAlign_Center)
 						[
 							SNew(STextBlock)
 							.Font(MainStyle->FontInfo_Size_12_White)
 							.Text(FText::FromString(TEXT("时间")))
 						]
 						+SHorizontalBox::Slot()
+						.HAlign(HAlign_Center)
+						.VAlign(VAlign_Center)
 						[
 							SNew(STextBlock)
 							.Font(MainStyle->FontInfo_Size_12_White)
 							.Text(FText::FromString(TEXT("处理")))
 						]
 					]
-				]
+				]	
 				+SVerticalBox::Slot()
+				.Padding(20,20,20,0)
+				.MaxHeight(400.0f)
 				[
 					SAssignNew(List,SScrollBox)
 				]
@@ -74,7 +96,7 @@ void SGJZTWidget::Construct(const FArguments& InArgs)
 	];
 	if (List)
 	{
-		for(int i=0;i<8;i++)
+		for(int i=0;i<50;i++)
 		{
 			if(i%2==0)
 			{
@@ -83,7 +105,7 @@ void SGJZTWidget::Construct(const FArguments& InArgs)
 					SNew(SPropListItemWidget)
 					.bHandle(false)
 					.Time(TEXT("时间"))
-					.PropName("隐患位置")
+					.PropName(TEXT("隐患位置"))
 					.PropState(TEXT("正常"))
 				];
 			}else
@@ -93,7 +115,7 @@ void SGJZTWidget::Construct(const FArguments& InArgs)
 					SNew(SPropListItemWidget)
 					.bHandle(true)
 					.Time(TEXT("时间"))
-					.PropName("隐患位置")
+					.PropName(TEXT("隐患位置"))
 					.PropState(TEXT("不正常"))
 				];
 			}

@@ -31,14 +31,18 @@ void SMainRightWidget::Construct(const FArguments& InArgs)
 			[
 				SNew(SVerticalBox)
 				+SVerticalBox::Slot()
+				.AutoHeight()
 				[
 					SAssignNew(MainRight_Top,SMainRight_Top)
 				]
 				+SVerticalBox::Slot()
+				.AutoHeight()
 				[
 					SAssignNew(MainRight_Center,SMainRight_Center)
 				]
 				+SVerticalBox::Slot()
+				.AutoHeight()
+				.VAlign(VAlign_Bottom)
 				[
 					SAssignNew(MainRight_Buttom,SMainRight_Buttom)
 				]
