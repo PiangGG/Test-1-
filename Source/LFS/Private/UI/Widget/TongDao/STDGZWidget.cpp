@@ -15,9 +15,16 @@ void STDGZWidget::Construct(const FArguments& InArgs)
 	[
 		// Populate the widget
 		SNew(SBox)
+		.Padding(FMargin(800,200,500,200))
 		[
 			SNew(SOverlay)
 			+SOverlay::Slot()
+			[
+				SNew(SImage)
+				.Image(&MainStyle->Center_Window)
+			]
+			+SOverlay::Slot()
+			.Padding(FMargin(30))
 			[
 				SNew(SVerticalBox)
 				+SVerticalBox::Slot()

@@ -26,7 +26,7 @@ void SGJZTWidget::Construct(const FArguments& InArgs)
 				.HAlign(HAlign_Fill)
 				.VAlign(VAlign_Center)
 				.AutoHeight()
-				.Padding(20,20,0,0)
+				.Padding(20,40,0,0)
 				[
 					SNew(STextBlock)
 					.Font(MainStyle->FontInfo_Size_16_Blue)
@@ -34,7 +34,7 @@ void SGJZTWidget::Construct(const FArguments& InArgs)
 				]
 				+SVerticalBox::Slot()
 				.AutoHeight()
-				.Padding(20,20,0,0)
+				.Padding(20,30,0,0)
 				[
 					
 					SNew(SOverlay)
@@ -87,7 +87,7 @@ void SGJZTWidget::Construct(const FArguments& InArgs)
 				]	
 				+SVerticalBox::Slot()
 				.Padding(20,20,20,0)
-				.MaxHeight(400.0f)
+				.MaxHeight(330.0f)
 				[
 					SAssignNew(List,SScrollBox)
 				]

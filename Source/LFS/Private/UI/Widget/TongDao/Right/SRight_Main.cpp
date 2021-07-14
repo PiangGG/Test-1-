@@ -33,7 +33,7 @@ void SRight_Main::Construct(const FArguments& InArgs)
 		[
 			SNew(SVerticalBox)
 			+SVerticalBox::Slot()
-			.Padding(FMargin(30,90,0,0))
+			.Padding(FMargin(20,90,0,0))
 			.AutoHeight()
 			[
 				SNew(STextBlock)
@@ -42,7 +42,7 @@ void SRight_Main::Construct(const FArguments& InArgs)
 			]
 			+SVerticalBox::Slot()
 			.AutoHeight()
-			.Padding(FMargin(30,0,0,0))
+			.Padding(FMargin(20,0,0,0))
 			[
 				SAssignNew(HJJCWidget,SHJJCWidget)
 			]

@@ -33,7 +33,7 @@ void SPropListItemWidget::Construct(const FArguments& InArgs)
 			SNew(SOverlay)
 			+SOverlay::Slot()
 			.HAlign(HAlign_Fill)
-			.Padding(0,5,0,0)
+			.Padding(0,10,0,0)
 			[
 				SNew(SHorizontalBox)
 				+SHorizontalBox::Slot()
