@@ -8,6 +8,7 @@
 #include "UI/Widget/ActorObjectInfo/SDLGZWidget.h"
 #include "UI/Widget/ActorObjectInfo/SDLXXWidget.h"
 #include "UI/Widget/ActorObjectInfo/SYXSJWidget.h"
+#include "Widgets/Images/SImage.h"
 
 BEGIN_SLATE_FUNCTION_BUILD_OPTIMIZATION
 void SActorObjectInfoMainWidget::Construct(const FArguments& InArgs)
@@ -19,9 +20,9 @@ void SActorObjectInfoMainWidget::Construct(const FArguments& InArgs)
 		// Populate the widget
 		SNew(SBox)
 		[
-			SNew(SOverlay)
+			SAssignNew(Overlay,SOverlay)
 			+SOverlay::Slot()
-			.Padding(300,300,500,300)
+			.Padding(700,200,700,0)
 			[
 				SNew(SVerticalBox)
 				+SVerticalBox::Slot()
@@ -32,43 +33,99 @@ void SActorObjectInfoMainWidget::Construct(const FArguments& InArgs)
 					[
 						SNew(SHorizontalBox)
 						+SHorizontalBox::Slot()
+						.HAlign(HAlign_Fill)
 						[
-							SAssignNew(Button_DLXX,SButton)
-							.ButtonStyle(&MainStyle->NotSelecdButtonStyle)
-							.Text(FText::FromString(TEXT("电缆信息")))
-							.OnClicked(this,&SActorObjectInfoMainWidget::BuuttonOnClick_1)
+							SNew(SOverlay)
+							+SOverlay::Slot()
+							.HAlign(HAlign_Center)
+							.VAlign(VAlign_Center)
+							[
+								SNew(STextBlock)
+								.Font(MainStyle->FontInfo_Size_16_White)
+								.Text(FText::FromString(TEXT("电缆信息")))
+							]
+							+SOverlay::Slot()
+							[	
+								SAssignNew(Button_DLXX,SButton)
+								.ButtonStyle(&MainStyle->SelecdButtonStyle)
+								.OnClicked(this,&SActorObjectInfoMainWidget::BuuttonOnClick_1)
+							]
 						]
 						+SHorizontalBox::Slot()
+						.HAlign(HAlign_Fill)
 						[
-							SAssignNew(Button_DLXX,SButton)
-							.ButtonStyle(&MainStyle->NotSelecdButtonStyle)
-							.Text(FText::FromString(TEXT("台账信息")))
-							.OnClicked(this,&SActorObjectInfoMainWidget::BuuttonOnClick_2)
+							SNew(SOverlay)
+							+SOverlay::Slot()
+							.HAlign(HAlign_Center)
+							.VAlign(VAlign_Center)
+							[
+								SNew(STextBlock)
+								.Font(MainStyle->FontInfo_Size_16_White)
+								.Text(FText::FromString(TEXT("电缆信息")))
+							]
+							+SOverlay::Slot()
+							[
+								SAssignNew(Button_DLXX,SButton)
+								.ButtonStyle(&MainStyle->SelecdButtonStyle)
+								.OnClicked(this,&SActorObjectInfoMainWidget::BuuttonOnClick_2)
+							]
 						]
 						+SHorizontalBox::Slot()
+						.HAlign(HAlign_Fill)
 						[
-							SAssignNew(Button_DLXX,SButton)
-							.ButtonStyle(&MainStyle->NotSelecdButtonStyle)
-							.Text(FText::FromString(TEXT("运行数据")))
-							.OnClicked(this,&SActorObjectInfoMainWidget::BuuttonOnClick_3)
+							SNew(SOverlay)
+							+SOverlay::Slot()
+							.HAlign(HAlign_Center)
+							.VAlign(VAlign_Center)
+							[
+								SNew(STextBlock)
+								.Font(MainStyle->FontInfo_Size_16_White)
+								.Text(FText::FromString(TEXT("运行数据")))
+							]
+							+SOverlay::Slot()
+							[
+								SAssignNew(Button_DLXX,SButton)
+								.ButtonStyle(&MainStyle->SelecdButtonStyle)
+								.OnClicked(this,&SActorObjectInfoMainWidget::BuuttonOnClick_3)
+							]
+							
 						]
 						+SHorizontalBox::Slot()
+						.HAlign(HAlign_Fill)
 						[
-							SAssignNew(Button_DLXX,SButton)
-							.ButtonStyle(&MainStyle->NotSelecdButtonStyle)
-							.Text(FText::FromString(TEXT("电缆感知")))
-							.OnClicked(this,&SActorObjectInfoMainWidget::BuuttonOnClick_4)
+							SNew(SOverlay)
+							+SOverlay::Slot()
+							.HAlign(HAlign_Center)
+							.VAlign(VAlign_Center)
+							[
+								SNew(STextBlock)
+								.Font(MainStyle->FontInfo_Size_16_White)
+								.Text(FText::FromString(TEXT("电缆感知")))
+							]
+							+SOverlay::Slot()
+							[
+								SAssignNew(Button_DLXX,SButton)
+								.ButtonStyle(&MainStyle->SelecdButtonStyle)
+								.OnClicked(this,&SActorObjectInfoMainWidget::BuuttonOnClick_4)
+							]
 						]
 					]	
 				]
 				+SVerticalBox::Slot()
+				.AutoHeight()
+				.VAlign(VAlign_Center)
+				.HAlign(HAlign_Center)
 				[
 					SNew(SBox)
-					.WidthOverride(600.f)
-					.HeightOverride(800.f)
 					[
-						SAssignNew(Content,SOverlay)
-						
+						SNew(SOverlay)
+						+SOverlay::Slot()
+						[
+							SNew(SBorder)
+							[
+								SAssignNew(Content,SOverlay)
+							]
+						]
 					]
 				]
 			]

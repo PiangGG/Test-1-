@@ -23,12 +23,28 @@ void SInRoomRightBttomWidget_Item_3::Construct(const FArguments& InArgs)
 			SNew(SOverlay)
 			+SOverlay::Slot()
 			[
+				SNew(SImage)
+				.Image(&MainStyle->LeftBottom_Window3)
+			]
+			+SOverlay::Slot()
+			.Padding(FMargin(20.0f))
+			[
 				SNew(SVerticalBox)
 				+SVerticalBox::Slot()
+				.Padding(FMargin(0,0,0,0))
+				.AutoHeight()
+				.HAlign(HAlign_Left)
+				.VAlign(VAlign_Center)
 				[
 					SAssignNew(Button_UniformGridPanel,SUniformGridPanel)
+					.SlotPadding(10.0F)
 				]
 				+SVerticalBox::Slot()
+				.AutoHeight()
+				.Padding(FMargin(5,5,0,0))
+				.AutoHeight()
+				.HAlign(HAlign_Fill)
+				.VAlign(VAlign_Center)
 				[
 					SNew(SOverlay)
 					+SOverlay::Slot()
@@ -37,15 +53,22 @@ void SInRoomRightBttomWidget_Item_3::Construct(const FArguments& InArgs)
 						.Image(&MainStyle->Main_Right_Infotitle)
 					]
 					+SOverlay::Slot()
+					.HAlign(HAlign_Fill)
 					[
 						SNew(SHorizontalBox)
 						+SHorizontalBox::Slot()
+						.FillWidth(1)
+						.HAlign(HAlign_Center)
+						.VAlign(VAlign_Center)
 						[
 							SNew(STextBlock)
 							.Text(FText::FromString(TEXT("报告时间")))
 							.Font(MainStyle->FontInfo_Size_12_White)
 						]
 						+SHorizontalBox::Slot()
+						.FillWidth(4)
+						.HAlign(HAlign_Center)
+						.VAlign(VAlign_Center)
 						[
 							SNew(STextBlock)
 							.Text(FText::FromString(TEXT("报告内容")))
@@ -54,6 +77,8 @@ void SInRoomRightBttomWidget_Item_3::Construct(const FArguments& InArgs)
 					]
 				]
 				+SVerticalBox::Slot()
+				.Padding(FMargin(5,5,0,0))
+				.MaxHeight(300.0F)
 				[
 					SAssignNew(List,SScrollBox)
 				]
@@ -69,6 +94,7 @@ void SInRoomRightBttomWidget_Item_3::Construct(const FArguments& InArgs)
 			+SOverlay::Slot()
 			.HAlign(HAlign_Center)
 			.VAlign(VAlign_Center)
+			.Padding(FMargin(6,3,6,3))
 			[
 				SNew(STextBlock)
 				.Font(MainStyle->FontInfo_Size_12_White)
@@ -89,6 +115,7 @@ void SInRoomRightBttomWidget_Item_3::Construct(const FArguments& InArgs)
 			+SOverlay::Slot()
 			.HAlign(HAlign_Center)
 			.VAlign(VAlign_Center)
+			.Padding(FMargin(6,3,6,3))
 			[
 				SNew(STextBlock)
 				.Font(MainStyle->FontInfo_Size_12_White)
@@ -106,6 +133,7 @@ void SInRoomRightBttomWidget_Item_3::Construct(const FArguments& InArgs)
 			SNew(SOverlay)
 			+SOverlay::Slot()
 			.HAlign(HAlign_Center)
+			.Padding(FMargin(6,3,6,3))
 			.VAlign(VAlign_Center)
 			[
 				SNew(STextBlock)
@@ -124,7 +152,7 @@ void SInRoomRightBttomWidget_Item_3::Construct(const FArguments& InArgs)
 	if (List)
 	{
 		List->ClearChildren();
-		for (int i=0;i<10;i++)
+		for (int i=0;i<20;i++)
 		{
 			List->AddSlot()
 			[
@@ -140,7 +168,7 @@ FReply SInRoomRightBttomWidget_Item_3::Button_Day_OnClick()
 {
 	if (GEngine)
 	{
-		GEngine->AddOnScreenDebugMessage(-1,3.0,FColor::Yellow,FString("当日报告"));
+		GEngine->AddOnScreenDebugMessage(-1,3.0,FColor::Yellow,TEXT("当日报告"));
 	}
 	return FReply::Handled();
 }
@@ -149,7 +177,7 @@ FReply SInRoomRightBttomWidget_Item_3::Button_Month_OnClick()
 {
 	if (GEngine)
 	{
-		GEngine->AddOnScreenDebugMessage(-1,3.0,FColor::Yellow,FString("当月报告"));
+		GEngine->AddOnScreenDebugMessage(-1,3.0,FColor::Yellow,TEXT("当月报告"));
 	}
 	return FReply::Handled();
 }
@@ -158,7 +186,7 @@ FReply SInRoomRightBttomWidget_Item_3::Button_Year_OnClick()
 {
 	if (GEngine)
 	{
-		GEngine->AddOnScreenDebugMessage(-1,3.0,FColor::Yellow,FString("本年报告"));
+		GEngine->AddOnScreenDebugMessage(-1,3.0,FColor::Yellow,TEXT("本年报告"));
 	}
 	return FReply::Handled();
 }

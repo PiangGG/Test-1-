@@ -20,17 +20,31 @@ void SInRoomRightBttomWidget_Item_4::Construct(const FArguments& InArgs)
 			SNew(SOverlay)
 			+SOverlay::Slot()
 			[
+				SNew(SImage)
+				.Image(&MainStyle->LeftBottom_Window4)
+			]
+			+SOverlay::Slot()
+			.Padding(FMargin(20.0f))
+			[
 				SNew(SVerticalBox)
 				+SVerticalBox::Slot()
+				.AutoHeight()
 				[
 					SNew(SHorizontalBox)
 					+SHorizontalBox::Slot()
+					.HAlign(HAlign_Center)
+					.VAlign(VAlign_Center)
+					.AutoWidth()
 					[
 						SNew(STextBlock)
 						.Font(MainStyle->FontInfo_Size_16_White)
 						.Text(FText::FromString(TEXT("作业区域监测")))
 					]
 					+SHorizontalBox::Slot()
+					.AutoWidth()
+					.HAlign(HAlign_Left)
+					.VAlign(VAlign_Center)
+					.Padding(FMargin(20,0,0,0))
 					[
 						SNew(STextBlock)
 						.Font(MainStyle->FontInfo_Size_12_Blue)
@@ -38,6 +52,9 @@ void SInRoomRightBttomWidget_Item_4::Construct(const FArguments& InArgs)
 					]
 				]
 				+SVerticalBox::Slot()
+				.HAlign(HAlign_Fill)
+				.VAlign(VAlign_Fill)
+				.Padding(FMargin(10.0f))
 				[
 					SNew(SImage)
 				]

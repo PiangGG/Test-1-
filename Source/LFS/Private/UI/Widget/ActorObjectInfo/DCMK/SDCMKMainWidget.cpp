@@ -18,6 +18,7 @@ void SDCMKMainWidget::Construct(const FArguments& InArgs)
 	[
 		// Populate the widget
 		SNew(SBox)
+		.Padding(FMargin(400,250,450,250))
 		[
 			SNew(SOverlay)
 			+SOverlay::Slot()
@@ -26,17 +27,40 @@ void SDCMKMainWidget::Construct(const FArguments& InArgs)
 				.Image(&MainStyle->ObjectActorInfo_BG)
 			]
 			+SOverlay::Slot()
+			.Padding(FMargin(20.0f))
 			[
 				SNew(SVerticalBox)
 				+SVerticalBox::Slot()
+				.AutoHeight()
 				[
-					SNew(STextBlock)
-					.Font(MainStyle->FontInfo_Size_16_White)
-					.Text(FText::FromString(TEXT("设备信息")))
+					SNew(SOverlay)
+					+SOverlay::Slot()
+					.Padding(FMargin(20,-34,0,0))
+					.VAlign(VAlign_Center)
+					.HAlign(HAlign_Left)
+					[
+						SNew(SOverlay)
+						+SOverlay::Slot()
+						[
+							SNew(SImage)
+							.Image(&MainStyle->TD_LB)
+						]
+						+SOverlay::Slot()
+						.VAlign(VAlign_Center)
+						.HAlign(HAlign_Center)
+						[
+							SNew(STextBlock)
+							.Font(MainStyle->FontInfo_Size_16_White)
+							.Text(FText::FromString(TEXT("设备信息")))
+						]
+					]
 				]
 				+SVerticalBox::Slot()
+				.HAlign(HAlign_Fill)
+				.VAlign(VAlign_Fill)
 				[
 					SAssignNew(UniformGridPanel,SUniformGridPanel)
+					.SlotPadding(20.0F)
 				]
 			]
 		]
@@ -55,7 +79,7 @@ void SDCMKMainWidget::Construct(const FArguments& InArgs)
 			.DC_Name(TEXT("1#电池模块运行状况"))
 			.DC_WorkState(TEXT("浮充"))
 		];
-		UniformGridPanel->AddSlot(0,1)
+		UniformGridPanel->AddSlot(1,0)
 		[
 			SNew(SDC_ItemWidget)
 			.Neizu(0.5)
@@ -66,7 +90,7 @@ void SDCMKMainWidget::Construct(const FArguments& InArgs)
 			.DC_Name(TEXT("2#电池模块运行状况"))
 			.DC_WorkState(TEXT("浮充"))
 		];
-		UniformGridPanel->AddSlot(1,0)
+		UniformGridPanel->AddSlot(0,1)
 		[
 			SNew(SDC_ItemWidget)
 			.Neizu(0.4)
@@ -74,7 +98,7 @@ void SDCMKMainWidget::Construct(const FArguments& InArgs)
 			.Number_1(0.76)
 			.Number_2(1-0.2)
 			.Number_3(1-0.2)
-			.DC_Name(("3#电池模块运行状况"))
+			.DC_Name(TEXT("3#电池模块运行状况"))
 			.DC_WorkState(TEXT("浮充"))
 		];
 		UniformGridPanel->AddSlot(1,1)

@@ -39,7 +39,7 @@ void SInRoomRightBttomWidget::Construct(const FArguments& InArgs)
 				]
 				+SVerticalBox::Slot()
 				.AutoHeight()
-				.Padding(10,20,10,0)
+				.Padding(13,20,13,0)
 				[
 					SNew(SOverlay)
 					+SOverlay::Slot()
@@ -85,7 +85,8 @@ void SInRoomRightBttomWidget::Construct(const FArguments& InArgs)
 					]
 				]
 				+SVerticalBox::Slot()
-				.Padding(10,20,10,0)
+				.Padding(13,5,10,0)
+				.MaxHeight(335.0f)
 				[
 					SAssignNew(List,SScrollBox)
 				]

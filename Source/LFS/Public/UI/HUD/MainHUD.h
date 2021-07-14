@@ -29,6 +29,8 @@ public:
 	
 	TSharedPtr<class SInRoomMainWidget> InRoomMainWidget;
 	HUDStateEnum CurrentState=HUDStateEnum::NullState;
+	
+	UFUNCTION(BlueprintCallable)
 	void ChangeHUDState(HUDStateEnum newState);
 
 	protected:

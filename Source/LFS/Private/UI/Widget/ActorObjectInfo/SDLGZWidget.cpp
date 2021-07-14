@@ -22,175 +22,247 @@ void SDLGZWidget::Construct(const FArguments& InArgs)
 		[
 			SNew(SOverlay)
 			+SOverlay::Slot()
+			.HAlign(HAlign_Fill)
+			.VAlign(VAlign_Fill)
 			[
-				SNew(SVerticalBox)
-				+SVerticalBox::Slot()
+				SNew(SImage)
+				.Image(&MainStyle->Center_Window4)
+			]
+			+SOverlay::Slot()
+			.Padding(FMargin(30.0f))
+			[
+				SNew(SBorder)
 				[
-					SNew(SHorizontalBox)
-					+SHorizontalBox::Slot()
+					SNew(SVerticalBox)
+					+SVerticalBox::Slot()
+					.AutoHeight()
+					[
+						SNew(SHorizontalBox)
+						+SHorizontalBox::Slot()
+						.AutoWidth()
+						[
+							SNew(SBorder)
+							[
+								SNew(STextBlock)
+								.Font(MainStyle->FontInfo_Size_12_White)
+								.Text(FText::FromString(TEXT("感知电缆段")))
+							]	
+						]
+						+SHorizontalBox::Slot()
+						[
+							SNew(SBorder)
+							[
+								SNew(STextBlock)
+								.Font(MainStyle->FontInfo_Size_12_White)
+								.Text(FText::FromString(TEXT("临江门变电站648开关至来福士广场公共开闭所")))
+							]
+						]
+					]
+					+SVerticalBox::Slot()
+					.AutoHeight()
+					[
+						SNew(SBorder)
+						[
+							SNew(SOverlay)
+							+SOverlay::Slot()
+							[
+								SNew(SImage)
+								.Image(&MainStyle->ProbarFillImageBrush)
+							]
+							+SOverlay::Slot()
+							.HAlign(HAlign_Center)
+							.VAlign(VAlign_Center)
+							[
+								SNew(STextBlock)
+								.Font(MainStyle->FontInfo_Size_12_White)
+								.Text(FText::FromString(TEXT("电缆绝缘在线感知")))
+							]
+						]
+					]
+					+SVerticalBox::Slot()
+					.AutoHeight()
+					[
+						SNew(SBorder)
+						[
+							SNew(SHorizontalBox)
+							+SHorizontalBox::Slot()
+							[
+								SNew(STextBlock)
+								.Font(MainStyle->FontInfo_Size_12_White)
+								.Text(FText::FromString(TEXT("电缆绝缘评价")))	
+							]
+							+SHorizontalBox::Slot()
+							.AutoWidth()
+							[
+								SNew(SBorder)
+								[
+									SNew(STextBlock)
+									.Font(MainStyle->FontInfo_Size_12_White)
+									.Text(FText::FromString(TEXT("正常")))
+								]
+							]
+						]
+					]
+					+SVerticalBox::Slot()
+					.AutoHeight()
 					[
 						SNew(STextBlock)
 						.Font(MainStyle->FontInfo_Size_12_White)
-						.Text(FText::FromString(TEXT("感知电缆段")))	
+						.Text(FText::FromString(TEXT("两端电流差值")))
 					]
-					+SHorizontalBox::Slot()
-					[
-						SNew(STextBlock)
-						.Font(MainStyle->FontInfo_Size_12_White)
-						.Text(FText::FromString(TEXT("临江门变电站648开关至来福士广场公共开闭所")))	
-					]
-				]
-				+SVerticalBox::Slot()
-				[
-					SNew(SOverlay)
-					+SOverlay::Slot()
-					[
-						SNew(SImage)
-					]
-					+SOverlay::Slot()
-					[
-						SNew(STextBlock)
-						.Font(MainStyle->FontInfo_Size_12_White)
-						.Text(FText::FromString(TEXT("电缆绝缘在线感知")))
-					]
-				]
-				+SVerticalBox::Slot()
-				[
-					SNew(SHorizontalBox)
-					+SHorizontalBox::Slot()
-					[
-						SNew(STextBlock)
-						.Font(MainStyle->FontInfo_Size_12_White)
-						.Text(FText::FromString(TEXT("电缆绝缘评价")))	
-					]
-					+SHorizontalBox::Slot()
-					[
-						SNew(STextBlock)
-						.Font(MainStyle->FontInfo_Size_12_White)
-						.Text(FText::FromString(TEXT("正常")))	
-					]
-				]
-				+SVerticalBox::Slot()
-				[
-					SNew(STextBlock)
-					.Font(MainStyle->FontInfo_Size_12_White)
-					.Text(FText::FromString(TEXT("两端电流差值")))
-				]
-				+SVerticalBox::Slot()
-				[
-					SNew(SHorizontalBox)
-					+SHorizontalBox::Slot()
+					+SVerticalBox::Slot()
+					.AutoHeight()
 					[
 						SNew(SHorizontalBox)
 						+SHorizontalBox::Slot()
 						[
+							SNew(SHorizontalBox)
+							+SHorizontalBox::Slot()
+							.AutoWidth()
+							[
+								SNew(STextBlock)
+								.Font(MainStyle->FontInfo_Size_12_White)
+								.Text(FText::FromString(TEXT("A相")))
+							]
+							+SHorizontalBox::Slot()
+							[
+								SAssignNew(Progressbar_A,SLFSProgressbar)
+								.percent(0.13)
+								//.Name(FText::FromString(TEXT("0.13A")))
+							]
+						]
+						+SHorizontalBox::Slot()
+						.Padding(FMargin(10,0,0,0))
+						[
+							SNew(SHorizontalBox)
+							+SHorizontalBox::Slot()
+							.AutoWidth()
+							[
+								SNew(STextBlock)
+								.Font(MainStyle->FontInfo_Size_12_White)
+								.Text(FText::FromString(TEXT("B相")))
+							]
+							+SHorizontalBox::Slot()
+							[
+								SAssignNew(Progressbar_B,SLFSProgressbar)
+								.percent(0.13)
+								//.Name(FText::FromString(TEXT("0.13A")))
+							]
+						]
+						+SHorizontalBox::Slot()
+						.Padding(FMargin(10,0,10,0))
+						[
+							SNew(SHorizontalBox)
+							+SHorizontalBox::Slot()
+							.AutoWidth()
+							[
+								SNew(STextBlock)
+								.Font(MainStyle->FontInfo_Size_12_White)
+								.Text(FText::FromString(TEXT("C相")))
+							]
+							+SHorizontalBox::Slot()
+							[
+								SAssignNew(Progressbar_A,SLFSProgressbar)
+								.percent(0.27)
+								//.Name(FText::FromString(TEXT("0.27A")))
+							]
+						]
+					]
+					+SVerticalBox::Slot()
+					.AutoHeight()
+					.Padding(FMargin(0,5,0,0))
+					[
+						SNew(SBorder)
+						[
+							SNew(SOverlay)
+							+SOverlay::Slot()
+							[
+								SNew(SImage)
+								.Image(&MainStyle->ProbarFillImageBrush)
+							]
+							+SOverlay::Slot()
+							.HAlign(HAlign_Center)
+							.VAlign(VAlign_Center)
+							[
+								SNew(STextBlock)
+								.Font(MainStyle->FontInfo_Size_12_White)
+								.Text(FText::FromString(TEXT("接头温度感知")))
+							]
+						]
+					]
+					+SVerticalBox::Slot()
+					.AutoHeight()
+					[
+						SNew(SBorder)
+						[
+							SNew(SHorizontalBox)
+							+SHorizontalBox::Slot()
+							[
+								SNew(STextBlock)
+								.Font(MainStyle->FontInfo_Size_12_White)
+								.Text(FText::FromString(TEXT("电缆接头温度评价")))	
+							]
+							+SHorizontalBox::Slot()
+							.AutoWidth()
+							[
+								SNew(STextBlock)
+								.Font(MainStyle->FontInfo_Size_12_White)
+								.Text(FText::FromString(TEXT("正常")))	
+							]
+						]
+					]
+					+SVerticalBox::Slot()
+					.AutoHeight()
+					[
+						SNew(SBorder)
+						[
+							SAssignNew(WD_GridPanel,SUniformGridPanel)
+							.SlotPadding(5.0F)
+						]
+						
+					]
+					+SVerticalBox::Slot()
+					.AutoHeight()
+					[
+						SNew(SOverlay)
+						+SOverlay::Slot()
+						[
+							SNew(SImage)
+							.Image(&MainStyle->ProbarFillImageBrush)
+						]
+						+SOverlay::Slot()
+						.HAlign(HAlign_Center)
+						.VAlign(VAlign_Center)
+						[
 							SNew(STextBlock)
 							.Font(MainStyle->FontInfo_Size_12_White)
-							.Text(FText::FromString(TEXT("A相")))
-						]
-						+SHorizontalBox::Slot()
-						[
-							SAssignNew(Progressbar_A,SLFSProgressbar)
-							.percent(0.13)
-							//.Name(FText::FromString(TEXT("0.13A")))
+							.Text(FText::FromString(TEXT("电缆震动感知")))
 						]
 					]
-					+SHorizontalBox::Slot()
+					+SVerticalBox::Slot()
+					.AutoHeight()
 					[
-						SNew(SHorizontalBox)
-						+SHorizontalBox::Slot()
-						[
-							SNew(STextBlock)
-							.Font(MainStyle->FontInfo_Size_12_White)
-							.Text(FText::FromString(TEXT("B相")))
+						SNew(SBorder)
+						[	
+							SNew(SHorizontalBox)
+							+SHorizontalBox::Slot()
+							[
+								SNew(STextBlock)
+								.Font(MainStyle->FontInfo_Size_12_White)
+								.Text(FText::FromString(TEXT("各电缆井位电缆震动感知")))	
+							]
+							+SHorizontalBox::Slot()
+							.AutoWidth()
+							[
+								SNew(SBorder)
+								[
+									SNew(STextBlock)
+									.Font(MainStyle->FontInfo_Size_12_White)
+									.Text(FText::FromString(TEXT("正常")))
+								]	
+							]
 						]
-						+SHorizontalBox::Slot()
-						[
-							SAssignNew(Progressbar_B,SLFSProgressbar)
-							.percent(0.13)
-							//.Name(FText::FromString(TEXT("0.13A")))
-						]
-					]
-					+SHorizontalBox::Slot()
-					[
-						SNew(SHorizontalBox)
-						+SHorizontalBox::Slot()
-						[
-							SNew(STextBlock)
-							.Font(MainStyle->FontInfo_Size_12_White)
-							.Text(FText::FromString(TEXT("B相")))
-						]
-						+SHorizontalBox::Slot()
-						[
-							SAssignNew(Progressbar_A,SLFSProgressbar)
-							.percent(0.27)
-							//.Name(FText::FromString(TEXT("0.27A")))
-						]
-					]
-				]
-				+SVerticalBox::Slot()
-				[
-					SNew(SOverlay)
-					+SOverlay::Slot()
-					[
-						SNew(SImage)
-					]
-					+SOverlay::Slot()
-					[
-						SNew(STextBlock)
-						.Font(MainStyle->FontInfo_Size_12_White)
-						.Text(FText::FromString(TEXT("温度接头感知")))
-					]
-				]
-				+SVerticalBox::Slot()
-				[
-					SNew(SHorizontalBox)
-					+SHorizontalBox::Slot()
-					[
-						SNew(STextBlock)
-						.Font(MainStyle->FontInfo_Size_12_White)
-						.Text(FText::FromString(TEXT("电缆接头温度评价")))	
-					]
-					+SHorizontalBox::Slot()
-					[
-						SNew(STextBlock)
-						.Font(MainStyle->FontInfo_Size_12_White)
-						.Text(FText::FromString(TEXT("正常")))	
-					]
-				]
-
-				+SVerticalBox::Slot()
-				[
-					SNew(SOverlay)
-					+SOverlay::Slot()
-					[
-						SNew(SImage)
-					]
-					+SOverlay::Slot()
-					[
-						SNew(STextBlock)
-						.Font(MainStyle->FontInfo_Size_12_White)
-						.Text(FText::FromString(TEXT("温度接头感知")))
-					]
-				]
-				+SVerticalBox::Slot()
-				[
-					SAssignNew(WD_GridPanel,SUniformGridPanel)
-				]
-				+SVerticalBox::Slot()
-				[
-					SNew(SHorizontalBox)
-					+SHorizontalBox::Slot()
-					[
-						SNew(STextBlock)
-						.Font(MainStyle->FontInfo_Size_12_White)
-						.Text(FText::FromString(TEXT("各电缆井位电缆震动感知")))	
-					]
-					+SHorizontalBox::Slot()
-					[
-						SNew(STextBlock)
-						.Font(MainStyle->FontInfo_Size_12_White)
-						.Text(FText::FromString(TEXT("正常")))	
+						
 					]
 				]
 			]
@@ -205,12 +277,16 @@ void SDLGZWidget::Construct(const FArguments& InArgs)
 			[
 				SNew(SVerticalBox)
 				+SVerticalBox::Slot()
+				.HAlign(HAlign_Center)
+				.VAlign(VAlign_Center)
+				.AutoHeight()
 				[
 					SNew(STextBlock)
 					.Font(MainStyle->FontInfo_Size_12_White)
 					.Text(FText::FromString(TEXT("电缆1")))
 				]
 				+SVerticalBox::Slot()
+				.AutoHeight()
 				[
 					SAssignNew(DL_1,SHuanWidget)
 					.number(0.325f)
@@ -225,12 +301,16 @@ void SDLGZWidget::Construct(const FArguments& InArgs)
 			[
 				SNew(SVerticalBox)
 				+SVerticalBox::Slot()
+				.HAlign(HAlign_Center)
+				.VAlign(VAlign_Center)
+				.AutoHeight()
 				[
 					SNew(STextBlock)
 					.Font(MainStyle->FontInfo_Size_12_White)
 					.Text(FText::FromString(TEXT("电缆2")))
 				]
 				+SVerticalBox::Slot()
+				.AutoHeight()
 				[
 					SAssignNew(DL_2,SHuanWidget)
 					.number(0.341f)
@@ -245,12 +325,16 @@ void SDLGZWidget::Construct(const FArguments& InArgs)
 			[
 				SNew(SVerticalBox)
 				+SVerticalBox::Slot()
+				.HAlign(HAlign_Center)
+				.VAlign(VAlign_Center)
+				.AutoHeight()
 				[
 					SNew(STextBlock)
 					.Font(MainStyle->FontInfo_Size_12_White)
 					.Text(FText::FromString(TEXT("电缆3")))
 				]
 				+SVerticalBox::Slot()
+				.AutoHeight()
 				[
 					SAssignNew(DL_3,SHuanWidget)
 					.number(0.337f)
@@ -258,19 +342,23 @@ void SDLGZWidget::Construct(const FArguments& InArgs)
 				]
 			]	
 		];
-		WD_GridPanel->AddSlot(1,0)
+		WD_GridPanel->AddSlot(0,1)
 		[
 			SNew(SOverlay)
 			+SOverlay::Slot()
 			[
 				SNew(SVerticalBox)
 				+SVerticalBox::Slot()
+				.HAlign(HAlign_Center)
+				.VAlign(VAlign_Center)
+				.AutoHeight()
 				[
 					SNew(STextBlock)
 					.Font(MainStyle->FontInfo_Size_12_White)
 					.Text(FText::FromString(TEXT("电缆4")))
 				]
 				+SVerticalBox::Slot()
+				.AutoHeight()
 				[
 					SAssignNew(DL_4,SHuanWidget)
 					.number(0.332f)
@@ -285,12 +373,16 @@ void SDLGZWidget::Construct(const FArguments& InArgs)
 			[
 				SNew(SVerticalBox)
 				+SVerticalBox::Slot()
+				.HAlign(HAlign_Center)
+				.VAlign(VAlign_Center)
+				.AutoHeight()
 				[
 					SNew(STextBlock)
 					.Font(MainStyle->FontInfo_Size_12_White)
 					.Text(FText::FromString(TEXT("电缆5")))
 				]
 				+SVerticalBox::Slot()
+				.AutoHeight()
 				[
 					SAssignNew(DL_5,SHuanWidget)
 					.number(0.351f)
@@ -298,19 +390,23 @@ void SDLGZWidget::Construct(const FArguments& InArgs)
 				]
 			]	
 		];
-		WD_GridPanel->AddSlot(1,2)
+		WD_GridPanel->AddSlot(2,1)
 		[
 			SNew(SOverlay)
 			+SOverlay::Slot()
 			[
 				SNew(SVerticalBox)
 				+SVerticalBox::Slot()
+				.HAlign(HAlign_Center)
+				.VAlign(VAlign_Center)
+				.AutoHeight()
 				[
 					SNew(STextBlock)
 					.Font(MainStyle->FontInfo_Size_12_White)
 					.Text(FText::FromString(TEXT("电缆6")))
 				]
 				+SVerticalBox::Slot()
+				.AutoHeight()
 				[
 					SAssignNew(DL_6,SHuanWidget)
 					.number(0.341f)

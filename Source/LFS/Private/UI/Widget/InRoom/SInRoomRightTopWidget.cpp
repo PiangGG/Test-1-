@@ -40,7 +40,7 @@ void SInRoomRightTopWidget::Construct(const FArguments& InArgs)
 					.Font(MainStyle->FontInfo_Size_16_Blue)
 				]
 				+SVerticalBox::Slot()
-				.Padding(10,20,10,0)
+				.Padding(13,20,13,0)
 				.AutoHeight()
 				[
 					SNew(SOverlay)
@@ -79,6 +79,8 @@ void SInRoomRightTopWidget::Construct(const FArguments& InArgs)
 					]
 				]
 				+SVerticalBox::Slot()
+				.Padding(13,5,10,0)
+				.MaxHeight(335.0f)
 				[
 					SAssignNew(List,SScrollBox)
 					

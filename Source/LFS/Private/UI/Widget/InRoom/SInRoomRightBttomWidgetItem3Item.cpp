@@ -20,18 +20,21 @@ void SInRoomRightBttomWidgetItem3Item::Construct(const FArguments& InArgs)
 		[
 			SNew(SHorizontalBox)
 			+SHorizontalBox::Slot()
+			.FillWidth(1)
 			[
 				SNew(STextBlock)
 				.Text(FText::FromString(Time))
 				.Font(MainStyle->FontInfo_Size_12_White)
 			]
 			+SHorizontalBox::Slot()
+			.FillWidth(3)
 			[
 				SNew(STextBlock)
 				.Text(FText::FromString(Content))
 				.Font(MainStyle->FontInfo_Size_12_White)
 			]
 			+SHorizontalBox::Slot()
+			.FillWidth(1)
 			[
 				SNew(SOverlay)
 				+SOverlay::Slot()
@@ -44,6 +47,7 @@ void SInRoomRightBttomWidgetItem3Item::Construct(const FArguments& InArgs)
 				[
 					SAssignNew(Item_Button,SButton)
 					.OnClicked(this,&SInRoomRightBttomWidgetItem3Item::Item_Button_OnClick)
+					.ButtonStyle(&MainStyle->ButtonStyle_Item_Chakan)
 				]
 			]
 		]

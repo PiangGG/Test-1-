@@ -35,6 +35,7 @@ public:
 
 	void BlockClicked(UPrimitiveComponent* ClickedComp);
 	//Component
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	class UStaticMeshComponent* StaticMeshComponent;
 	//Component
 	class UBoxComponent* BoxComponent;

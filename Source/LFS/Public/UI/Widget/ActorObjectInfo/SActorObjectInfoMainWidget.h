@@ -21,6 +21,7 @@ public:
 	//引入Sytle|获取MenuStyle
 	const struct FMainSlateStyle* MainStyle;
 
+	TSharedPtr<class SOverlay>Overlay;
 	//Button
 	TSharedPtr<class SButton> Button_DLXX;
 	TSharedPtr<class SButton> Button_TZXX;

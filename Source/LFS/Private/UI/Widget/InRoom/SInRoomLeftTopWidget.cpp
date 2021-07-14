@@ -34,7 +34,7 @@ void SInRoomLeftTopWidget::Construct(const FArguments& InArgs)
 				SNew(SVerticalBox)
 				+SVerticalBox::Slot()
 				.AutoHeight()
-				.Padding(10,0,0,0)
+				.Padding(20,20,0,0)
 				[
 					SNew(STextBlock)
 					.Text(FText::FromString(TEXT("设备管理")))
@@ -42,7 +42,7 @@ void SInRoomLeftTopWidget::Construct(const FArguments& InArgs)
 				]
 				+SVerticalBox::Slot()
 				.AutoHeight()
-				.Padding(10,20,10,0)
+				.Padding(13,20,13,0)
 				[
 					SNew(SOverlay)
 					+SOverlay::Slot()
@@ -58,7 +58,7 @@ void SInRoomLeftTopWidget::Construct(const FArguments& InArgs)
 					[
 						SNew(SHorizontalBox)
 						+SHorizontalBox::Slot()
-						.HAlign(HAlign_Fill)
+						.HAlign(HAlign_Center)
 						.VAlign(VAlign_Center)
 						[
 							SNew(STextBlock)
@@ -84,7 +84,8 @@ void SInRoomLeftTopWidget::Construct(const FArguments& InArgs)
 					]
 				]
 				+SVerticalBox::Slot()
-				.Padding(10,0,10,0)
+				.Padding(13,10,13,0)
+				.MaxHeight(335.0f)
 				[
 					SAssignNew(List,SScrollBox)
 				]

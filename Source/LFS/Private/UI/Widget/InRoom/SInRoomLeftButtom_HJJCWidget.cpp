@@ -31,7 +31,7 @@ void SInRoomLeftButtom_HJJCWidget::Construct(const FArguments& InArgs)
 				SNew(SVerticalBox)
 				+SVerticalBox::Slot()
 				.AutoHeight()
-				.Padding(0,20,0,0)
+				.Padding(20,20,0,0)
 				[
 					SNew(STextBlock)
 					.Font(MainStyle->FontInfo_Size_16_Blue)

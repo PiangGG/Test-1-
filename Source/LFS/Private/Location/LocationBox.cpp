@@ -40,7 +40,7 @@ void ALocationBox::OverlapCompBegin(UPrimitiveComponent* OverlappedComponent, AA
 	bool bFromSweep, const FHitResult& SweepResult)
 {
 	UE_LOG(LogTemp,Warning,TEXT("OverlapCompBegin"));
-	AMainCharacter *Character=Cast<AMainCharacter>(OtherActor);
+	APawn*Character=Cast<APawn>(OtherActor);
 	if (Character)
 	{
 		ChangeNewLocationState(BoxState);
@@ -57,7 +57,6 @@ void ALocationBox::ChangeNewLocationState(LocationBoxState newState)
 	//AMainGameMode *GM=Cast<AMainGameMode>(UGameplayStatics::GetGameMode(GWorld));
 	AMainHUD* HUD=Cast<AMainHUD>(UGameplayStatics::GetPlayerController(GWorld,0)->GetHUD());
 	if (!HUD)return;
-	
 	switch (newState)
 	{
 	case LocationBoxState::LocationNullState:

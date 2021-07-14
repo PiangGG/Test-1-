@@ -16,5 +16,7 @@ class LFS_API AMainGameMode : public AGameModeBase
 
 	public:
 	AMainGameMode();
-	
+
+	void ChangeCharacter(APawn *Pawn);
+	//virtual  void SetPlayerDefaults(APawn* PlayerPawn) override;
 };

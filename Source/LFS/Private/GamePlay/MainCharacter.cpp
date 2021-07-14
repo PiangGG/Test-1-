@@ -5,6 +5,7 @@
 
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
+#include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 
 // Sets default values
@@ -26,6 +27,7 @@ AMainCharacter::AMainCharacter()
 	ThirdCamera=CreateDefaultSubobject<UCameraComponent>(TEXT("ThirdCamera"));
 	ThirdCamera->SetupAttachment(CameraBoom,USpringArmComponent::SocketName);
 	ThirdCamera->bUsePawnControlRotation= false;//设置第三人称相机不跟随控制器旋转
+	GetCharacterMovement()->GravityScale=0.0f;
 }
 
 // Called when the game starts or when spawned

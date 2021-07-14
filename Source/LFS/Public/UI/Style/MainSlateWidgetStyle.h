@@ -81,19 +81,35 @@ public:
 	UPROPERTY(EditAnywhere,Category=Image)
 	FSlateBrush ButtomIcon_4;
 
-	//通道BG
+	//通道
 	UPROPERTY(EditAnywhere,Category=Image)
 	FSlateBrush TD_BG_LEFT;
 	UPROPERTY(EditAnywhere,Category=Image)
 	FSlateBrush TD_BG_RIGHT;
-	
+	UPROPERTY(EditAnywhere,Category=Image)
+	FSlateBrush TD_LB;
 	//Main Windows
 	UPROPERTY(EditAnywhere,Category=Image)
 	FSlateBrush Main_Window;
 
 	//center window
 	UPROPERTY(EditAnywhere,Category=Image)
-	FSlateBrush Center_Window;
+	FSlateBrush Center_Window1;
+	UPROPERTY(EditAnywhere,Category=Image)
+	FSlateBrush Center_Window2;
+	UPROPERTY(EditAnywhere,Category=Image)
+	FSlateBrush Center_Window3;
+	UPROPERTY(EditAnywhere,Category=Image)
+	FSlateBrush Center_Window4;
+
+	UPROPERTY(EditAnywhere,Category=Image)
+	FSlateBrush LeftBottom_Window1;
+	UPROPERTY(EditAnywhere,Category=Image)
+	FSlateBrush LeftBottom_Window2;
+	UPROPERTY(EditAnywhere,Category=Image)
+	FSlateBrush LeftBottom_Window3;
+	UPROPERTY(EditAnywhere,Category=Image)
+	FSlateBrush LeftBottom_Window4;
 	
 	UPROPERTY(EditAnywhere,Category=ButtonStyle)
 	FButtonStyle ButtonStyle_DMY;
@@ -109,6 +125,9 @@ public:
 	FComboBoxStyle ComboBoStyle;
 	UPROPERTY(EditAnywhere,Category=ButtonStyle)
 	FColor ComboBoStyleColor;
+
+	UPROPERTY(EditAnywhere,Category=ButtonStyle)
+	FButtonStyle ButtonStyle_Item_Chakan;
 		
 	
 	//InRoom

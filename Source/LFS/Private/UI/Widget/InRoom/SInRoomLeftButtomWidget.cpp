@@ -28,6 +28,7 @@ void SInRoomLeftButtomWidget::Construct(const FArguments& InArgs)
 			[
 				SNew(SVerticalBox)
 				+SVerticalBox::Slot()
+				.AutoHeight()
 				[
 					SAssignNew(Content,SOverlay)
 				]
@@ -36,35 +37,77 @@ void SInRoomLeftButtomWidget::Construct(const FArguments& InArgs)
 				[
 					SNew(SHorizontalBox)
 					+SHorizontalBox::Slot()
-					.AutoWidth()
+					.HAlign(HAlign_Fill)
 					[
-						SAssignNew(HJJC_Button,SButton)
-						.ButtonStyle(&MainStyle->NotSelecdButtonStyle)
-						.Text(FText::FromString(TEXT("环境监测")))
-						.HAlign(HAlign_Fill)
-						.VAlign(VAlign_Fill)
-						.OnClicked(this,&SInRoomLeftButtomWidget::BuuttonOnClick_1)
+						SNew(SOverlay)
+						+SOverlay::Slot()
+						.HAlign(HAlign_Center)
+						.VAlign(VAlign_Center)
+						[
+							SNew(STextBlock)
+							.Font(MainStyle->FontInfo_Size_16_White)
+							.Text(FText::FromString(TEXT("电缆信息")))
+						]
+						+SOverlay::Slot()
+						[	
+							SAssignNew(HJJC_Button,SButton)
+							.ButtonStyle(&MainStyle->SelecdButtonStyle)
+							.OnClicked(this,&SInRoomLeftButtomWidget::BuuttonOnClick_1)
+						]
 					]
 					+SHorizontalBox::Slot()
 					[
-						SAssignNew(GJXX_Button,SButton)
-						.ButtonStyle(&MainStyle->NotSelecdButtonStyle)
-						.Text(FText::FromString(TEXT("告警信息")))
-						.OnClicked(this,&SInRoomLeftButtomWidget::BuuttonOnClick_2)
+						SNew(SOverlay)
+						+SOverlay::Slot()
+						.HAlign(HAlign_Center)
+						.VAlign(VAlign_Center)
+						[
+							SNew(STextBlock)
+							.Font(MainStyle->FontInfo_Size_16_White)
+							.Text(FText::FromString(TEXT("告警信息")))
+						]
+						+SOverlay::Slot()
+						[	
+							SAssignNew(GJXX_Button,SButton)
+							.ButtonStyle(&MainStyle->SelecdButtonStyle)
+							.OnClicked(this,&SInRoomLeftButtomWidget::BuuttonOnClick_2)
+						]
 					]
 					+SHorizontalBox::Slot()
 					[
-						SAssignNew(ZNXJ_Button,SButton)
-						.ButtonStyle(&MainStyle->NotSelecdButtonStyle)
-						.Text(FText::FromString(TEXT("智能巡检")))
-						.OnClicked(this,&SInRoomLeftButtomWidget::BuuttonOnClick_3)
+						SNew(SOverlay)
+						+SOverlay::Slot()
+						.HAlign(HAlign_Center)
+						.VAlign(VAlign_Center)
+						[
+							SNew(STextBlock)
+							.Font(MainStyle->FontInfo_Size_16_White)
+							.Text(FText::FromString(TEXT("智能巡检")))
+						]
+						+SOverlay::Slot()
+						[	
+							SAssignNew(ZNXJ_Button,SButton)
+							.ButtonStyle(&MainStyle->SelecdButtonStyle)
+							.OnClicked(this,&SInRoomLeftButtomWidget::BuuttonOnClick_3)
+						]
 					]
 					+SHorizontalBox::Slot()
 					[
-						SAssignNew(ZYGK_Button,SButton)
-						.ButtonStyle(&MainStyle->NotSelecdButtonStyle)
-						.Text(FText::FromString(TEXT("作业管控")))
-						.OnClicked(this,&SInRoomLeftButtomWidget::BuuttonOnClick_4)
+						SNew(SOverlay)
+						+SOverlay::Slot()
+						.HAlign(HAlign_Center)
+						.VAlign(VAlign_Center)
+						[
+							SNew(STextBlock)
+							.Font(MainStyle->FontInfo_Size_16_White)
+							.Text(FText::FromString(TEXT("作业管控")))
+						]
+						+SOverlay::Slot()
+						[	
+							SAssignNew(ZYGK_Button,SButton)
+							.ButtonStyle(&MainStyle->SelecdButtonStyle)
+							.OnClicked(this,&SInRoomLeftButtomWidget::BuuttonOnClick_4)
+						]
 					]
 				]				
 			]

@@ -72,7 +72,7 @@ void SMainLeftWidget::Construct(const FArguments& InArgs)
 						SAssignNew(Gongdian_State,SMain_Left_State_Widget)
 						.ProbarSize(0.45)
 						.ShowText(TEXT("供电状态"))
-						.StateImageIcon(MainStyle->StateIcon_2)
+						.StateImageIcon(MainStyle->StateIcon_3)
 						.ProgressBarText(TEXT("供电状态正常"))
 					]
 					+SVerticalBox::Slot()

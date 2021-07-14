@@ -33,70 +33,108 @@ void SDC_ItemWidget::Construct(const FArguments& InArgs)
 			SNew(SOverlay)
 			+SOverlay::Slot()
 			[
-				SNew(SVerticalBox)
-				+SVerticalBox::Slot()
+				SNew(SBorder)
 				[
-					SNew(STextBlock)
-					.Font(MainStyle->FontInfo_Size_12_White)
-					.Text(FText::FromString(DC_Name))
-				]
-				+SVerticalBox::Slot()
-				[
-					SNew(SHorizontalBox)
-					+SHorizontalBox::Slot()
+					SNew(SVerticalBox)
+					+SVerticalBox::Slot()
+					.AutoHeight()
+					[
+						SNew(SBorder)
+						.BorderImage(&MainStyle->Main_Right_Infotitle)
+						[
+							SNew(STextBlock)
+							.Font(MainStyle->FontInfo_Size_12_White)
+							.Text(FText::FromString(DC_Name))
+						]
+						
+					]
+					+SVerticalBox::Slot()
+					.AutoHeight()
+					[
+						SNew(SBorder)
+						[
+							SNew(SHorizontalBox)
+							+SHorizontalBox::Slot()
+							.FillWidth(1)
+							[
+								SNew(SHorizontalBox)
+								+SHorizontalBox::Slot()
+								.AutoWidth()
+								.Padding(FMargin(0,0,-10,0))
+								[
+									SNew(SBorder)
+									[	
+										SNew(STextBlock)
+										.Font(MainStyle->FontInfo_Size_12_White)
+										.Text(FText::FromString(TEXT("总告警")))
+									]
+									
+								]
+								+SHorizontalBox::Slot()
+								.HAlign(HAlign_Left)
+								.Padding(FMargin(10,0,0,0))
+								[
+									SNew(SBorder)
+									[
+										SNew(STextBlock)
+										.Font(MainStyle->FontInfo_Size_12_White)
+										.Text(FText::FromString(DC_ZGJ))
+									]
+								]
+							]
+							+SHorizontalBox::Slot()
+							.FillWidth(1)
+							[
+								SNew(SHorizontalBox)
+								+SHorizontalBox::Slot()
+								.AutoWidth()
+								.Padding(FMargin(0,0,0,0))
+								[
+									SNew(SBorder)
+									[
+										SNew(STextBlock)
+										.Font(MainStyle->FontInfo_Size_12_White)
+										.Text(FText::FromString(TEXT("工作状态")))
+									]
+								]
+								+SHorizontalBox::Slot()
+								.HAlign(HAlign_Left)
+								.Padding(FMargin(10,0,0,0))
+								[
+									SNew(SBorder)
+									[
+										SNew(STextBlock)
+										.Font(MainStyle->FontInfo_Size_12_White)
+										.Text(FText::FromString(DC_WorkState))
+									]
+								]
+							]
+						]
+					]
+					+SVerticalBox::Slot()
+					.AutoHeight()
 					[
 						SNew(SHorizontalBox)
 						+SHorizontalBox::Slot()
 						[
-							SNew(STextBlock)
-							.Font(MainStyle->FontInfo_Size_12_White)
-							.Text(FText::FromString(TEXT("总告警")))
+							SAssignNew(Progressbar_1,SLFSProgressbar)
+							.percent(JZWD)
+							.Name(TEXT("脊柱温度"))
+							.Number(FString::SanitizeFloat(JZWD*100)+"℃")
 						]
 						+SHorizontalBox::Slot()
 						[
-							SNew(STextBlock)
-							.Font(MainStyle->FontInfo_Size_12_White)
-							.Text(FText::FromString(DC_ZGJ))
+							SAssignNew(Progressbar_1,SLFSProgressbar)
+							.percent(Neizu)
+							.Name(TEXT("内阻"))
+							.Number(FString::SanitizeFloat(Neizu*100)+"mΩ")
 						]
 					]
-					+SHorizontalBox::Slot()
+					+SVerticalBox::Slot()
 					[
-						SNew(SHorizontalBox)
-						+SHorizontalBox::Slot()
-						[
-							SNew(STextBlock)
-							.Font(MainStyle->FontInfo_Size_12_White)
-							.Text(FText::FromString(TEXT("工作状态")))
-						]
-						+SHorizontalBox::Slot()
-						[
-							SNew(STextBlock)
-							.Font(MainStyle->FontInfo_Size_12_White)
-							.Text(FText::FromString(DC_WorkState))
-						]
+						SAssignNew(UniformGridPanel,SUniformGridPanel)
+						.SlotPadding(10.0f)
 					]
-				]
-				+SVerticalBox::Slot()
-				[
-					SNew(SHorizontalBox)
-					+SHorizontalBox::Slot()
-					[
-						SAssignNew(Progressbar_1,SLFSProgressbar)
-						.percent(JZWD)
-						.Name(TEXT("脊柱温度"))
-						.Number(FString::SanitizeFloat(JZWD*100)+"℃")
-					]
-					+SHorizontalBox::Slot()
-					[
-						SAssignNew(Progressbar_1,SLFSProgressbar)
-						.percent(Neizu)
-						.Name(TEXT("内阻"))
-						.Number(FString::SanitizeFloat(Neizu*100)+"mΩ")
-					]
-				]
-				+SVerticalBox::Slot()
-				[
-					SAssignNew(UniformGridPanel,SUniformGridPanel)
 				]
 			]
 		]
@@ -110,13 +148,13 @@ void SDC_ItemWidget::Construct(const FArguments& InArgs)
 			.number(Number_1)
 			.Name(TEXT("输出电压"))
 		];
-		UniformGridPanel->AddSlot(0,1)
+		UniformGridPanel->AddSlot(1,0)
 		[
 			SNew(SHuanWidget)
 			.number(Number_2)
 			.Name(TEXT("输出电流"))
 		];
-		UniformGridPanel->AddSlot(0,2)
+		UniformGridPanel->AddSlot(2,0)
 		[
 			SNew(SHuanWidget)
 			.number(Number_3)
