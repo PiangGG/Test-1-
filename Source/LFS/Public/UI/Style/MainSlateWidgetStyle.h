@@ -80,6 +80,12 @@ public:
 	FSlateBrush ButtomIcon_3;
 	UPROPERTY(EditAnywhere,Category=Image)
 	FSlateBrush ButtomIcon_4;
+
+	//通道BG
+	UPROPERTY(EditAnywhere,Category=Image)
+	FSlateBrush TD_BG_LEFT;
+	UPROPERTY(EditAnywhere,Category=Image)
+	FSlateBrush TD_BG_RIGHT;
 	
 	//Main Windows
 	UPROPERTY(EditAnywhere,Category=Image)

@@ -25,7 +25,7 @@ void SRight_Main::Construct(const FArguments& InArgs)
 		.Padding(FMargin(0,25,0,0))
 		[
 			SNew(SImage)
-			.Image(&MainStyle->Main_Right_BG)
+			.Image(&MainStyle->TD_BG_RIGHT)
 		]
 		+SOverlay::Slot()
 		.VAlign(VAlign_Top)

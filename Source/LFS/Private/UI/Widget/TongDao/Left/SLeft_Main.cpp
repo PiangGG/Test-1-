@@ -33,7 +33,7 @@ void SLeft_Main::Construct(const FArguments& InArgs)
 			.Padding(FMargin(0,25,0,0))
 			[
 				SNew(SImage)
-				.Image(&MainStyle->Main_Left_BG)
+				.Image(&MainStyle->TD_BG_LEFT)
 			]
 			+SOverlay::Slot()
 			.VAlign(VAlign_Top)
