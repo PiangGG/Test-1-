@@ -1,0 +1,40 @@
+[
+  {
+    "ConditionMonitoring":
+    [
+      {
+        "Status":
+        [
+          {
+            "percent": 0.3
+          },
+          {
+            "State": "正常"
+          }
+        ]
+      },
+      {
+        "Status":
+        [
+          {
+            "percent": 0.5
+          },
+          {
+            "State": "正常"
+          }
+        ]
+      },
+      {
+        "Status":
+        [
+          {
+            "percent": 0.4
+          },
+          {
+            "State": "正常"
+          }
+        ]
+      }
+    ]
+  }
+]

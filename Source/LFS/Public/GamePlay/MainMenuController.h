@@ -23,9 +23,17 @@ public:
 	AMainMenuController();
 
 	void ChangeControllerLocation(ControllerLocation NewLocation);
+
 	
+	void ChnageLocation1();
+	
+	void ChnageLocation2();
+	
+	void ChnageLocation3();
 private:
 	ControllerLocation controllerLocation=ControllerLocation::Main;
+	
+	AActor* StartActor;
 protected:
 	virtual void BeginPlay() override;
 	virtual void SetupInputComponent() override;
@@ -38,10 +46,14 @@ protected:
 	void MouseOnclick_Left();
 	void FocusActor(AActor *actor);
 
-	//鼠标位置发射一个射线
-	class AActorObject* GetMouseOnClicActor();
+	void ChangeAllStaticMeshMaterial();
+	void ResetAllStatticMeshMaterial();
 	
-	class AActorObject* MouseOnClicActor = nullptr;
+	//鼠标位置发射一个射线
+	class ABaseActorObject* GetMouseOnClicActor();
+	
+	class ABaseActorObject* MouseOnClicActor = nullptr;
+
 
 };
 

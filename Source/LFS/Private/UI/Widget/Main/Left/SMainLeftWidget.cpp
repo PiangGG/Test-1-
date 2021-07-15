@@ -4,6 +4,7 @@
 #include "UI/Widget/Main/Left/SMainLeftWidget.h"
 
 #include "SlateOptMacros.h"
+#include "Data/LFSDataHandle.h"
 #include "UI/Style/LFSStyle.h"
 #include "UI/Style/MainSlateWidgetStyle.h"
 #include "UI/Widget/Main/Left/SHXZBWidget.h"
@@ -14,6 +15,16 @@ BEGIN_SLATE_FUNCTION_BUILD_OPTIMIZATION
 void SMainLeftWidget::Construct(const FArguments& InArgs)
 {
 	MainStyle=&LFSStyle::Get().GetWidgetStyle<FMainSlateStyle>("BPMainStyle");
+	theState = LFSDataHandle::Get()->State;
+	
+	DistributionNetworkStatus=FString(TEXT("配网状态"))+FString(*theState[0].Find(FString("State")));
+	DistributionNetworkStatusfloat=FString(*theState[0].Find(FString("percent")));
+
+	OperationAndMaintenanceStatus=FString(TEXT("运维状态"))+FString(*theState[1].Find(FString("State")));
+	OperationAndMaintenanceStatusfloat=FString(*theState[1].Find(FString("percent")));
+
+	PowerSupplyStatus=FString(TEXT("供电状态"))+FString(*theState[2].Find(FString("State")));
+	PowerSupplyStatusfloat=FString(*theState[2].Find(FString("percent")));
 	ChildSlot
 	[
 		// Populate the widget
@@ -46,10 +57,10 @@ void SMainLeftWidget::Construct(const FArguments& InArgs)
 					.Padding(FMargin(30,90,20,0))
 					[
 						SAssignNew(Yujing_State,SMain_Left_State_Widget)
-						.ProbarSize(0.4)
+						.ProbarSize(FCString::Atof(*DistributionNetworkStatusfloat))
 						.ShowText(TEXT("预警状态"))
 						.StateImageIcon(MainStyle->StateIcon_1)
-						.ProgressBarText(TEXT("配网状态正常"))
+						.ProgressBarText(DistributionNetworkStatus)
 					]
 					+SVerticalBox::Slot()
 					.AutoHeight()
@@ -58,10 +69,10 @@ void SMainLeftWidget::Construct(const FArguments& InArgs)
 					.Padding(FMargin(30,35,20,0))
 					[
 						SAssignNew(Yunwei_State,SMain_Left_State_Widget)
-						.ProbarSize(0.5)
+						.ProbarSize(FCString::Atof(*OperationAndMaintenanceStatusfloat))
 						.ShowText(TEXT("运维状态"))
 						.StateImageIcon(MainStyle->StateIcon_2)
-						.ProgressBarText(TEXT("运维状态正常"))
+						.ProgressBarText(OperationAndMaintenanceStatus)
 					]
 					+SVerticalBox::Slot()
 					.AutoHeight()
@@ -70,10 +81,10 @@ void SMainLeftWidget::Construct(const FArguments& InArgs)
 					.Padding(FMargin(30,35,20,0))
 					[
 						SAssignNew(Gongdian_State,SMain_Left_State_Widget)
-						.ProbarSize(0.45)
+						.ProbarSize(FCString::Atof(*PowerSupplyStatusfloat))
 						.ShowText(TEXT("供电状态"))
 						.StateImageIcon(MainStyle->StateIcon_3)
-						.ProgressBarText(TEXT("供电状态正常"))
+						.ProgressBarText(OperationAndMaintenanceStatus)
 					]
 					+SVerticalBox::Slot()
 					//.AutoHeight()

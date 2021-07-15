@@ -3,19 +3,17 @@
 #pragma once
 
 #include "CoreMinimal.h"
-
-#include "UI/Style/LFSStyle.h"
-#include "UI/Style/MainSlateWidgetStyle.h"
 #include "Widgets/SCompoundWidget.h"
 
 /**
  * 
  */
-class LFS_API SMainTopWidget : public SCompoundWidget
+class LFS_API STextInfoWidgetBase : public SCompoundWidget
 {
 public:
-	SLATE_BEGIN_ARGS(SMainTopWidget)
+	SLATE_BEGIN_ARGS(STextInfoWidgetBase)
 	{}
+	SLATE_ATTRIBUTE(FSlateBrush,TextImage)
 	SLATE_END_ARGS()
 
 	/** Constructs this widget with InArgs */
@@ -24,4 +22,7 @@ public:
 	//引入Sytle|获取MenuStyle
 	const struct FMainSlateStyle* MainStyle;
 
+	virtual FReply OnMouseButtonUp(const FGeometry& MyGeometry, const FPointerEvent& MouseEvent) override;
+
+	FSlateBrush TextImage;
 };

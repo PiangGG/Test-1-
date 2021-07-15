@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+
 #include "GameFramework/GameModeBase.h"
 #include "MainGameMode.generated.h"
 
@@ -17,6 +18,19 @@ class LFS_API AMainGameMode : public AGameModeBase
 	public:
 	AMainGameMode();
 
+	protected:
+	virtual void BeginPlay() override;
+	public:
 	void ChangeCharacter(APawn *Pawn);
 	//virtual  void SetPlayerDefaults(APawn* PlayerPawn) override;
+
+	void ChangeAllStaticMeshMaterial();
+	void ResetAllStatticMeshMaterial();
+	void RecordAllStatticMeshMaterial();
+
+	//将要更换的材质
+	UMaterialInterface* Materials;
+		
+	TArray<class AStaticMeshActor*> WorldAllActors;
+	TArray<UMaterialInterface*> UMaterials;
 };

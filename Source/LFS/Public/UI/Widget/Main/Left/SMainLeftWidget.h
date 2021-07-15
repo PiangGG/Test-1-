@@ -32,4 +32,18 @@ public:
 	TSharedPtr<class SLineChartWidget> LineChartWidget;
 	//核心指标子界面
 	TSharedPtr<class SHXZBWidget> HXZBWidget;
+
+	TArray<TMap<FString,FString>> theState;
+
+	//配网状态
+	FString DistributionNetworkStatus;
+	FString DistributionNetworkStatusfloat;
+
+	//运维状态
+	FString OperationAndMaintenanceStatus;
+	FString OperationAndMaintenanceStatusfloat;
+
+	//供电状态
+	FString PowerSupplyStatus;
+	FString PowerSupplyStatusfloat;
 };

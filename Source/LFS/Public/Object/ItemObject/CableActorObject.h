@@ -3,14 +3,16 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Object/ActorObject.h"
+
+#include "ItemObjectActor.h"
+
 #include "CableActorObject.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class LFS_API ACableActorObject : public AActorObject
+class LFS_API ACableActorObject : public AItemObjectActor
 {
 	GENERATED_BODY()
 	public:
@@ -18,4 +20,6 @@ class LFS_API ACableActorObject : public AActorObject
 	
 	public:
 	virtual EActorObjectEnum GetObjectEnum()override;
+
+	virtual void OnMouseButton_Left_OnClick() override;
 };

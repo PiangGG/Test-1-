@@ -1,7 +1,9 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "Object/CableActorObject.h"
+#include "Object/ItemObject/CableActorObject.h"
+
+#include "UI/HUD/MainHUD.h"
 
 ACableActorObject::ACableActorObject()
 {
@@ -12,4 +14,10 @@ ACableActorObject::ACableActorObject()
 EActorObjectEnum ACableActorObject::GetObjectEnum()
 {
 	return EActorObjectEnum::Cable;
+}
+
+void ACableActorObject::OnMouseButton_Left_OnClick()
+{
+	
+	Cast<AMainHUD>(GetWorld()->GetFirstPlayerController()->GetHUD())->ShowCableInfoWidget();
 }

@@ -1,7 +1,9 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "Object/BatteryModuleActorObject.h"
+#include "Object/ItemObject/BatteryModuleActorObject.h"
+
+#include "UI/HUD/MainHUD.h"
 
 ABatteryModuleActorObject::ABatteryModuleActorObject()
 {
@@ -12,4 +14,9 @@ ABatteryModuleActorObject::ABatteryModuleActorObject()
 EActorObjectEnum ABatteryModuleActorObject::GetObjectEnum()
 {
 	return EActorObjectEnum::BatteryModule;
+}
+
+void ABatteryModuleActorObject::OnMouseButton_Left_OnClick()
+{
+	Cast<AMainHUD>(GetWorld()->GetFirstPlayerController()->GetHUD())->ShowBatteryModuleInfoWidget();
 }

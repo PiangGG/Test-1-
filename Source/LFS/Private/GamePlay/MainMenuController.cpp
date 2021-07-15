@@ -3,7 +3,10 @@
 
 #include "GamePlay/MainMenuController.h"
 
-#include "Object/ActorObject.h"
+#include "GameFramework/PlayerStart.h"
+#include "GamePlay/MainGameMode.h"
+#include "Kismet/GameplayStatics.h"
+#include "Object/ItemObject/ItemObjectActor.h"
 #include "UI/HUD/MainHUD.h"
 
 AMainMenuController::AMainMenuController()
@@ -37,6 +40,13 @@ void AMainMenuController::SetupInputComponent()
 		InputComponent->BindAction("ShowMouse",IE_Pressed,this,&AMainMenuController::ShowMouse);
 		
 		InputComponent->BindAction("MouseOnclick_Left",IE_Pressed,this,&AMainMenuController::MouseOnclick_Left);
+
+		InputComponent->BindAction("ChangeAllStaticMeshMaterial",IE_Pressed,this,&AMainMenuController::ChangeAllStaticMeshMaterial);
+		InputComponent->BindAction("ResetAllStatticMeshMaterial",IE_Pressed,this,&AMainMenuController::ResetAllStatticMeshMaterial);
+		
+		InputComponent->BindAction("ChnageLocation1",IE_Pressed,this,&AMainMenuController::ChnageLocation1);
+		InputComponent->BindAction("ChnageLocation2",IE_Pressed,this,&AMainMenuController::ChnageLocation2);
+		InputComponent->BindAction("ChnageLocation3",IE_Pressed,this,&AMainMenuController::ChnageLocation3);
 	}
 }
 
@@ -56,27 +66,13 @@ void AMainMenuController::MouseOnclick_Left()
 {
 	if (bShowMouseCursor)
 	{
-		UE_LOG(LogTemp,Warning,TEXT("Onclick"));
 		MouseOnClicActor=GetMouseOnClicActor();
 		if (MouseOnClicActor)
 		{
-			switch (MouseOnClicActor->GetObjectEnum())
-			{
-				case Cable:
-					Cast<AMainHUD>(GetHUD())->ShowCableInfoWidget();
-					break;
-				
-				case BatteryModule:
-					Cast<AMainHUD>(GetHUD())->ShowBatteryModuleInfoWidget();
-					break;
-					
-				default:
-					Cast<AMainHUD>(GetHUD())->ShowInfoWidget();
-				 break;
-			}
-			
+			MouseOnClicActor->OnMouseButton_Left_OnClick();
 		}else
 		{
+			UE_LOG(LogTemp,Warning,TEXT("Onclick"));
 			Cast<AMainHUD>(GetHUD())->HideInfoWidget();
 		}
 	}
@@ -104,7 +100,19 @@ void AMainMenuController::FocusActor(AActor* actor)
 	
 }
 
-AActorObject* AMainMenuController::GetMouseOnClicActor()
+void AMainMenuController::ChangeAllStaticMeshMaterial()
+{
+	UE_LOG(LogTemp,Warning,TEXT("AMainMenuController::ChangeAllStaticMeshMaterial()"));
+	Cast<AMainGameMode>(UGameplayStatics::GetGameMode(GetWorld()))->ChangeAllStaticMeshMaterial();
+}
+
+void AMainMenuController::ResetAllStatticMeshMaterial()
+{
+	Cast<AMainGameMode>(UGameplayStatics::GetGameMode(GetWorld()))->ResetAllStatticMeshMaterial();
+}
+
+
+ABaseActorObject* AMainMenuController::GetMouseOnClicActor()
 {
 	
 	FVector CamLoc;
@@ -137,9 +145,24 @@ AActorObject* AMainMenuController::GetMouseOnClicActor()
 					{
 						GEngine->AddOnScreenDebugMessage(-1, 0.8f, FColor::Blue, hit.GetActor()->GetName());
 					}
-				return Cast<AActorObject>(hit.GetActor());
+				return Cast<ABaseActorObject>(hit.GetActor());
 			}
 		}
 	}
 	return nullptr;
+}
+
+void AMainMenuController::ChnageLocation1()
+{
+	UGameplayStatics::OpenLevel(GetWorld(),FName("laifushi"));
+	//GetWorld()->GetFirstPlayerController()->SetViewTargetWithBlend(StartActor,1);
+}
+
+void AMainMenuController::ChnageLocation2()
+{
+	UGameplayStatics::OpenLevel(GetWorld(),FName("Fangzhi"));
+}
+
+void AMainMenuController::ChnageLocation3()
+{
 }
