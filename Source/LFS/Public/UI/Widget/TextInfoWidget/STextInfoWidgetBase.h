@@ -23,6 +23,10 @@ public:
 	const struct FMainSlateStyle* MainStyle;
 
 	virtual FReply OnMouseButtonUp(const FGeometry& MyGeometry, const FPointerEvent& MouseEvent) override;
-
+	
+	virtual void SetLocationActor(AActor* Actor);
 	FSlateBrush TextImage;
+
+private:
+	AActor* LocationActor=nullptr;
 };

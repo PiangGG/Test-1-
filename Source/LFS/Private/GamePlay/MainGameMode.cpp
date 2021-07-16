@@ -25,7 +25,7 @@ AMainGameMode::AMainGameMode()
 void AMainGameMode::BeginPlay()
 {
 	Super::BeginPlay();
-	RecordAllStatticMeshMaterial();
+	//RecordAllStatticMeshMaterial();
 }
 
 void AMainGameMode::ChangeCharacter(APawn *Pawn)

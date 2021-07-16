@@ -47,6 +47,7 @@ void AMainMenuController::SetupInputComponent()
 		InputComponent->BindAction("ChnageLocation1",IE_Pressed,this,&AMainMenuController::ChnageLocation1);
 		InputComponent->BindAction("ChnageLocation2",IE_Pressed,this,&AMainMenuController::ChnageLocation2);
 		InputComponent->BindAction("ChnageLocation3",IE_Pressed,this,&AMainMenuController::ChnageLocation3);
+		InputComponent->BindAction("ChnageLocation4",IE_Pressed,this,&AMainMenuController::ChnageLocation4);
 	}
 }
 
@@ -72,7 +73,7 @@ void AMainMenuController::MouseOnclick_Left()
 			MouseOnClicActor->OnMouseButton_Left_OnClick();
 		}else
 		{
-			UE_LOG(LogTemp,Warning,TEXT("Onclick"));
+			//UE_LOG(LogTemp,Warning,TEXT("Onclick"));
 			Cast<AMainHUD>(GetHUD())->HideInfoWidget();
 		}
 	}
@@ -165,4 +166,9 @@ void AMainMenuController::ChnageLocation2()
 
 void AMainMenuController::ChnageLocation3()
 {
+	UGameplayStatics::OpenLevel(GetWorld(),FName("NewMap"));
+}
+void AMainMenuController::ChnageLocation4()
+{
+	UGameplayStatics::OpenLevel(GetWorld(),FName("TongDao"));
 }

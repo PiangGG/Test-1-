@@ -30,6 +30,8 @@ public:
 	void ChnageLocation2();
 	
 	void ChnageLocation3();
+	
+	void ChnageLocation4();
 private:
 	ControllerLocation controllerLocation=ControllerLocation::Main;
 	

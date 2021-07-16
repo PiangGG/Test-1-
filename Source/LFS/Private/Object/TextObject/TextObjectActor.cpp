@@ -19,7 +19,6 @@ ATextObjectActor::ATextObjectActor()
 	WidgetComponent=CreateDefaultSubobject<UWidgetComponent>(TEXT("WidgetComponent"));
 	WidgetComponent->SetupAttachment(RootComp);
 	WidgetComponent->SetVisibility(true);
-
 }
 
 // Called when the game starts or when spawned
@@ -29,7 +28,7 @@ void ATextObjectActor::BeginPlay()
 	SAssignNew(TextInfoWidgetBase, STextInfoWidgetBase)
 	.TextImage(TextImage);
 	WidgetComponent->SetSlateWidget(TextInfoWidgetBase);
-	
+	TextInfoWidgetBase->SetLocationActor(this);
 }
 
 // Called every frame
