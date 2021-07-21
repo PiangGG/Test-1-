@@ -3,11 +3,13 @@
 
 #include "GamePlay/MainMenuController.h"
 
+#include "Engine/StaticMeshActor.h"
 #include "GameFramework/PlayerStart.h"
 #include "GamePlay/MainGameMode.h"
 #include "Kismet/GameplayStatics.h"
 #include "Object/ItemObject/ItemObjectActor.h"
 #include "UI/HUD/MainHUD.h"
+#include "Widgets/SViewport.h"
 
 AMainMenuController::AMainMenuController()
 {
@@ -41,8 +43,7 @@ void AMainMenuController::SetupInputComponent()
 		
 		InputComponent->BindAction("MouseOnclick_Left",IE_Pressed,this,&AMainMenuController::MouseOnclick_Left);
 
-		InputComponent->BindAction("ChangeAllStaticMeshMaterial",IE_Pressed,this,&AMainMenuController::ChangeAllStaticMeshMaterial);
-		InputComponent->BindAction("ResetAllStatticMeshMaterial",IE_Pressed,this,&AMainMenuController::ResetAllStatticMeshMaterial);
+		InputComponent->BindAction("ChangeMode",IE_Pressed,this,&AMainMenuController::ChangeMode);
 		
 		InputComponent->BindAction("ChnageLocation1",IE_Pressed,this,&AMainMenuController::ChnageLocation1);
 		InputComponent->BindAction("ChnageLocation2",IE_Pressed,this,&AMainMenuController::ChnageLocation2);
@@ -70,6 +71,7 @@ void AMainMenuController::MouseOnclick_Left()
 		MouseOnClicActor=GetMouseOnClicActor();
 		if (MouseOnClicActor)
 		{
+			
 			MouseOnClicActor->OnMouseButton_Left_OnClick();
 		}else
 		{
@@ -101,21 +103,8 @@ void AMainMenuController::FocusActor(AActor* actor)
 	
 }
 
-void AMainMenuController::ChangeAllStaticMeshMaterial()
-{
-	UE_LOG(LogTemp,Warning,TEXT("AMainMenuController::ChangeAllStaticMeshMaterial()"));
-	Cast<AMainGameMode>(UGameplayStatics::GetGameMode(GetWorld()))->ChangeAllStaticMeshMaterial();
-}
-
-void AMainMenuController::ResetAllStatticMeshMaterial()
-{
-	Cast<AMainGameMode>(UGameplayStatics::GetGameMode(GetWorld()))->ResetAllStatticMeshMaterial();
-}
-
-
 ABaseActorObject* AMainMenuController::GetMouseOnClicActor()
 {
-	
 	FVector CamLoc;
 	FRotator CamRot;
 
@@ -132,7 +121,7 @@ ABaseActorObject* AMainMenuController::GetMouseOnClicActor()
 				FVector TraceStar = CamLoc;//摄像机所在位置
 				FVector Direction = CamRot.Vector();//摄像机所看方向//实际上这个方向也可以发射一个射线出去，判断是否在前方
 				//射线的终点
-				FVector TranceEnd = TraceStar + (Dir * 10000);//射线的终点
+				FVector TranceEnd = TraceStar + (Dir * 1000000);//射线的终点
  
 				FCollisionQueryParams  TraceParams(FName(TEXT("Actor")), true, this);//给射线定义碰撞，并取一个名字
  
@@ -141,11 +130,22 @@ ABaseActorObject* AMainMenuController::GetMouseOnClicActor()
 				TraceParams.bTraceComplex = true;
  
 				FHitResult hit(ForceInit);//初始化射线类并且发射一个射线
-				GetWorld()->LineTraceSingleByChannel(hit, TraceStar, TranceEnd, ECC_Visibility, TraceParams);
-				if (Cast<AActor>(hit.GetActor()))//打印被射线碰撞的物体
+				
+				if (!bIstransparent)
+				{
+					GetWorld()->LineTraceSingleByChannel(hit, TraceStar, TranceEnd, ECC_Visibility, TraceParams);
+					if (Cast<AActor>(hit.GetActor()))//打印被射线碰撞的物体
 					{
 						GEngine->AddOnScreenDebugMessage(-1, 0.8f, FColor::Blue, hit.GetActor()->GetName());
 					}
+				}else
+				{
+					GetWorld()->LineTraceSingleByChannel(hit, TraceStar, TranceEnd,ECC_GameTraceChannel1,TraceParams);
+					if (Cast<AActor>(hit.GetActor()))
+					{
+						GEngine->AddOnScreenDebugMessage(-1, 0.8f, FColor::Blue, hit.GetActor()->GetName()+"666");
+					}
+				}
 				return Cast<ABaseActorObject>(hit.GetActor());
 			}
 		}
@@ -171,4 +171,16 @@ void AMainMenuController::ChnageLocation3()
 void AMainMenuController::ChnageLocation4()
 {
 	UGameplayStatics::OpenLevel(GetWorld(),FName("TongDao"));
+}
+
+void AMainMenuController::ChangeMode()
+{
+	if (bIstransparent)
+	{
+		ResetAllStatticMeshMaterial();
+	}else
+	{
+		ChangeAllStaticMeshMaterial();
+	}
+	bIstransparent=!bIstransparent;
 }

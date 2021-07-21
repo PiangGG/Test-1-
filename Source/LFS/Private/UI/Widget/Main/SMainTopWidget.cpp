@@ -31,7 +31,7 @@ void SMainTopWidget::Construct(const FArguments& InArgs)
 			[
 				SNew(STextBlock)
 				.Text(FText::FromString(TEXT("市区公司配电网孪生系统")))
-				.Font(MainStyle->FontInfo_Size_16_White)
+				.Font(MainStyle->FontInfo_Size_36_White)
 			]
 		]	
 	];

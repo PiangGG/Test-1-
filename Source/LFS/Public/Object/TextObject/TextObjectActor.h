@@ -41,10 +41,14 @@ public:
 	//UPROPERTY(EditAnywhere,BlueprintReadWrite,Category=Component)
 	TSharedPtr<class STextInfoWidgetBase>TextInfoWidgetBase;
 
-	virtual void OnMouseButton_Left_OnClick() override;
+	/*UFUNCTION()
+	virtual void OnMouseButton_Left_OnClick() override;*/
 
 	AActor * TargetActor;
 
 	FVector TargetActorLocation;
 	FRotator TargetActorRotator;
+
+	void ShowWidget();
+	void HideWidget();
 };

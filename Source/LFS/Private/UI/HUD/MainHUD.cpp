@@ -3,9 +3,13 @@
 
 #include "UI/HUD/MainHUD.h"
 
+#include "Components/WidgetComponent.h"
+#include "Kismet/GameplayStatics.h"
+#include "Object/TextObject/TextObjectActor.h"
 #include "UI/Widget/ActorObjectInfo/SActorObjectInfoMainWidget.h"
 #include "UI/Widget/ActorObjectInfo/DCMK/SDCMKMainWidget.h"
 #include "UI/Widget/InRoom/SInRoomMainWidget.h"
+#include "UI/Widget/Main/SMainTopWidget.h"
 #include "UI/Widget/Main/SMainWidget.h"
 #include "UI/Widget/TongDao/STDGZWidget.h"
 #include "UI/Widget/TongDao/STodaoMainWidget.h"
@@ -34,6 +38,8 @@ void AMainHUD::ChangeHUDState(HUDStateEnum newState)
 		if (GEngine&&GEngine->GameViewport)
 		{
 			GEngine->GameViewport->RemoveAllViewportWidgets();
+			SAssignNew(MainTopWidget, SMainTopWidget);
+			GEngine->GameViewport->AddViewportWidgetContent(MainTopWidget.ToSharedRef(),-50);
 		}
 		break;
 	case MainState:
@@ -41,7 +47,7 @@ void AMainHUD::ChangeHUDState(HUDStateEnum newState)
 		{
 			GEngine->GameViewport->RemoveAllViewportWidgets();
 			SAssignNew(MainWidget, SMainWidget);
-			GEngine->GameViewport->AddViewportWidgetContent(MainWidget.ToSharedRef());
+			GetWorld()->GetGameViewport()->AddViewportWidgetContent(MainWidget.ToSharedRef(),-50);
 		}
 		break;
 	case TongDaoState:
@@ -49,24 +55,25 @@ void AMainHUD::ChangeHUDState(HUDStateEnum newState)
 		{
 			GEngine->GameViewport->RemoveAllViewportWidgets();
 			SAssignNew(TodaoMainWidget, STodaoMainWidget);
-			GEngine->GameViewport->AddViewportWidgetContent(TodaoMainWidget.ToSharedRef());
+			GEngine->GameViewport->AddViewportWidgetContent(TodaoMainWidget.ToSharedRef(),-50);
 		}
 		break;
 	case TDGZState:
 			SAssignNew(TDGZWidget, STDGZWidget);
-			GEngine->GameViewport->AddViewportWidgetContent(TDGZWidget.ToSharedRef());
+			GEngine->GameViewport->AddViewportWidgetContent(TDGZWidget.ToSharedRef(),-50);
 			break;
 	case InRoomState:
 		if (GEngine&&GEngine->GameViewport)
 		{
 			GEngine->GameViewport->RemoveAllViewportWidgets();
 			SAssignNew(InRoomMainWidget, SInRoomMainWidget);
-			GEngine->GameViewport->AddViewportWidgetContent(InRoomMainWidget.ToSharedRef());
+			GEngine->GameViewport->AddViewportWidgetContent(InRoomMainWidget.ToSharedRef(),-50);
 		}
 		break;
 	default:
 		break;
 	}
+	CurrentState=newState;
 }
 
 void AMainHUD::BeginPlay()
@@ -134,5 +141,30 @@ void AMainHUD::ShowBatteryModuleInfoWidget()
 			GEngine->GameViewport->AddViewportWidgetContent(InfoWidget.ToSharedRef());
 		}
 		
+	}
+}
+
+void AMainHUD::ShowAllLocationObjectTextWidget()
+{
+	if (GetWorld())
+	{
+		UGameplayStatics::GetAllActorsOfClass(GetWorld(),ATextObjectActor::StaticClass(),TextObjectActor);
+		for (int i=0;i<TextObjectActor.Num();i++)
+		{
+			Cast<ATextObjectActor>(TextObjectActor[i])->ShowWidget();
+		}
+	}
+	
+}
+
+void AMainHUD::HideAllLocationObjectTextWidget()
+{
+	if (GetWorld())
+	{
+		UGameplayStatics::GetAllActorsOfClass(GetWorld(),ATextObjectActor::StaticClass(),TextObjectActor);
+		for (int i=0;i<TextObjectActor.Num();i++)
+		{
+			Cast<ATextObjectActor>(TextObjectActor[i])->HideWidget();
+		}
 	}
 }

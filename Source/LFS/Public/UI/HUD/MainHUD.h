@@ -23,6 +23,8 @@ public:
 	
 	TSharedPtr<class SMainWidget> MainWidget;
 	
+	TSharedPtr<class SMainTopWidget> MainTopWidget;
+	
 	TSharedPtr<class STodaoMainWidget> TodaoMainWidget;
 
 	TSharedPtr<class STDGZWidget> TDGZWidget;
@@ -46,4 +48,12 @@ public:
 	void ShowCableInfoWidget();
 	
 	void ShowBatteryModuleInfoWidget();
+
+	UFUNCTION(BlueprintCallable)
+	void ShowAllLocationObjectTextWidget();
+	UFUNCTION(BlueprintCallable)
+	void HideAllLocationObjectTextWidget();
+	
+	UPROPERTY(BlueprintReadWrite,EditAnywhere)
+	TArray<class AActor*>TextObjectActor;
 };

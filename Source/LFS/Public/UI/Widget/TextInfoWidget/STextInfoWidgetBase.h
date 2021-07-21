@@ -22,10 +22,17 @@ public:
 	//引入Sytle|获取MenuStyle
 	const struct FMainSlateStyle* MainStyle;
 
+	UFUNCTION()
 	virtual FReply OnMouseButtonUp(const FGeometry& MyGeometry, const FPointerEvent& MouseEvent) override;
+
+	UFUNCTION()
+	virtual FReply OnMouseButtonDown(const FGeometry& MyGeometry, const FPointerEvent& MouseEvent) override;
 	
+	UFUNCTION()
 	virtual void SetLocationActor(AActor* Actor);
+	
 	FSlateBrush TextImage;
+
 
 private:
 	AActor* LocationActor=nullptr;

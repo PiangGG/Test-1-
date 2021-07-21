@@ -49,7 +49,29 @@ void ALocationBox::OverlapCompBegin(UPrimitiveComponent* OverlappedComponent, AA
 void ALocationBox::OverlapCompEnd(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
 	UE_LOG(LogTemp,Warning,TEXT("OverlapCompEnd"));
-	ChangeNewLocationState(LocationBoxState::LocationNullState);
+	AMainHUD* HUD=Cast<AMainHUD>(UGameplayStatics::GetPlayerController(GWorld,0)->GetHUD());
+	if (!HUD)return;
+	switch (HUD->CurrentState)
+	{
+	case NullState:
+		ChangeNewLocationState(LocationBoxState::LocationNullState);
+		break;
+	case MainState:
+		ChangeNewLocationState(LocationBoxState::LocationNullState);
+		break;
+	case TongDaoState:
+		ChangeNewLocationState(LocationBoxState::LocationNullState);
+		break;
+	case InRoomState:
+		ChangeNewLocationState(LocationBoxState::LocationNullState);
+		break;
+	case TDGZState:
+		ChangeNewLocationState(LocationBoxState::LocationTongDaoState);
+		break;
+	default:
+		ChangeNewLocationState(LocationBoxState::LocationNullState);
+		break;
+	}
 }
 
 void ALocationBox::ChangeNewLocationState(LocationBoxState newState)

@@ -6,6 +6,10 @@
 #include "GamePlay/MainCharacter.h"
 #include "Kismet/GameplayStatics.h"
 #include "Widgets/Images/SImage.h"
+#include "Engine/World.h"
+#include "TimerManager.h"
+#include "GamePlay/MainGameMode.h"
+#include "Widgets/SViewport.h"
 
 BEGIN_SLATE_FUNCTION_BUILD_OPTIMIZATION
 void STextInfoWidgetBase::Construct(const FArguments& InArgs)
@@ -23,6 +27,7 @@ void STextInfoWidgetBase::Construct(const FArguments& InArgs)
 				[
 					SNew(SImage)
 					.Image(&TextImage)
+					.OnMouseButtonDown(this,&STextInfoWidgetBase::OnMouseButtonDown)
 				]
 			]
 		]
@@ -32,15 +37,30 @@ void STextInfoWidgetBase::Construct(const FArguments& InArgs)
 
 FReply STextInfoWidgetBase::OnMouseButtonUp(const FGeometry& MyGeometry, const FPointerEvent& MouseEvent)
 {
-	UE_LOG(LogTemp,Warning,TEXT("STextInfoWidgetBase::OnMouseButtonUp"));
+	/*UE_LOG(LogTemp,Warning,TEXT("STextInfoWidgetBase::OnMouseButtonUp"));
 
 	if (LocationActor&&UGameplayStatics::GetPlayerController(GWorld,0))
 	{
-		UGameplayStatics::GetPlayerController(GWorld,0)->SetViewTargetWithBlend(LocationActor,1);
-		AMainCharacter *player=GWorld->SpawnActor<AMainCharacter>(AMainCharacter::StaticClass(),LocationActor->GetActorLocation(),LocationActor->GetActorRotation());
-	
-		UGameplayStatics::GetPlayerController(GWorld,0)->Possess(player);
+		UE_LOG(LogTemp,Warning,TEXT("STextInfoWidgetBase::OnMouseButtonUp1"));
+		Cast<AMainGameMode>(UGameplayStatics::GetGameMode(GWorld))->SpawnCharatorClass=AMainCharacter::StaticClass();
+		Cast<AMainGameMode>(UGameplayStatics::GetGameMode(GWorld))->JumpActorLocation(LocationActor);
+		LocationActor->SetActorHiddenInGame(true);
 	}
+	*/
+	return FReply::Handled();
+}
+
+FReply STextInfoWidgetBase::OnMouseButtonDown(const FGeometry& MyGeometry, const FPointerEvent& MouseEvent)
+{
+	
+	UE_LOG(LogTemp,Warning,TEXT("STextInfoWidgetBase::OnMouseButtonDown"));
+	if (LocationActor&&UGameplayStatics::GetPlayerController(GWorld,0))
+	{
+		Cast<AMainGameMode>(UGameplayStatics::GetGameMode(GWorld))->SpawnCharatorClass=AMainCharacter::StaticClass();
+		Cast<AMainGameMode>(UGameplayStatics::GetGameMode(GWorld))->JumpActorLocation(LocationActor);
+		LocationActor->SetActorHiddenInGame(true);
+	}
+	
 	return FReply::Handled();
 }
 

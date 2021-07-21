@@ -19,27 +19,30 @@ void STJianKongItemWidget::Construct(const FArguments& InArgs)
 		.WidthOverride(300.0f)
 		.HeightOverride(300.0f)
 		[
-			SNew(SOverlay)
-			+SOverlay::Slot()
+			SNew(SBorder)
 			[
-				SNew(SImage)
-				.Image(&JianKongImage)
-			]
-			+SOverlay::Slot()
-			.HAlign(HAlign_Left)
-			.VAlign(VAlign_Top)
-			[
-				SNew(STextBlock)
-				.Font(MainStyle->FontInfo_Size_12_White)
-				.Text(FText::FromString(Lcoation))
-			]
-			+SOverlay::Slot()
-			.HAlign(HAlign_Right)
-			.VAlign(VAlign_Bottom)
-			[
-				SNew(STextBlock)
-				.Font(MainStyle->FontInfo_Size_12_White)
-				.Text(FText::FromString(Time))
+				SNew(SOverlay)
+				+SOverlay::Slot()
+				[
+					SNew(SImage)
+					.Image(&JianKongImage)
+				]
+				+SOverlay::Slot()
+				.HAlign(HAlign_Left)
+				.VAlign(VAlign_Top)
+				[
+					SNew(STextBlock)
+					.Font(MainStyle->FontInfo_Size_12_White)
+					.Text(FText::FromString(Lcoation))
+				]
+				+SOverlay::Slot()
+				.HAlign(HAlign_Right)
+				.VAlign(VAlign_Bottom)
+				[
+					SNew(STextBlock)
+					.Font(MainStyle->FontInfo_Size_12_White)
+					.Text(FText::FromString(Time))
+				]
 			]
 		]
 	];

@@ -37,6 +37,8 @@ public:
 	FSlateFontInfo FontInfo_Size_12_Blue;//蓝色12号字体
 	UPROPERTY(EditAnywhere,Category=Font)
 	FSlateFontInfo FontInfo_Size_12_Yellow;//黄色12号字体
+	UPROPERTY(EditAnywhere,Category=Font)
+	FSlateFontInfo FontInfo_Size_36_White;//白色36号字体
 
 	/*
 	 * 背景图片

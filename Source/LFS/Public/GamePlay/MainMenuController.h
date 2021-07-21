@@ -32,6 +32,15 @@ public:
 	void ChnageLocation3();
 	
 	void ChnageLocation4();
+
+	UFUNCTION(BlueprintCallable)
+	void ChangeMode();
+
+	UPROPERTY(BlueprintReadWrite,EditAnywhere)
+	bool bIstransparent = false;
+
+	//忽略Actor
+	TArray<AActor*> ArrayActors;
 private:
 	ControllerLocation controllerLocation=ControllerLocation::Main;
 	
@@ -48,14 +57,14 @@ protected:
 	void MouseOnclick_Left();
 	void FocusActor(AActor *actor);
 
+	UFUNCTION(BlueprintImplementableEvent)
 	void ChangeAllStaticMeshMaterial();
+	UFUNCTION(BlueprintImplementableEvent)
 	void ResetAllStatticMeshMaterial();
 	
 	//鼠标位置发射一个射线
 	class ABaseActorObject* GetMouseOnClicActor();
 	
 	class ABaseActorObject* MouseOnClicActor = nullptr;
-
-
 };
 

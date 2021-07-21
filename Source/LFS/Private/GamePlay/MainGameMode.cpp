@@ -7,15 +7,17 @@
 #include "Engine/StaticMeshActor.h"
 #include "GameFramework/DefaultPawn.h"
 #include "GamePlay/MainCharacter.h"
+#include "GamePlay/MainLevelPawn.h"
 #include "GamePlay/MainMenuController.h"
 #include "Kismet/GameplayStatics.h"
+#include "Location/LocationTargetPoint.h"
 #include "UI/HUD/MainHUD.h"
 
 AMainGameMode::AMainGameMode()
 {
 	PlayerControllerClass=AMainMenuController::StaticClass();
 	HUDClass=AMainHUD::StaticClass();
-	//DefaultPawnClass=AMainCharacter::StaticClass();
+	DefaultPawnClass=ADefaultPawn::StaticClass();
 
 	//变换后的材质
 	ConstructorHelpers::FObjectFinder<UMaterialInterface>Material(TEXT("MaterialInstanceConstant'/Game/ThirdPersonBP/ThirdPersonBP/NewMaterial_2_Inst.NewMaterial_2_Inst'"));
@@ -25,7 +27,8 @@ AMainGameMode::AMainGameMode()
 void AMainGameMode::BeginPlay()
 {
 	Super::BeginPlay();
-	//RecordAllStatticMeshMaterial();
+	RecordAllStatticMeshMaterial();
+	ChangeActorLocation(FString("Start"));
 }
 
 void AMainGameMode::ChangeCharacter(APawn *Pawn)
@@ -43,31 +46,70 @@ void AMainGameMode::ChangeCharacter(APawn *Pawn)
 void AMainGameMode::ChangeAllStaticMeshMaterial()
 {
 	UE_LOG(LogTemp,Warning,TEXT("AMainGameMode::ChangeAllStaticMeshMaterial()"));
-	for (TActorIterator<AStaticMeshActor> It(GetWorld()); It; ++It)
+
+	/*for (int i=0;i<AllActor.Num();i++)
 	{
-		AStaticMeshActor* Actor=*It;
-		int mnumber=Actor->GetStaticMeshComponent()->GetNumMaterials();
-		for (int i=0;i<mnumber;i++)
+		for (int j=0;j<Cast<AStaticMeshActor>(AllActor[i])->GetStaticMeshComponent()->GetMaterials().Num();j++)
 		{
-			Actor->GetStaticMeshComponent()->SetMaterial(0,Materials);
+			Cast<AStaticMeshActor>(AllActor[i])->GetStaticMeshComponent()->SetMaterial(j,Materials);
 		}
-	}
+		
+	}*/
+	
 }
 
 void AMainGameMode::ResetAllStatticMeshMaterial()
 {
-	for (TActorIterator<AStaticMeshActor> It(GetWorld()); It; ++It)
+	/*for (int i=0;i<AllActor.Num();i++)
 	{
-		AStaticMeshActor* Actor=*It;
-		Actor->Reset();
-	}
+		for (int j=0;j<Cast<AStaticMeshActor>(AllActor[i])->GetStaticMeshComponent()->GetMaterials().Num();j++)
+		{
+			Cast<AStaticMeshActor>(AllActor[i])->GetStaticMeshComponent()->SetMaterial(j,AllMaterials[j]);
+		}
+	}*/
 }
 
 void AMainGameMode::RecordAllStatticMeshMaterial()
 {
-	for (TActorIterator<AStaticMeshActor> It(GetWorld()); It; ++It)
+	/*UGameplayStatics::GetAllActorsOfClass(GetWorld(),AStaticMeshActor::StaticClass(),AllActor);
+
+	for (int i=0;i<AllActor.Num();i++)
 	{
-		AStaticMeshActor* Actor=*It;
-		UMaterials.Add(Actor->GetStaticMeshComponent()->GetMaterial(0));
+		AllMaterials.Append(Cast<AStaticMeshActor>(AllActor[i])->GetStaticMeshComponent()->GetMaterials());
+	}
+	*/
+}
+
+void AMainGameMode::JumpActorLocation(AActor* LocationActor)
+{
+	JumpActor=LocationActor;
+	if (JumpActor&&UGameplayStatics::GetPlayerController(GWorld,0))
+	{
+		UGameplayStatics::GetPlayerController(GWorld,0)->SetViewTargetWithBlend(JumpActor,2);
+		FTimerDelegate UpdateTimerDelegate=FTimerDelegate::CreateUObject(this,&AMainGameMode::DelayCtrl);
+		GetWorld()->GetTimerManager().SetTimer(TimerHandle,UpdateTimerDelegate,2.0f,false);
+	}
+}
+
+void AMainGameMode::DelayCtrl()
+{
+	if (JumpActor&&SpawnCharatorClass)
+	{
+		APawn *player=GWorld->SpawnActor<APawn>(SpawnCharatorClass,JumpActor->GetActorLocation(),JumpActor->GetActorRotation());
+		UGameplayStatics::GetPlayerController(GWorld,0)->Possess(player);
+		GWorld->GetWorld()->GetTimerManager().ClearTimer(TimerHandle);
+	}
+}
+
+void AMainGameMode::ChangeActorLocation(FString LocationName)
+{
+	SpawnCharatorClass=AMainLevelPawn::StaticClass();
+	for (TActorIterator<ALocationTargetPoint> It(GetWorld()); It; ++It)
+	{
+		ALocationTargetPoint* LocationTargetPoint=*It;
+		if (LocationTargetPoint->TargetName == LocationName)
+		{
+			JumpActorLocation(LocationTargetPoint);
+		}
 	}
 }

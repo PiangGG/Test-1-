@@ -18,17 +18,22 @@ ATextObjectActor::ATextObjectActor()
 	
 	WidgetComponent=CreateDefaultSubobject<UWidgetComponent>(TEXT("WidgetComponent"));
 	WidgetComponent->SetupAttachment(RootComp);
-	WidgetComponent->SetVisibility(true);
+	WidgetComponent->SetVisibility(false);
+	
 }
 
 // Called when the game starts or when spawned
 void ATextObjectActor::BeginPlay()
 {
 	Super::BeginPlay();
+	
 	SAssignNew(TextInfoWidgetBase, STextInfoWidgetBase)
 	.TextImage(TextImage);
 	WidgetComponent->SetSlateWidget(TextInfoWidgetBase);
+	
+	//WidgetComponent->SetInitialLayerZOrder(1);
 	TextInfoWidgetBase->SetLocationActor(this);
+	
 }
 
 // Called every frame
@@ -47,13 +52,28 @@ void ATextObjectActor::UpdateForwardController()
 	FVector StartPos(GetActorLocation().X, GetActorLocation().Y,  GetActorLocation().Z);
 	FVector TargetPos(Location.X, Location.Y, Location.Z);
 	WidgetComponent->SetWorldRotation(FRotationMatrix::MakeFromX(TargetPos - StartPos).Rotator());
-
-	/*FVector len=WidgetComponent->GetComponentLocation()-Location;
-	WidgetComponent->SetRelativeScale3D(len*0.001);*/
 }
 
-void ATextObjectActor::OnMouseButton_Left_OnClick()
+void ATextObjectActor::ShowWidget()
+{
+	if (TextInfoWidgetBase)
+	{
+		TextInfoWidgetBase->SetVisibility(EVisibility::Visible);
+		WidgetComponent->SetVisibility(true);
+	}
+}
+
+void ATextObjectActor::HideWidget()
+{
+	if (TextInfoWidgetBase)
+	{
+		TextInfoWidgetBase->SetVisibility(EVisibility::Hidden);
+		WidgetComponent->SetVisibility(false);	
+	}
+}
+
+/*void ATextObjectActor::OnMouseButton_Left_OnClick()
 {
 	GetWorld()->GetFirstPlayerController()->SetViewTargetWithBlend(this,1);
-}
+}*/
 
