@@ -19,7 +19,7 @@ AMainCharacter::AMainCharacter()
 	//摄像机手臂
 	CameraBoom=CreateDefaultSubobject<USpringArmComponent>(TEXT("CamerBoom"));
 	CameraBoom->SetupAttachment(RootComponent);
-	CameraBoom->TargetArmLength = 300.0f;
+	CameraBoom->TargetArmLength = 0.0f;
 	CameraBoom->TargetOffset = FVector(0.0f,0.0f,60.0f);
 	CameraBoom->bUsePawnControlRotation = true;//绑定Controller旋转
 

@@ -4,6 +4,8 @@
 #include "Object/TextObject/TextObjectActor.h"
 
 #include "Components/WidgetComponent.h"
+#include "GamePlay/MainCharacter.h"
+#include "GamePlay/MainGameMode.h"
 #include "Kismet/GameplayStatics.h"
 #include "UI/Widget/TextInfoWidget/STextInfoWidgetBase.h"
 
@@ -18,7 +20,7 @@ ATextObjectActor::ATextObjectActor()
 	
 	WidgetComponent=CreateDefaultSubobject<UWidgetComponent>(TEXT("WidgetComponent"));
 	WidgetComponent->SetupAttachment(RootComp);
-	WidgetComponent->SetVisibility(false);
+	
 	
 }
 
@@ -27,13 +29,44 @@ void ATextObjectActor::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	SAssignNew(TextInfoWidgetBase, STextInfoWidgetBase)
-	.TextImage(TextImage);
-	WidgetComponent->SetSlateWidget(TextInfoWidgetBase);
-	
-	//WidgetComponent->SetInitialLayerZOrder(1);
+	Show();
+	WidgetComponent->SetVisibility(false);
 	TextInfoWidgetBase->SetLocationActor(this);
-	
+}
+
+void ATextObjectActor::Show()
+{
+	if (WidgetComponent)
+	{
+		SAssignNew(TextInfoWidgetBase, STextInfoWidgetBase)
+		.TextImage(TextImage)
+		.OnClickedImage_UObject(this,&ATextObjectActor::OnImageOnclick);
+		
+		WidgetComponent->SetSlateWidget(TextInfoWidgetBase);
+		WidgetComponent->SetVisibility(true);
+	}
+}
+
+void ATextObjectActor::Hide()
+{
+	if (WidgetComponent)
+	{
+		WidgetComponent->SetSlateWidget(nullptr);
+		WidgetComponent->SetVisibility(false);
+		//WidgetComponent->ReceiveHardwareInput(true);
+		//WidgetComponent->SetInitialLayerZOrder(1);
+	}
+}
+
+void ATextObjectActor::OnImageOnclick()
+{
+	UE_LOG(LogTemp,Warning,TEXT("STextInfoWidgetBase::OnMouseButtonDown"));
+	if (this&&UGameplayStatics::GetPlayerController(GWorld,0))
+	{
+		Cast<AMainGameMode>(UGameplayStatics::GetGameMode(GWorld))->SpawnCharatorClass=AMainCharacter::StaticClass();
+		Cast<AMainGameMode>(UGameplayStatics::GetGameMode(GWorld))->JumpActorLocation(this);
+		//this->SetActorHiddenInGame(true);
+	}
 }
 
 // Called every frame
@@ -58,8 +91,7 @@ void ATextObjectActor::ShowWidget()
 {
 	if (TextInfoWidgetBase)
 	{
-		TextInfoWidgetBase->SetVisibility(EVisibility::Visible);
-		WidgetComponent->SetVisibility(true);
+		Show();
 	}
 }
 
@@ -67,8 +99,7 @@ void ATextObjectActor::HideWidget()
 {
 	if (TextInfoWidgetBase)
 	{
-		TextInfoWidgetBase->SetVisibility(EVisibility::Hidden);
-		WidgetComponent->SetVisibility(false);	
+		Hide();
 	}
 }
 

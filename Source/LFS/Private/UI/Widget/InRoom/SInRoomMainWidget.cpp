@@ -21,12 +21,7 @@ void SInRoomMainWidget::Construct(const FArguments& InArgs)
 		SNew(SBox)
 		[
 			SNew(SOverlay)
-			+SOverlay::Slot()
-			.HAlign(HAlign_Fill)
-			.VAlign(VAlign_Top)
-			[
-				SAssignNew(MainTopWidget,SMainTopWidget)
-			]
+			
 			+SOverlay::Slot()
 			.HAlign(HAlign_Left)
 			.VAlign(VAlign_Top)
@@ -62,6 +57,13 @@ void SInRoomMainWidget::Construct(const FArguments& InArgs)
 			.Padding(0,0,0,0)
 			[
 				SAssignNew(InRoomLeftButtomWidget,SInRoomLeftButtomWidget)
+			]
+			+SOverlay::Slot()
+			.HAlign(HAlign_Fill)
+			.VAlign(VAlign_Top)
+			[
+				SAssignNew(MainTopWidget,SMainTopWidget)
+				.bShowButton(true)
 			]
 			
 		]

@@ -18,13 +18,14 @@ AItemObjectActor::AItemObjectActor()
 
 	/*BoxComponent->OnClicked.AddDynamic(this,&AActorObject::NotifyActorOnClicked);
 	OnClicked.AddUniqueDynamic(this, &AActorObject::NotifyActorOnClicked);*/
+	MaterialInterface_Hide=LoadObject<UMaterial>(NULL,TEXT("Material'/Game/Material/StaticMesh/Hightline.Hightline'"));
 }
 
 // Called when the game starts or when spawned
 void AItemObjectActor::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	MaterialInterface_Base=StaticMeshComponent->GetMaterials();
 }
 
 // Called every frame
@@ -37,8 +38,6 @@ void AItemObjectActor::Tick(float DeltaTime)
 void AItemObjectActor::NotifyActorOnClicked(FKey ButtonPressed)
 {
 	Super::NotifyActorOnClicked(ButtonPressed);
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("NotifyActorOnClicked"), false);
-	UE_LOG(LogTemp,Warning,TEXT("NotifyActorOnClicked"));
 }
 
 void AItemObjectActor::BlockClicked(UPrimitiveComponent* ClickedComp)
@@ -46,4 +45,20 @@ void AItemObjectActor::BlockClicked(UPrimitiveComponent* ClickedComp)
 	UE_LOG(LogTemp,Warning,TEXT("BlockClicked"));
 }
 
+void AItemObjectActor::OnMouseButton_Left_OnClick()
+{
+	Super::OnMouseButton_Left_OnClick();
+	//bSelected=true;
+	for (int i=0;i<StaticMeshComponent->GetMaterials().Num();i++)
+	{
+		StaticMeshComponent->SetMaterial(i,MaterialInterface_Hide);
+	}
+}
 
+void AItemObjectActor::ReSetMaterial()
+{
+	for (int i=0;i<MaterialInterface_Base.Num();i++)
+	{
+		StaticMeshComponent->SetMaterial(i,MaterialInterface_Base[i]);
+	}
+}

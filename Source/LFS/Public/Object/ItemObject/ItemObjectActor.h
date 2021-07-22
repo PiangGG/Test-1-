@@ -21,7 +21,7 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:	
+public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
@@ -33,6 +33,15 @@ public:
 	class UStaticMeshComponent* StaticMeshComponent;
 	//Component
 	class UBoxComponent* BoxComponent;
+
+	virtual void OnMouseButton_Left_OnClick() override;
+	bool bSelected=false;
+
+	TArray<class UMaterialInterface*> MaterialInterface_Base;
+	
+	UMaterialInterface* MaterialInterface_Hide;
+
+	void ReSetMaterial();
 private:	
 	EActorObjectEnum ActorObjectEnum;
 };

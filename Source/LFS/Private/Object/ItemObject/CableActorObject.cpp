@@ -18,6 +18,6 @@ EActorObjectEnum ACableActorObject::GetObjectEnum()
 
 void ACableActorObject::OnMouseButton_Left_OnClick()
 {
-	
+	Super::OnMouseButton_Left_OnClick();
 	Cast<AMainHUD>(GetWorld()->GetFirstPlayerController()->GetHUD())->ShowCableInfoWidget();
 }

@@ -13,7 +13,8 @@
 
 AMainMenuController::AMainMenuController()
 {
-	
+	//ConstructorHelpers::FObjectFinder<UMaterial>MaterialInstance(TEXT("MaterialInstanceConstant'/Game/Material/StaticMesh/Hightline_Inst.Hightline_Inst'"));
+	//'LoadObject<U>()
 }
 
 void AMainMenuController::ChangeControllerLocation(ControllerLocation NewLocation)
@@ -68,13 +69,19 @@ void AMainMenuController::MouseOnclick_Left()
 {
 	if (bShowMouseCursor)
 	{
+		if (MouseOnClicActor)
+		{
+			Cast<AItemObjectActor>(MouseOnClicActor)->ReSetMaterial();
+			
+		}
 		MouseOnClicActor=GetMouseOnClicActor();
 		if (MouseOnClicActor)
 		{
-			
 			MouseOnClicActor->OnMouseButton_Left_OnClick();
+		
 		}else
 		{
+			
 			//UE_LOG(LogTemp,Warning,TEXT("Onclick"));
 			Cast<AMainHUD>(GetHUD())->HideInfoWidget();
 		}

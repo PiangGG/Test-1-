@@ -13,6 +13,9 @@
 #include "UI/Widget/Main/SMainWidget.h"
 #include "UI/Widget/TongDao/STDGZWidget.h"
 #include "UI/Widget/TongDao/STodaoMainWidget.h"
+#include "SlateBasics.h"
+#include "GamePlay/MainGameMode.h"
+#include "UI/Widget/ActorObjectInfo/SMoitorJKWidget.h"
 
 AMainHUD::AMainHUD()
 {
@@ -37,15 +40,54 @@ void AMainHUD::ChangeHUDState(HUDStateEnum newState)
 	case NullState:
 		if (GEngine&&GEngine->GameViewport)
 		{
-			GEngine->GameViewport->RemoveAllViewportWidgets();
-			SAssignNew(MainTopWidget, SMainTopWidget);
+			//GEngine->GameViewport->RemoveAllViewportWidgets();
+			if (MainTopWidget)
+			{
+				GEngine->GameViewport->RemoveViewportWidgetContent(MainTopWidget.ToSharedRef());
+			}
+			if (MainWidget)
+			{
+				GEngine->GameViewport->RemoveViewportWidgetContent(MainWidget.ToSharedRef());
+			}
+			if (TodaoMainWidget)
+			{
+				GEngine->GameViewport->RemoveViewportWidgetContent(TodaoMainWidget.ToSharedRef());
+			}
+			if (TDGZWidget)
+			{
+				GEngine->GameViewport->RemoveViewportWidgetContent(TDGZWidget.ToSharedRef());
+			}
+			if (InRoomMainWidget)
+			{
+				GEngine->GameViewport->RemoveViewportWidgetContent(InRoomMainWidget.ToSharedRef());
+			}
+			SAssignNew(MainTopWidget, SMainTopWidget).bShowButton(false);
 			GEngine->GameViewport->AddViewportWidgetContent(MainTopWidget.ToSharedRef(),-50);
 		}
 		break;
 	case MainState:
 		if (GEngine&&GEngine->GameViewport)
 		{
-			GEngine->GameViewport->RemoveAllViewportWidgets();
+			if (MainTopWidget)
+			{
+				GEngine->GameViewport->RemoveViewportWidgetContent(MainTopWidget.ToSharedRef());
+			}
+			if (MainWidget)
+			{
+				GEngine->GameViewport->RemoveViewportWidgetContent(MainWidget.ToSharedRef());
+			}
+			if (TodaoMainWidget)
+			{
+				GEngine->GameViewport->RemoveViewportWidgetContent(TodaoMainWidget.ToSharedRef());
+			}
+			if (TDGZWidget)
+			{
+				GEngine->GameViewport->RemoveViewportWidgetContent(TDGZWidget.ToSharedRef());
+			}
+			if (InRoomMainWidget)
+			{
+				GEngine->GameViewport->RemoveViewportWidgetContent(InRoomMainWidget.ToSharedRef());
+			}
 			SAssignNew(MainWidget, SMainWidget);
 			GetWorld()->GetGameViewport()->AddViewportWidgetContent(MainWidget.ToSharedRef(),-50);
 		}
@@ -53,7 +95,26 @@ void AMainHUD::ChangeHUDState(HUDStateEnum newState)
 	case TongDaoState:
 		if (GEngine&&GEngine->GameViewport)
 		{
-			GEngine->GameViewport->RemoveAllViewportWidgets();
+			if (MainTopWidget)
+			{
+				GEngine->GameViewport->RemoveViewportWidgetContent(MainTopWidget.ToSharedRef());
+			}
+			if (MainWidget)
+			{
+				GEngine->GameViewport->RemoveViewportWidgetContent(MainWidget.ToSharedRef());
+			}
+			if (TodaoMainWidget)
+			{
+				GEngine->GameViewport->RemoveViewportWidgetContent(TodaoMainWidget.ToSharedRef());
+			}
+			if (TDGZWidget)
+			{
+				GEngine->GameViewport->RemoveViewportWidgetContent(TDGZWidget.ToSharedRef());
+			}
+			if (InRoomMainWidget)
+			{
+				GEngine->GameViewport->RemoveViewportWidgetContent(InRoomMainWidget.ToSharedRef());
+			}
 			SAssignNew(TodaoMainWidget, STodaoMainWidget);
 			GEngine->GameViewport->AddViewportWidgetContent(TodaoMainWidget.ToSharedRef(),-50);
 		}
@@ -65,7 +126,26 @@ void AMainHUD::ChangeHUDState(HUDStateEnum newState)
 	case InRoomState:
 		if (GEngine&&GEngine->GameViewport)
 		{
-			GEngine->GameViewport->RemoveAllViewportWidgets();
+			if (MainTopWidget)
+			{
+				GEngine->GameViewport->RemoveViewportWidgetContent(MainTopWidget.ToSharedRef());
+			}
+			if (MainWidget)
+			{
+				GEngine->GameViewport->RemoveViewportWidgetContent(MainWidget.ToSharedRef());
+			}
+			if (TodaoMainWidget)
+			{
+				GEngine->GameViewport->RemoveViewportWidgetContent(TodaoMainWidget.ToSharedRef());
+			}
+			if (TDGZWidget)
+			{
+				GEngine->GameViewport->RemoveViewportWidgetContent(TDGZWidget.ToSharedRef());
+			}
+			if (InRoomMainWidget)
+			{
+				GEngine->GameViewport->RemoveViewportWidgetContent(InRoomMainWidget.ToSharedRef());
+			}
 			SAssignNew(InRoomMainWidget, SInRoomMainWidget);
 			GEngine->GameViewport->AddViewportWidgetContent(InRoomMainWidget.ToSharedRef(),-50);
 		}
@@ -81,6 +161,7 @@ void AMainHUD::BeginPlay()
 	Super::BeginPlay();
 	ChangeHUDState(HUDStateEnum::NullState);
 }
+
 
 void AMainHUD::ShowInfoWidget()
 {
@@ -144,6 +225,40 @@ void AMainHUD::ShowBatteryModuleInfoWidget()
 	}
 }
 
+void AMainHUD::ShowMonitorInfoWidget()
+{
+	if (GEngine&&GEngine->GameViewport)
+	{
+		if (InfoWidget)
+		{
+			GEngine->GameViewport->RemoveViewportWidgetContent(InfoWidget.ToSharedRef());
+			SAssignNew(InfoWidget, STDGZWidget);
+			GEngine->GameViewport->AddViewportWidgetContent(InfoWidget.ToSharedRef());
+		}else
+		{
+			SAssignNew(InfoWidget, STDGZWidget);
+			GEngine->GameViewport->AddViewportWidgetContent(InfoWidget.ToSharedRef());
+		}
+		
+	}
+}
+void AMainHUD::ShowMonitor2InfoWidget()
+{
+	if (GEngine&&GEngine->GameViewport)
+	{
+		if (InfoWidget)
+		{
+			GEngine->GameViewport->RemoveViewportWidgetContent(InfoWidget.ToSharedRef());
+			SAssignNew(InfoWidget, SMoitorJKWidget);
+			GEngine->GameViewport->AddViewportWidgetContent(InfoWidget.ToSharedRef());
+		}else
+		{
+			SAssignNew(InfoWidget, SMoitorJKWidget);
+			GEngine->GameViewport->AddViewportWidgetContent(InfoWidget.ToSharedRef());
+		}
+		
+	}
+}
 void AMainHUD::ShowAllLocationObjectTextWidget()
 {
 	if (GetWorld())
@@ -165,6 +280,33 @@ void AMainHUD::HideAllLocationObjectTextWidget()
 		for (int i=0;i<TextObjectActor.Num();i++)
 		{
 			Cast<ATextObjectActor>(TextObjectActor[i])->HideWidget();
+		}
+	}
+}
+
+void AMainHUD::RemoveAllUI()
+{
+	if (GEngine&&GEngine->GameViewport)
+	{
+		if (MainTopWidget)
+		{
+			GEngine->GameViewport->RemoveViewportWidgetContent(MainTopWidget.ToSharedRef());
+		}
+		if (MainWidget)
+		{
+			GEngine->GameViewport->RemoveViewportWidgetContent(MainWidget.ToSharedRef());
+		}
+		if (TodaoMainWidget)
+		{
+			GEngine->GameViewport->RemoveViewportWidgetContent(TodaoMainWidget.ToSharedRef());
+		}
+		if (TDGZWidget)
+		{
+			GEngine->GameViewport->RemoveViewportWidgetContent(TDGZWidget.ToSharedRef());
+		}
+		if (InRoomMainWidget)
+		{
+			GEngine->GameViewport->RemoveViewportWidgetContent(InRoomMainWidget.ToSharedRef());
 		}
 	}
 }

@@ -66,5 +66,8 @@ protected:
 	class ABaseActorObject* GetMouseOnClicActor();
 	
 	class ABaseActorObject* MouseOnClicActor = nullptr;
+	
+	class UMaterialInstance* MouseOnClicActorMaterial_Base;
+	class UMaterialInstance* MouseOnClicActorMaterial_Hight;
 };
 

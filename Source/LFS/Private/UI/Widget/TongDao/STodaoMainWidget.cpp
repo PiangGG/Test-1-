@@ -17,12 +17,6 @@ void STodaoMainWidget::Construct(const FArguments& InArgs)
 		// Populate the widget
 		SNew(SOverlay)
 		+SOverlay::Slot()
-		.VAlign(VAlign_Top)
-		.HAlign(HAlign_Fill)
-		[
-			SNew(SMainTopWidget)
-		]
-		+SOverlay::Slot()
 		.VAlign(VAlign_Fill)
 		.HAlign(HAlign_Left)
 		[
@@ -34,6 +28,13 @@ void STodaoMainWidget::Construct(const FArguments& InArgs)
 		.Padding(0,0,5,0)
 		[
 			SAssignNew(Right_Main,SRight_Main)
+		]
+		+SOverlay::Slot()
+		.VAlign(VAlign_Top)
+		.HAlign(HAlign_Fill)
+		[
+			SNew(SMainTopWidget)
+			.bShowButton(true)
 		]
 	];
 	

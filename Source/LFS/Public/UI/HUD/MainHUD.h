@@ -22,16 +22,21 @@ public:
 	AMainHUD();
 	
 	TSharedPtr<class SMainWidget> MainWidget;
+	//TSubclassOf<class UUserWidget> UserMainWidget;
 	
 	TSharedPtr<class SMainTopWidget> MainTopWidget;
+	//TSubclassOf<class UUserWidget> UserMainTopWidget;
 	
 	TSharedPtr<class STodaoMainWidget> TodaoMainWidget;
 
 	TSharedPtr<class STDGZWidget> TDGZWidget;
 	
 	TSharedPtr<class SInRoomMainWidget> InRoomMainWidget;
-	HUDStateEnum CurrentState=HUDStateEnum::NullState;
+
+	UUserWidget *CurrentWidget;
 	
+	HUDStateEnum CurrentState=HUDStateEnum::NullState;
+
 	UFUNCTION(BlueprintCallable)
 	void ChangeHUDState(HUDStateEnum newState);
 
@@ -41,18 +46,20 @@ public:
 	TSharedPtr<class SCompoundWidget>InfoWidget;
 
 	public:
-	
 	void ShowInfoWidget();
 	void HideInfoWidget();
 
 	void ShowCableInfoWidget();
-	
 	void ShowBatteryModuleInfoWidget();
-
+	void ShowMonitorInfoWidget();
+	void ShowMonitor2InfoWidget();
+	
 	UFUNCTION(BlueprintCallable)
 	void ShowAllLocationObjectTextWidget();
 	UFUNCTION(BlueprintCallable)
 	void HideAllLocationObjectTextWidget();
+	UFUNCTION(BlueprintCallable)
+	void RemoveAllUI();
 	
 	UPROPERTY(BlueprintReadWrite,EditAnywhere)
 	TArray<class AActor*>TextObjectActor;

@@ -3,29 +3,20 @@
 #pragma once
 
 #include "CoreMinimal.h"
-
-#include "UI/Style/LFSStyle.h"
-#include "UI/Style/MainSlateWidgetStyle.h"
 #include "Widgets/SCompoundWidget.h"
 
 /**
  * 
  */
-class LFS_API SMainTopWidget : public SCompoundWidget
+class LFS_API SRobotWidget : public SCompoundWidget
 {
 public:
-	SLATE_BEGIN_ARGS(SMainTopWidget)
+	SLATE_BEGIN_ARGS(SRobotWidget)
 	{}
-	SLATE_ATTRIBUTE(bool,bShowButton)
 	SLATE_END_ARGS()
 
 	/** Constructs this widget with InArgs */
 	void Construct(const FArguments& InArgs);
-
 	//引入Sytle|获取MenuStyle
 	const struct FMainSlateStyle* MainStyle;
-
-	bool bShowButton;
-	TSharedPtr<class SButton>Button_Back;
-	FReply BackMainMap();
 };

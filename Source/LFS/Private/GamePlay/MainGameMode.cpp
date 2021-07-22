@@ -98,6 +98,7 @@ void AMainGameMode::DelayCtrl()
 		APawn *player=GWorld->SpawnActor<APawn>(SpawnCharatorClass,JumpActor->GetActorLocation(),JumpActor->GetActorRotation());
 		UGameplayStatics::GetPlayerController(GWorld,0)->Possess(player);
 		GWorld->GetWorld()->GetTimerManager().ClearTimer(TimerHandle);
+		Cast<AMainHUD>(UGameplayStatics::GetPlayerController(GWorld,0)->GetHUD())->ChangeHUDState(HUDStateEnum::NullState);
 	}
 }
 

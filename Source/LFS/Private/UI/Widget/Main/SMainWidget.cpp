@@ -17,10 +17,10 @@ void SMainWidget::Construct(const FArguments& InArgs)
 	ChildSlot
 	[
 		// Populate the widget
-		SNew(SBox)
-		.HAlign(HAlign_Fill)
-		.VAlign(VAlign_Fill)
-		[
+		//SNew(SBox)
+		/*.HAlign(HAlign_Fill)
+		.VAlign(VAlign_Fill)*/
+		//[
 			SNew(SOverlay)
 			+SOverlay::Slot()//Left
 			.Padding(FMargin(0,30,0,0))
@@ -34,6 +34,7 @@ void SMainWidget::Construct(const FArguments& InArgs)
 			.VAlign(VAlign_Top)
 			[
 				SAssignNew(MainTopWidget,SMainTopWidget)
+				.bShowButton(false)
 			]
 			+SOverlay::Slot()//Right
 			.Padding(FMargin(0,30,0,0))
@@ -55,7 +56,7 @@ void SMainWidget::Construct(const FArguments& InArgs)
 			[
 				SAssignNew(MainCenterWidget,SMainCenterWidget)
 			]//center
-		]
+		//]
 	];
 	
 }

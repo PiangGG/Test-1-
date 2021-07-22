@@ -46,6 +46,10 @@ public:
 	//Main Top
 	UPROPERTY(EditAnywhere,Category=Image)
 	FSlateBrush Main_Top_BG;
+	UPROPERTY(EditAnywhere,Category=Style)
+	FButtonStyle ButtonStyle;
+	UPROPERTY(EditAnywhere,Category=Style)
+	FTextBlockStyle TextBlockStyle;
 	
 	//Main Left
 	UPROPERTY(EditAnywhere,Category=Image)
