@@ -20,6 +20,7 @@ class LFS_API AMainGameMode : public AGameModeBase
 	public:
 	AMainGameMode();
 
+	void ChangePawn(AActor*actor);
 	protected:
 	virtual void BeginPlay() override;
 	public:

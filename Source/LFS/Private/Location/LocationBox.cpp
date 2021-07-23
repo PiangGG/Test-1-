@@ -53,19 +53,19 @@ void ALocationBox::OverlapCompEnd(UPrimitiveComponent* OverlappedComponent, AAct
 	if (!HUD)return;
 	switch (HUD->CurrentState)
 	{
-	case NullState:
+	case HUDStateEnum::NullState:
 		ChangeNewLocationState(LocationBoxState::LocationNullState);
 		break;
-	case MainState:
+	case HUDStateEnum::MainState:
 		ChangeNewLocationState(LocationBoxState::LocationNullState);
 		break;
-	case TongDaoState:
+	case HUDStateEnum::TongDaoState:
 		ChangeNewLocationState(LocationBoxState::LocationNullState);
 		break;
-	case InRoomState:
+	case HUDStateEnum::InRoomState:
 		ChangeNewLocationState(LocationBoxState::LocationNullState);
 		break;
-	case TDGZState:
+	case HUDStateEnum::TDGZState:
 		ChangeNewLocationState(LocationBoxState::LocationTongDaoState);
 		break;
 	default:

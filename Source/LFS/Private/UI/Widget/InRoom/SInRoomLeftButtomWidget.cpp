@@ -5,6 +5,7 @@
 #include "SlateOptMacros.h"
 #include "GamePlay/MainMenuController.h"
 #include "Kismet/GameplayStatics.h"
+#include "Object/ItemObject/WorkObjectActor.h"
 #include "UI/HUD/MainHUD.h"
 #include "UI/Style/LFSStyle.h"
 #include "UI/Style/MainSlateWidgetStyle.h"
@@ -113,7 +114,21 @@ void SInRoomLeftButtomWidget::Construct(const FArguments& InArgs)
 			]
 		]
 	];
-	
+	if (InRoomRightBttomWidget_Item_4&&GWorld)
+	{
+		UGameplayStatics::GetAllActorsOfClass(GWorld,AWorkObjectActor::StaticClass(),ArrayActors);
+		for (int i=0;i<ArrayActors.Num();i++)
+		{
+			Cast<AWorkObjectActor>(ArrayActors[i])->OnMouseButton_Left_OnClick();
+		}
+	}else
+	{
+		UGameplayStatics::GetAllActorsOfClass(GWorld,AWorkObjectActor::StaticClass(),ArrayActors);
+		for (int i=0;i<ArrayActors.Num();i++)
+		{
+			Cast<AWorkObjectActor>(ArrayActors[i])->ChangeActorState(EWorkObjectActorState::Null);
+		}
+	}
 }
 
 FReply SInRoomLeftButtomWidget::BuuttonOnClick_1()

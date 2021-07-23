@@ -4,9 +4,13 @@
 
 #include "CoreMinimal.h"
 #include "Object/BaseActorObject.h"
-
 #include "TextObjectActor.generated.h"
 
+UENUM(BlueprintType)
+enum class ETextObjectActorState:uint8
+{
+	DLTD,KBS,PDF,DLSJ
+};
 UCLASS()
 class LFS_API ATextObjectActor : public ABaseActorObject
 {
@@ -43,6 +47,9 @@ public:
 
 	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category=Component)
 	FSlateBrush TextImage;
+	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category=State)
+	ETextObjectActorState TextObjectActorState =ETextObjectActorState::DLTD;
+	
 	//UPROPERTY(EditAnywhere,BlueprintReadWrite,Category=Component)
 	TSharedPtr<class STextInfoWidgetBase>TextInfoWidgetBase;
 
@@ -56,4 +63,7 @@ public:
 
 	void ShowWidget();
 	void HideWidget();
+
+	
+	void ChangeUIState();
 };

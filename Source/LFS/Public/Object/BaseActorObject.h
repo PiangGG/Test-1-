@@ -10,7 +10,7 @@
 UENUM()
 enum EActorObjectEnum
 {
-	Cable,BatteryModule,TextImage,Monitor,Monitor2,Robot
+	Cable,BatteryModule,TextImage,Monitor,Monitor2,Robot,WorkBox
 };
 
 UCLASS()

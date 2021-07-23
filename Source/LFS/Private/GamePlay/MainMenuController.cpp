@@ -71,8 +71,7 @@ void AMainMenuController::MouseOnclick_Left()
 	{
 		if (MouseOnClicActor)
 		{
-			Cast<AItemObjectActor>(MouseOnClicActor)->ReSetMaterial();
-			
+			Cast<AItemObjectActor>(MouseOnClicActor)->ReSetMaterial();		
 		}
 		MouseOnClicActor=GetMouseOnClicActor();
 		if (MouseOnClicActor)

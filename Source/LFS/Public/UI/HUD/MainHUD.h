@@ -10,7 +10,7 @@
  * 
  */
 UENUM()
-enum HUDStateEnum
+enum class HUDStateEnum : uint8 
 {
 	NullState,MainState,TongDaoState,TDGZState,InRoomState
 };
@@ -34,7 +34,8 @@ public:
 	TSharedPtr<class SInRoomMainWidget> InRoomMainWidget;
 
 	UUserWidget *CurrentWidget;
-	
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	HUDStateEnum CurrentState=HUDStateEnum::NullState;
 
 	UFUNCTION(BlueprintCallable)

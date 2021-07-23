@@ -11,6 +11,7 @@
 #include "GamePlay/MainMenuController.h"
 #include "Kismet/GameplayStatics.h"
 #include "Location/LocationTargetPoint.h"
+#include "Object/TextObject/TextObjectActor.h"
 #include "UI/HUD/MainHUD.h"
 
 AMainGameMode::AMainGameMode()
@@ -22,6 +23,12 @@ AMainGameMode::AMainGameMode()
 	//变换后的材质
 	ConstructorHelpers::FObjectFinder<UMaterialInterface>Material(TEXT("MaterialInstanceConstant'/Game/ThirdPersonBP/ThirdPersonBP/NewMaterial_2_Inst.NewMaterial_2_Inst'"));
 	Materials=Material.Object;
+}
+
+void AMainGameMode::ChangePawn(AActor* actor)
+{
+	APawn *player2=GWorld->SpawnActor<APawn>(ADefaultPawn::StaticClass(),actor->GetActorLocation(),actor->GetActorRotation());
+	UGameplayStatics::GetPlayerController(GWorld,0)->Possess(player2);
 }
 
 void AMainGameMode::BeginPlay()
@@ -98,7 +105,31 @@ void AMainGameMode::DelayCtrl()
 		APawn *player=GWorld->SpawnActor<APawn>(SpawnCharatorClass,JumpActor->GetActorLocation(),JumpActor->GetActorRotation());
 		UGameplayStatics::GetPlayerController(GWorld,0)->Possess(player);
 		GWorld->GetWorld()->GetTimerManager().ClearTimer(TimerHandle);
-		Cast<AMainHUD>(UGameplayStatics::GetPlayerController(GWorld,0)->GetHUD())->ChangeHUDState(HUDStateEnum::NullState);
+		if (Cast<ATextObjectActor>(JumpActor))
+		{
+			switch (Cast<ATextObjectActor>(JumpActor)->TextObjectActorState)
+			{
+			case ETextObjectActorState::DLTD:
+				Cast<AMainHUD>(UGameplayStatics::GetPlayerController(GWorld,0)->GetHUD())->ChangeHUDState(HUDStateEnum::TongDaoState);
+				break;
+			case ETextObjectActorState::KBS:
+				Cast<AMainHUD>(UGameplayStatics::GetPlayerController(GWorld,0)->GetHUD())->ChangeHUDState(HUDStateEnum::InRoomState);
+				break;
+			case ETextObjectActorState::PDF:
+				Cast<AMainHUD>(UGameplayStatics::GetPlayerController(GWorld,0)->GetHUD())->ChangeHUDState(HUDStateEnum::InRoomState);
+				break;
+			case ETextObjectActorState::DLSJ:
+				Cast<AMainHUD>(UGameplayStatics::GetPlayerController(GWorld,0)->GetHUD())->ChangeHUDState(HUDStateEnum::MainState);
+				ChangePawn(JumpActor);
+				break;
+			default:
+				Cast<AMainHUD>(UGameplayStatics::GetPlayerController(GWorld,0)->GetHUD())->ChangeHUDState(HUDStateEnum::NullState);
+				break;
+			}
+		}else
+		{
+			Cast<AMainHUD>(UGameplayStatics::GetPlayerController(GWorld,0)->GetHUD())->ChangeHUDState(HUDStateEnum::NullState);	
+		}
 	}
 }
 

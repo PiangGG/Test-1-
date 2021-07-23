@@ -49,7 +49,7 @@ FReply STextInfoWidgetBase::OnMouseButtonUp(const FGeometry& MyGeometry, const F
 FReply STextInfoWidgetBase::OnMouseButtonDown(const FGeometry& MyGeometry, const FPointerEvent& MouseEvent)
 {
 	
-	UE_LOG(LogTemp,Warning,TEXT("STextInfoWidgetBase::OnMouseButtonDown"));
+	//UE_LOG(LogTemp,Warning,TEXT("STextInfoWidgetBase::OnMouseButtonDown"));
 	/*if (LocationActor&&UGameplayStatics::GetPlayerController(GWorld,0))
 	{
 		Cast<AMainGameMode>(UGameplayStatics::GetGameMode(GWorld))->SpawnCharatorClass=AMainCharacter::StaticClass();

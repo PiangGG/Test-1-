@@ -40,4 +40,6 @@ public:
 
 	void ShowHJJCWidegt();
 	void HideHJJCWidget();
+
+	TArray<AActor*> ArrayActors;
 };

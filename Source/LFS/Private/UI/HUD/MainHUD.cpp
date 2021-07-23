@@ -37,7 +37,7 @@ void AMainHUD::ChangeHUDState(HUDStateEnum newState)
 {
 	switch (newState)
 	{
-	case NullState:
+	case HUDStateEnum::NullState:
 		if (GEngine&&GEngine->GameViewport)
 		{
 			//GEngine->GameViewport->RemoveAllViewportWidgets();
@@ -65,7 +65,7 @@ void AMainHUD::ChangeHUDState(HUDStateEnum newState)
 			GEngine->GameViewport->AddViewportWidgetContent(MainTopWidget.ToSharedRef(),-50);
 		}
 		break;
-	case MainState:
+	case HUDStateEnum::MainState:
 		if (GEngine&&GEngine->GameViewport)
 		{
 			if (MainTopWidget)
@@ -92,7 +92,7 @@ void AMainHUD::ChangeHUDState(HUDStateEnum newState)
 			GetWorld()->GetGameViewport()->AddViewportWidgetContent(MainWidget.ToSharedRef(),-50);
 		}
 		break;
-	case TongDaoState:
+	case HUDStateEnum::TongDaoState:
 		if (GEngine&&GEngine->GameViewport)
 		{
 			if (MainTopWidget)
@@ -119,11 +119,11 @@ void AMainHUD::ChangeHUDState(HUDStateEnum newState)
 			GEngine->GameViewport->AddViewportWidgetContent(TodaoMainWidget.ToSharedRef(),-50);
 		}
 		break;
-	case TDGZState:
+	case HUDStateEnum::TDGZState:
 			SAssignNew(TDGZWidget, STDGZWidget);
 			GEngine->GameViewport->AddViewportWidgetContent(TDGZWidget.ToSharedRef(),-50);
 			break;
-	case InRoomState:
+	case HUDStateEnum::InRoomState:
 		if (GEngine&&GEngine->GameViewport)
 		{
 			if (MainTopWidget)

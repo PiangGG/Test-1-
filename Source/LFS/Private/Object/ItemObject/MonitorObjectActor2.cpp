@@ -31,8 +31,8 @@ void AMonitorObjectActor2::UpdateForwardController()
 	Location=GetWorld()->GetFirstPlayerController()->PlayerCameraManager->GetCameraLocation();
 
 	//旋转
-	FVector StartPos(GetActorLocation().X, GetActorLocation().Y,  GetActorLocation().Z);
-	FVector TargetPos(Location.X, Location.Y, Location.Z);
+	FVector StartPos(GetActorLocation().X, GetActorLocation().Y, 0);
+	FVector TargetPos(Location.X, Location.Y, 0);
 	WidgetComponent->SetWorldRotation(FRotationMatrix::MakeFromX(TargetPos - StartPos).Rotator());
 }
 

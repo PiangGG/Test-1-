@@ -20,7 +20,7 @@ ATextObjectActor::ATextObjectActor()
 	
 	WidgetComponent=CreateDefaultSubobject<UWidgetComponent>(TEXT("WidgetComponent"));
 	WidgetComponent->SetupAttachment(RootComp);
-	
+	//WidgetComponent->is
 	
 }
 
@@ -53,19 +53,15 @@ void ATextObjectActor::Hide()
 	{
 		WidgetComponent->SetSlateWidget(nullptr);
 		WidgetComponent->SetVisibility(false);
-		//WidgetComponent->ReceiveHardwareInput(true);
-		//WidgetComponent->SetInitialLayerZOrder(1);
 	}
 }
 
 void ATextObjectActor::OnImageOnclick()
 {
-	UE_LOG(LogTemp,Warning,TEXT("STextInfoWidgetBase::OnMouseButtonDown"));
 	if (this&&UGameplayStatics::GetPlayerController(GWorld,0))
 	{
 		Cast<AMainGameMode>(UGameplayStatics::GetGameMode(GWorld))->SpawnCharatorClass=AMainCharacter::StaticClass();
 		Cast<AMainGameMode>(UGameplayStatics::GetGameMode(GWorld))->JumpActorLocation(this);
-		//this->SetActorHiddenInGame(true);
 	}
 }
 
@@ -103,8 +99,7 @@ void ATextObjectActor::HideWidget()
 	}
 }
 
-/*void ATextObjectActor::OnMouseButton_Left_OnClick()
+void ATextObjectActor::ChangeUIState()
 {
-	GetWorld()->GetFirstPlayerController()->SetViewTargetWithBlend(this,1);
-}*/
-
+	
+}
