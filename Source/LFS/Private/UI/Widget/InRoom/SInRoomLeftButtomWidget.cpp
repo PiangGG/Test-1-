@@ -3,6 +3,7 @@
 
 #include "UI/Widget/InRoom/SInRoomLeftButtomWidget.h"
 #include "SlateOptMacros.h"
+#include "GamePlay/MainGameMode.h"
 #include "GamePlay/MainMenuController.h"
 #include "Kismet/GameplayStatics.h"
 #include "Object/ItemObject/WorkObjectActor.h"
@@ -38,76 +39,92 @@ void SInRoomLeftButtomWidget::Construct(const FArguments& InArgs)
 				[
 					SNew(SHorizontalBox)
 					+SHorizontalBox::Slot()
-					.HAlign(HAlign_Fill)
+					.AutoWidth()
 					[
 						SNew(SOverlay)
-						+SOverlay::Slot()
-						.HAlign(HAlign_Center)
-						.VAlign(VAlign_Center)
+						/*+SOverlay::Slot()
 						[
 							SNew(STextBlock)
 							.Font(MainStyle->FontInfo_Size_16_White)
-							.Text(FText::FromString(TEXT("电缆信息")))
-						]
+						]*/
 						+SOverlay::Slot()
 						[	
 							SAssignNew(HJJC_Button,SButton)
+							.HAlign(HAlign_Center)
+							.VAlign(VAlign_Center)
 							.ButtonStyle(&MainStyle->SelecdButtonStyle)
+							.Text(FText::FromString(TEXT("电缆信息")))
+							.TextStyle(&MainStyle->TextBlockStyle)
 							.OnClicked(this,&SInRoomLeftButtomWidget::BuuttonOnClick_1)
 						]
 					]
 					+SHorizontalBox::Slot()
+					.AutoWidth()
 					[
 						SNew(SOverlay)
-						+SOverlay::Slot()
+						/*+SOverlay::Slot()
 						.HAlign(HAlign_Center)
 						.VAlign(VAlign_Center)
 						[
 							SNew(STextBlock)
 							.Font(MainStyle->FontInfo_Size_16_White)
-							.Text(FText::FromString(TEXT("告警信息")))
-						]
+							
+						]*/
 						+SOverlay::Slot()
 						[	
 							SAssignNew(GJXX_Button,SButton)
+							.HAlign(HAlign_Center)
+							.VAlign(VAlign_Center)
 							.ButtonStyle(&MainStyle->SelecdButtonStyle)
 							.OnClicked(this,&SInRoomLeftButtomWidget::BuuttonOnClick_2)
+							.Text(FText::FromString(TEXT("告警信息")))
+							.TextStyle(&MainStyle->TextBlockStyle)
 						]
 					]
 					+SHorizontalBox::Slot()
+					.AutoWidth()
 					[
 						SNew(SOverlay)
-						+SOverlay::Slot()
+						/*+SOverlay::Slot()
 						.HAlign(HAlign_Center)
 						.VAlign(VAlign_Center)
 						[
 							SNew(STextBlock)
 							.Font(MainStyle->FontInfo_Size_16_White)
 							.Text(FText::FromString(TEXT("智能巡检")))
-						]
+						]*/
 						+SOverlay::Slot()
 						[	
 							SAssignNew(ZNXJ_Button,SButton)
+							.HAlign(HAlign_Center)
+							.VAlign(VAlign_Center)
 							.ButtonStyle(&MainStyle->SelecdButtonStyle)
 							.OnClicked(this,&SInRoomLeftButtomWidget::BuuttonOnClick_3)
+							.Text(FText::FromString(TEXT("智能巡检")))
+							.TextStyle(&MainStyle->TextBlockStyle)
 						]
 					]
 					+SHorizontalBox::Slot()
+					.AutoWidth()
 					[
 						SNew(SOverlay)
-						+SOverlay::Slot()
+						/*+SOverlay::Slot()
 						.HAlign(HAlign_Center)
 						.VAlign(VAlign_Center)
 						[
 							SNew(STextBlock)
 							.Font(MainStyle->FontInfo_Size_16_White)
 							.Text(FText::FromString(TEXT("作业管控")))
-						]
+						]*/
 						+SOverlay::Slot()
 						[	
 							SAssignNew(ZYGK_Button,SButton)
+							.HAlign(HAlign_Center)
+							.VAlign(VAlign_Center)
 							.ButtonStyle(&MainStyle->SelecdButtonStyle)
 							.OnClicked(this,&SInRoomLeftButtomWidget::BuuttonOnClick_4)
+							.Text(FText::FromString(TEXT("作业管控")))
+							.TextStyle(&MainStyle->TextBlockStyle)
 						]
 					]
 				]				
@@ -178,7 +195,12 @@ FReply SInRoomLeftButtomWidget::BuuttonOnClick_3()
 	Content->AddSlot()
 	[
 		SAssignNew(InRoomRightBttomWidget_Item_3,SInRoomRightBttomWidget_Item_3)
+		
 	];
+	//if (Cast<AMainGameMode>(UGameplayStatics::GetGameMode(GWorld))->RobotActorObject==nullptr)
+	{
+		Cast<AMainGameMode>(UGameplayStatics::GetGameMode(GWorld))->CreateCat();
+	}
 	return FReply::Handled();
 }
 
@@ -196,6 +218,7 @@ FReply SInRoomLeftButtomWidget::BuuttonOnClick_4()
 	[
 		SAssignNew(InRoomRightBttomWidget_Item_4,SInRoomRightBttomWidget_Item_4)
 	];
+	Cast<AMainGameMode>(UGameplayStatics::GetGameMode(GWorld))->ShowAllWorkObject();
 	return FReply::Handled();
 }
 

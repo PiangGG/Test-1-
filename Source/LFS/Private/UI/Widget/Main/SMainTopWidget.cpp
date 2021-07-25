@@ -6,6 +6,7 @@
 #include "GamePlay/MainGameMode.h"
 #include "Kismet/GameplayStatics.h"
 #include "UI/HUD/MainHUD.h"
+#include "UI/Widget/SLeftTopButtonWidget.h"
 #include "Widgets/SOverlay.h"
 #include "Widgets/Images/SImage.h"
 
@@ -39,26 +40,12 @@ void SMainTopWidget::Construct(const FArguments& InArgs)
 			+SOverlay::Slot()
 			.HAlign(HAlign_Left)
 			.VAlign(VAlign_Center)
+			.Padding(FMargin(5,0,0,0))
 			[
-				SAssignNew(Button_Back,SButton)
-				.Text(FText::FromString(TEXT("返回主界面")))
-				.OnClicked(this,&SMainTopWidget::BackMainMap)
-				.TextStyle(&MainStyle->TextBlockStyle)
-				.ButtonStyle(&MainStyle->ButtonStyle)
+				SAssignNew(LeftTopButtonWidget,SLeftTopButtonWidget)
 			]
 		]	
 	];
-	if (Button_Back)
-	{
-		if (bShowButton)
-		{
-			Button_Back->SetVisibility(EVisibility::Visible);
-		}else
-		{
-			Button_Back->SetVisibility(EVisibility::Hidden);
-		
-		}
-	}
 }
 
 FReply SMainTopWidget::BackMainMap()
@@ -66,8 +53,6 @@ FReply SMainTopWidget::BackMainMap()
 	if (GWorld)
 	{
 		Cast<AMainGameMode>(UGameplayStatics::GetGameMode(GWorld))->ChangeActorLocation(FString("Start"));
-		
-		//return FReply::Handled();
 	}
 	return FReply::Handled();
 }

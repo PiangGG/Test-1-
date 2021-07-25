@@ -26,6 +26,6 @@ public:
 	const struct FMainSlateStyle* MainStyle;
 
 	bool bShowButton;
-	TSharedPtr<class SButton>Button_Back;
+	TSharedPtr<class SLeftTopButtonWidget>LeftTopButtonWidget;
 	FReply BackMainMap();
 };

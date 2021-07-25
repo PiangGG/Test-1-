@@ -8,6 +8,7 @@
 #include "Widgets/Images/SImage.h"
 #include "Engine/World.h"
 #include "GamePlay/MainGameMode.h"
+#include "UI/HUD/MainHUD.h"
 #include "Widgets/SViewport.h"
 
 BEGIN_SLATE_FUNCTION_BUILD_OPTIMIZATION
@@ -56,6 +57,7 @@ FReply STextInfoWidgetBase::OnMouseButtonDown(const FGeometry& MyGeometry, const
 		Cast<AMainGameMode>(UGameplayStatics::GetGameMode(GWorld))->JumpActorLocation(LocationActor);
 		LocationActor->SetActorHiddenInGame(true);
 	}*/
+	//Cast<AMainHUD>(UGameplayStatics::GetPlayerController(GWorld,0))->ShowAllUI();
 	OnClickedImage.ExecuteIfBound();
 	return FReply::Handled();
 }

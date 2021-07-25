@@ -36,7 +36,7 @@ class LFS_API ARobotActorObject : public AItemObjectActor
 
 	bool bIsShow=false;
 
-	protected:
+	public:
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	FVector StartLoation;
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)

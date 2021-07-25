@@ -14,6 +14,8 @@ AMonitorObjectActor2::AMonitorObjectActor2()
 	WidgetComponent=CreateDefaultSubobject<UWidgetComponent>(TEXT("WidgetComponent"));
 	WidgetComponent->SetupAttachment(StaticMeshComponent);
 	WidgetComponent->SetRelativeLocation(FVector(0,0,200.0));
+	WidgetComponent->SetWidgetSpace(EWidgetSpace::Screen);
+	WidgetComponent->bSelectable=true;
 }
 
 void AMonitorObjectActor2::Tick(float DeltaSeconds)

@@ -32,7 +32,9 @@ void AMainMenuController::ChangeControllerLocation(ControllerLocation NewLocatio
 void AMainMenuController::BeginPlay()
 {
 	Super::BeginPlay();
-	ChangeControllerLocation(controllerLocation);
+	//ChangeControllerLocation(controllerLocation);
+	bShowMouseCursor=true;
+	SetInputMode(FInputModeGameAndUI());
 }
 
 void AMainMenuController::SetupInputComponent()
@@ -40,9 +42,10 @@ void AMainMenuController::SetupInputComponent()
 	Super::SetupInputComponent();
 	if (InputComponent)
 	{
-		InputComponent->BindAction("ShowMouse",IE_Pressed,this,&AMainMenuController::ShowMouse);
+		//InputComponent->BindAction("ShowMouse",IE_Pressed,this,&AMainMenuController::ShowMouse);
 		
-		InputComponent->BindAction("MouseOnclick_Left",IE_Pressed,this,&AMainMenuController::MouseOnclick_Left);
+		InputComponent->BindAction("MouseOnclick_Left",IE_Pressed,this,&AMainMenuController::MouseOnclick_Left_Pressed);
+		InputComponent->BindAction("MouseOnclick_Left",IE_Released,this,&AMainMenuController::MouseOnclick_Left_Released);
 
 		InputComponent->BindAction("ChangeMode",IE_Pressed,this,&AMainMenuController::ChangeMode);
 		
@@ -65,10 +68,15 @@ void AMainMenuController::ShowMouse()
 	}
 }
 
-void AMainMenuController::MouseOnclick_Left()
+void AMainMenuController::MouseOnclick_Left_Pressed()
 {
+	
 	if (bShowMouseCursor)
 	{
+		if (Cast<AMainHUD>(GetHUD())->CurrentState==HUDStateEnum::MainState)
+		{
+			Cast<AMainHUD>(GetHUD())->HideAllUI();
+		}
 		if (MouseOnClicActor)
 		{
 			Cast<AItemObjectActor>(MouseOnClicActor)->ReSetMaterial();		
@@ -80,13 +88,17 @@ void AMainMenuController::MouseOnclick_Left()
 		
 		}else
 		{
-			
-			//UE_LOG(LogTemp,Warning,TEXT("Onclick"));
 			Cast<AMainHUD>(GetHUD())->HideInfoWidget();
 		}
 	}
 }
-
+void AMainMenuController::MouseOnclick_Left_Released()
+{
+	if (Cast<AMainHUD>(GetHUD())->CurrentState==HUDStateEnum::MainState)
+	{
+		Cast<AMainHUD>(GetHUD())->ShowAllUI();
+	}
+}
 void AMainMenuController::MoveForward(float var)
 {
 	

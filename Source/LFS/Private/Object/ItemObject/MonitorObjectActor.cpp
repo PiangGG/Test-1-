@@ -19,5 +19,5 @@ EActorObjectEnum AMonitorObjectActor::GetObjectEnum()
 void AMonitorObjectActor::OnMouseButton_Left_OnClick()
 {
 	Super::OnMouseButton_Left_OnClick();
-	Cast<AMainHUD>(GetWorld()->GetFirstPlayerController()->GetHUD())->ShowBatteryModuleInfoWidget();
+	Cast<AMainHUD>(GetWorld()->GetFirstPlayerController()->GetHUD())->ShowMonitorInfoWidget();
 }

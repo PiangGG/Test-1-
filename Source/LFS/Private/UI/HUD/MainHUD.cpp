@@ -19,147 +19,116 @@
 
 AMainHUD::AMainHUD()
 {
-	if (GEngine&&GEngine->GameViewport)
-	{
-		SAssignNew(MainWidget, SMainWidget);
-		GEngine->GameViewport->AddViewportWidgetContent(MainWidget.ToSharedRef());
-		UE_LOG(LogTemp,Warning,TEXT("InitAElMenuHUD"));
-	}
-	/*if (GEngine&&GEngine->GameViewport)
-	{
-		SAssignNew(TodaoMainWidget, STodaoMainWidget);
-		GEngine->GameViewport->AddViewportWidgetContent(TodaoMainWidget.ToSharedRef());
-		UE_LOG(LogTemp,Warning,TEXT("InitAElMenuHUD"));
-	}*/
+	
 }
 
 void AMainHUD::ChangeHUDState(HUDStateEnum newState)
 {
+	CurrentState=newState;
 	switch (newState)
 	{
 	case HUDStateEnum::NullState:
-		if (GEngine&&GEngine->GameViewport)
-		{
-			//GEngine->GameViewport->RemoveAllViewportWidgets();
-			if (MainTopWidget)
-			{
-				GEngine->GameViewport->RemoveViewportWidgetContent(MainTopWidget.ToSharedRef());
-			}
-			if (MainWidget)
-			{
-				GEngine->GameViewport->RemoveViewportWidgetContent(MainWidget.ToSharedRef());
-			}
-			if (TodaoMainWidget)
-			{
-				GEngine->GameViewport->RemoveViewportWidgetContent(TodaoMainWidget.ToSharedRef());
-			}
-			if (TDGZWidget)
-			{
-				GEngine->GameViewport->RemoveViewportWidgetContent(TDGZWidget.ToSharedRef());
-			}
-			if (InRoomMainWidget)
-			{
-				GEngine->GameViewport->RemoveViewportWidgetContent(InRoomMainWidget.ToSharedRef());
-			}
-			SAssignNew(MainTopWidget, SMainTopWidget).bShowButton(false);
-			GEngine->GameViewport->AddViewportWidgetContent(MainTopWidget.ToSharedRef(),-50);
-		}
+		ChangeHUDState_NullState();
 		break;
 	case HUDStateEnum::MainState:
-		if (GEngine&&GEngine->GameViewport)
-		{
-			if (MainTopWidget)
-			{
-				GEngine->GameViewport->RemoveViewportWidgetContent(MainTopWidget.ToSharedRef());
-			}
-			if (MainWidget)
-			{
-				GEngine->GameViewport->RemoveViewportWidgetContent(MainWidget.ToSharedRef());
-			}
-			if (TodaoMainWidget)
-			{
-				GEngine->GameViewport->RemoveViewportWidgetContent(TodaoMainWidget.ToSharedRef());
-			}
-			if (TDGZWidget)
-			{
-				GEngine->GameViewport->RemoveViewportWidgetContent(TDGZWidget.ToSharedRef());
-			}
-			if (InRoomMainWidget)
-			{
-				GEngine->GameViewport->RemoveViewportWidgetContent(InRoomMainWidget.ToSharedRef());
-			}
-			SAssignNew(MainWidget, SMainWidget);
-			GetWorld()->GetGameViewport()->AddViewportWidgetContent(MainWidget.ToSharedRef(),-50);
-		}
+		ChangeHUDState_MainState();
 		break;
 	case HUDStateEnum::TongDaoState:
-		if (GEngine&&GEngine->GameViewport)
-		{
-			if (MainTopWidget)
-			{
-				GEngine->GameViewport->RemoveViewportWidgetContent(MainTopWidget.ToSharedRef());
-			}
-			if (MainWidget)
-			{
-				GEngine->GameViewport->RemoveViewportWidgetContent(MainWidget.ToSharedRef());
-			}
-			if (TodaoMainWidget)
-			{
-				GEngine->GameViewport->RemoveViewportWidgetContent(TodaoMainWidget.ToSharedRef());
-			}
-			if (TDGZWidget)
-			{
-				GEngine->GameViewport->RemoveViewportWidgetContent(TDGZWidget.ToSharedRef());
-			}
-			if (InRoomMainWidget)
-			{
-				GEngine->GameViewport->RemoveViewportWidgetContent(InRoomMainWidget.ToSharedRef());
-			}
-			SAssignNew(TodaoMainWidget, STodaoMainWidget);
-			GEngine->GameViewport->AddViewportWidgetContent(TodaoMainWidget.ToSharedRef(),-50);
-		}
+		ChangeHUDState_TongDaoState();
 		break;
 	case HUDStateEnum::TDGZState:
-			SAssignNew(TDGZWidget, STDGZWidget);
-			GEngine->GameViewport->AddViewportWidgetContent(TDGZWidget.ToSharedRef(),-50);
+			//SAssignNew(TDGZWidget, STDGZWidget);
+			//GEngine->GameViewport->AddViewportWidgetContent(TDGZWidget.ToSharedRef(),-50);
 			break;
 	case HUDStateEnum::InRoomState:
-		if (GEngine&&GEngine->GameViewport)
-		{
-			if (MainTopWidget)
-			{
-				GEngine->GameViewport->RemoveViewportWidgetContent(MainTopWidget.ToSharedRef());
-			}
-			if (MainWidget)
-			{
-				GEngine->GameViewport->RemoveViewportWidgetContent(MainWidget.ToSharedRef());
-			}
-			if (TodaoMainWidget)
-			{
-				GEngine->GameViewport->RemoveViewportWidgetContent(TodaoMainWidget.ToSharedRef());
-			}
-			if (TDGZWidget)
-			{
-				GEngine->GameViewport->RemoveViewportWidgetContent(TDGZWidget.ToSharedRef());
-			}
-			if (InRoomMainWidget)
-			{
-				GEngine->GameViewport->RemoveViewportWidgetContent(InRoomMainWidget.ToSharedRef());
-			}
-			SAssignNew(InRoomMainWidget, SInRoomMainWidget);
-			GEngine->GameViewport->AddViewportWidgetContent(InRoomMainWidget.ToSharedRef(),-50);
-		}
+		ChangeHUDState_InRoomState();
 		break;
 	default:
 		break;
 	}
-	CurrentState=newState;
+	
+}
+
+void AMainHUD::ChangeHUDState_NullState()
+{
+	if (GEngine&&GEngine->GameViewport&&MainWidget.IsValid())
+	{
+		
+		MainWidget->SetVisibility(EVisibility::Visible);
+		TodaoMainWidget->SetVisibility(EVisibility::Hidden);
+		InRoomMainWidget->SetVisibility(EVisibility::Hidden);
+		
+		MainWidget->ChangeShowMenu(false);
+		HideAllLocationObjectTextWidget();
+	}
+}
+
+void AMainHUD::ChangeHUDState_MainState()
+{
+	if (GEngine&&GEngine->GameViewport&&MainWidget.IsValid())
+	{
+		MainWidget->SetVisibility(EVisibility::Visible);
+		TodaoMainWidget->SetVisibility(EVisibility::Hidden);
+		InRoomMainWidget->SetVisibility(EVisibility::Hidden);
+		
+		MainWidget->ChangeShowMenu(true);
+		ShowAllLocationObjectTextWidget();
+	}
+}
+
+void AMainHUD::ChangeHUDState_TongDaoState()
+{
+	if (GEngine&&GEngine->GameViewport&&TodaoMainWidget.IsValid())
+	{
+		MainWidget->SetVisibility(EVisibility::Hidden);
+		
+		TodaoMainWidget->SetVisibility(EVisibility::Visible);
+		//TodaoMainWidget
+		
+		InRoomMainWidget->SetVisibility(EVisibility::Hidden);
+		HideAllLocationObjectTextWidget();
+
+		Cast<AMainGameMode>(UGameplayStatics::GetGameMode(GWorld))->ChangeWorldMode(EWorldMode::Mode1);
+	}
+}
+
+void AMainHUD::ChangeHUDState_InRoomState()
+{
+	if (GEngine&&GEngine->GameViewport&&InRoomMainWidget.IsValid())
+	{
+		MainWidget->SetVisibility(EVisibility::Hidden);
+		TodaoMainWidget->SetVisibility(EVisibility::Hidden);
+		InRoomMainWidget->SetVisibility(EVisibility::Visible);
+		HideAllLocationObjectTextWidget();
+		Cast<AMainGameMode>(UGameplayStatics::GetGameMode(GWorld))->ChangeWorldMode(EWorldMode::Mode2);
+	}
 }
 
 void AMainHUD::BeginPlay()
 {
 	Super::BeginPlay();
-	ChangeHUDState(HUDStateEnum::NullState);
+
+	SAssignNew(MainWidget, SMainWidget);
+	SAssignNew(TodaoMainWidget, STodaoMainWidget);
+	SAssignNew(InRoomMainWidget, SInRoomMainWidget);
+	
+	if (GEngine->GameViewport)
+	{
+		GEngine->GameViewport->AddViewportWidgetContent(MainWidget.ToSharedRef(),-50);
+		MainWidget->ChangeShowMenu(false);
+		MainWidget->SetVisibility(EVisibility::Visible);
+		
+		GEngine->GameViewport->AddViewportWidgetContent(TodaoMainWidget.ToSharedRef(),-50);
+		TodaoMainWidget->SetVisibility(EVisibility::Hidden);
+
+		GEngine->GameViewport->AddViewportWidgetContent(InRoomMainWidget.ToSharedRef(),-50);
+		InRoomMainWidget->SetVisibility(EVisibility::Hidden);
+	}
+	HideAllLocationObjectTextWidget();
+	/*if (true)
+	{
+		
+	}*/
 }
 
 
@@ -177,7 +146,6 @@ void AMainHUD::ShowInfoWidget()
 			SAssignNew(InfoWidget, SActorObjectInfoMainWidget);
 			GEngine->GameViewport->AddViewportWidgetContent(InfoWidget.ToSharedRef());
 		}
-		
 	}
 }
 
@@ -284,7 +252,33 @@ void AMainHUD::HideAllLocationObjectTextWidget()
 	}
 }
 
-void AMainHUD::RemoveAllUI()
+void AMainHUD::ShowAllUI()
+{
+	if (GEngine&&GEngine->GameViewport)
+	{
+		if (MainWidget)
+		{
+			//MainWidget->SetEnabled(true);
+			MainWidget->SetVisibility(EVisibility::Visible);
+			//ShowAllLocationObjectTextWidget();
+		}
+	}
+}
+
+void AMainHUD::HideAllUI()
+{
+	if (GEngine&&GEngine->GameViewport)
+	{
+		if (MainWidget)
+		{
+			//MainWidget->SetEnabled(true);
+			MainWidget->SetVisibility(EVisibility::Hidden);
+			//HideAllLocationObjectTextWidget();
+		}
+	}
+}
+
+/*void AMainHUD::RemoveAllUI()
 {
 	if (GEngine&&GEngine->GameViewport)
 	{
@@ -309,4 +303,4 @@ void AMainHUD::RemoveAllUI()
 			GEngine->GameViewport->RemoveViewportWidgetContent(InRoomMainWidget.ToSharedRef());
 		}
 	}
-}
+}*/

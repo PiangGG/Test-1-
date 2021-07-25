@@ -50,14 +50,24 @@ void SMainWidget::Construct(const FArguments& InArgs)
 			[
 				SAssignNew(MainBottomWidget,SMainBottomWidget)
 			]
-			+SOverlay::Slot()
-			.HAlign(HAlign_Center)
-			.VAlign(VAlign_Center)
-			[
-				SAssignNew(MainCenterWidget,SMainCenterWidget)
-			]//center
-		//]
 	];
 	
+}
+
+void SMainWidget::ChangeShowMenu(bool bShowMenu)
+{
+	if (bShowMenu)
+	{
+		MainLeftWidget->SetVisibility(EVisibility::Visible);
+		MainRightWidget->SetVisibility(EVisibility::Visible);
+		MainBottomWidget->SetVisibility(EVisibility::Visible);
+		MainTopWidget->SetVisibility(EVisibility::Visible);
+	}else
+	{
+		MainLeftWidget->SetVisibility(EVisibility::Hidden);
+		MainRightWidget->SetVisibility(EVisibility::Hidden);
+		MainBottomWidget->SetVisibility(EVisibility::Hidden);
+		MainTopWidget->SetVisibility(EVisibility::Visible);
+	}
 }
 END_SLATE_FUNCTION_BUILD_OPTIMIZATION

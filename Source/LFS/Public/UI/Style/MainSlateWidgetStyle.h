@@ -26,6 +26,8 @@ struct LFS_API FMainSlateStyle : public FSlateWidgetStyle
 	static const FMainSlateStyle& GetDefault();
 
 public:
+	UPROPERTY(EditAnywhere,Category=TextStyle)
+	FTextBlockStyle LeftTopButtonTextStyle;//蓝色16号字体
 	//Font
 	UPROPERTY(EditAnywhere,Category=Font)
 	FSlateFontInfo FontInfo_Size_16_White;//白色16号字体

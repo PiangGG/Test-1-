@@ -4,6 +4,7 @@
 #include "UI/Widget/TongDao/STodaoMainWidget.h"
 #include "SlateOptMacros.h"
 #include "UI/Style/LFSStyle.h"
+#include "UI/Widget/SLeftTopButtonWidget.h"
 #include "UI/Widget/Main/SMainTopWidget.h"
 #include "UI/Widget/TongDao/Left/SLeft_Main.h"
 #include "UI/Widget/Tongdao/Right/SRight_Main.h"
@@ -33,10 +34,12 @@ void STodaoMainWidget::Construct(const FArguments& InArgs)
 		.VAlign(VAlign_Top)
 		.HAlign(HAlign_Fill)
 		[
-			SNew(SMainTopWidget)
-			.bShowButton(true)
+			SAssignNew(MainTopWidget,SMainTopWidget)
 		]
 	];
-	
+	if (MainTopWidget)
+	{
+		MainTopWidget->LeftTopButtonWidget->ButtonStyle=EButtonStyle::Back;
+	}
 }
 END_SLATE_FUNCTION_BUILD_OPTIMIZATION
