@@ -54,7 +54,10 @@ protected:
 	void Lookup(float var);
 
 	void ShowMouse();
-	void MouseOnclick_Left();
+	
+	void MouseOnclick_Left_Pressed();
+	void MouseOnclick_Left_Released();
+	
 	void FocusActor(AActor *actor);
 
 	UFUNCTION(BlueprintImplementableEvent)

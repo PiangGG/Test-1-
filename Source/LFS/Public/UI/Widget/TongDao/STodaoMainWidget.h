@@ -24,4 +24,8 @@ public:
 	TSharedPtr<class SLeft_Main> Left_Main;
 	
 	TSharedPtr<class SRight_Main> Right_Main;
+	
+	TSharedPtr<class SMainTopWidget> MainTopWidget;
+
+	
 };

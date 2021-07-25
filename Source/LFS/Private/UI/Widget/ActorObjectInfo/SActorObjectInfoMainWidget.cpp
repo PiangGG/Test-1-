@@ -36,18 +36,22 @@ void SActorObjectInfoMainWidget::Construct(const FArguments& InArgs)
 						.HAlign(HAlign_Fill)
 						[
 							SNew(SOverlay)
-							+SOverlay::Slot()
+							/*+SOverlay::Slot()
 							.HAlign(HAlign_Center)
 							.VAlign(VAlign_Center)
 							[
 								SNew(STextBlock)
 								.Font(MainStyle->FontInfo_Size_16_White)
-								.Text(FText::FromString(TEXT("电缆信息")))
-							]
+								
+							]*/
 							+SOverlay::Slot()
 							[	
 								SAssignNew(Button_DLXX,SButton)
+								.HAlign(HAlign_Center)
+								.VAlign(VAlign_Center)
 								.ButtonStyle(&MainStyle->SelecdButtonStyle)
+								.TextStyle(&MainStyle->TextBlockStyle)
+								.Text(FText::FromString(TEXT("电缆信息")))
 								.OnClicked(this,&SActorObjectInfoMainWidget::BuuttonOnClick_1)
 							]
 						]
@@ -55,18 +59,23 @@ void SActorObjectInfoMainWidget::Construct(const FArguments& InArgs)
 						.HAlign(HAlign_Fill)
 						[
 							SNew(SOverlay)
-							+SOverlay::Slot()
+							/*+SOverlay::Slot()
 							.HAlign(HAlign_Center)
 							.VAlign(VAlign_Center)
 							[
 								SNew(STextBlock)
 								.Font(MainStyle->FontInfo_Size_16_White)
-								.Text(FText::FromString(TEXT("电缆信息")))
-							]
+								
+							]*/
 							+SOverlay::Slot()
+							
 							[
 								SAssignNew(Button_DLXX,SButton)
+								.HAlign(HAlign_Center)
+								.VAlign(VAlign_Center)
 								.ButtonStyle(&MainStyle->SelecdButtonStyle)
+								.TextStyle(&MainStyle->TextBlockStyle)
+								.Text(FText::FromString(TEXT("台账信息")))
 								.OnClicked(this,&SActorObjectInfoMainWidget::BuuttonOnClick_2)
 							]
 						]
@@ -74,18 +83,23 @@ void SActorObjectInfoMainWidget::Construct(const FArguments& InArgs)
 						.HAlign(HAlign_Fill)
 						[
 							SNew(SOverlay)
-							+SOverlay::Slot()
+							/*+SOverlay::Slot()
 							.HAlign(HAlign_Center)
 							.VAlign(VAlign_Center)
 							[
 								SNew(STextBlock)
 								.Font(MainStyle->FontInfo_Size_16_White)
-								.Text(FText::FromString(TEXT("运行数据")))
-							]
+								
+							]*/
 							+SOverlay::Slot()
+							
 							[
 								SAssignNew(Button_DLXX,SButton)
+								.HAlign(HAlign_Center)
+								.VAlign(VAlign_Center)
 								.ButtonStyle(&MainStyle->SelecdButtonStyle)
+								.TextStyle(&MainStyle->TextBlockStyle)
+								.Text(FText::FromString(TEXT("运行数据")))
 								.OnClicked(this,&SActorObjectInfoMainWidget::BuuttonOnClick_3)
 							]
 							
@@ -94,19 +108,24 @@ void SActorObjectInfoMainWidget::Construct(const FArguments& InArgs)
 						.HAlign(HAlign_Fill)
 						[
 							SNew(SOverlay)
-							+SOverlay::Slot()
+							/*+SOverlay::Slot()
 							.HAlign(HAlign_Center)
 							.VAlign(VAlign_Center)
 							[
 								SNew(STextBlock)
 								.Font(MainStyle->FontInfo_Size_16_White)
-								.Text(FText::FromString(TEXT("电缆感知")))
-							]
+								
+							]*/
 							+SOverlay::Slot()
+							
 							[
 								SAssignNew(Button_DLXX,SButton)
+								.HAlign(HAlign_Center)
+								.VAlign(VAlign_Center)
 								.ButtonStyle(&MainStyle->SelecdButtonStyle)
 								.OnClicked(this,&SActorObjectInfoMainWidget::BuuttonOnClick_4)
+								.TextStyle(&MainStyle->TextBlockStyle)
+								.Text(FText::FromString(TEXT("电缆感知")))
 							]
 						]
 					]	

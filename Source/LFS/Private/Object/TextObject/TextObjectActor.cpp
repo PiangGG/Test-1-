@@ -7,6 +7,7 @@
 #include "GamePlay/MainCharacter.h"
 #include "GamePlay/MainGameMode.h"
 #include "Kismet/GameplayStatics.h"
+#include "UI/HUD/MainHUD.h"
 #include "UI/Widget/TextInfoWidget/STextInfoWidgetBase.h"
 
 // Sets default values
@@ -41,7 +42,6 @@ void ATextObjectActor::Show()
 		SAssignNew(TextInfoWidgetBase, STextInfoWidgetBase)
 		.TextImage(TextImage)
 		.OnClickedImage_UObject(this,&ATextObjectActor::OnImageOnclick);
-		
 		WidgetComponent->SetSlateWidget(TextInfoWidgetBase);
 		WidgetComponent->SetVisibility(true);
 	}

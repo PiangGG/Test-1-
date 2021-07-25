@@ -18,6 +18,7 @@ public:
 	/** Constructs this widget with InArgs */
 	void Construct(const FArguments& InArgs);
 
+	void ChangeShowMenu(bool bShowMenu);
 	private:
 	//引入Sytle|获取MenuStyle
 	const struct FMainSlateStyle* MainStyle;
@@ -30,4 +31,6 @@ public:
 
 	//DPI缩放
 	TAttribute<float> UIScaler;
+
+	
 };

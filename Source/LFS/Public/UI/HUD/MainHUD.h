@@ -40,6 +40,10 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void ChangeHUDState(HUDStateEnum newState);
+	void ChangeHUDState_NullState();
+	void ChangeHUDState_MainState();
+	void ChangeHUDState_TongDaoState();
+	void ChangeHUDState_InRoomState();
 
 	protected:
 	virtual void BeginPlay() override;
@@ -60,7 +64,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void HideAllLocationObjectTextWidget();
 	UFUNCTION(BlueprintCallable)
-	void RemoveAllUI();
+	void ShowAllUI();
+	UFUNCTION(BlueprintCallable)
+	void HideAllUI();
 	
 	UPROPERTY(BlueprintReadWrite,EditAnywhere)
 	TArray<class AActor*>TextObjectActor;

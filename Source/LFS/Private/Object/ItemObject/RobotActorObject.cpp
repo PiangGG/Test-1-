@@ -66,6 +66,8 @@ void ARobotActorObject::Show()
 		SAssignNew(RobotWidget, SRobotWidget);
 		WidgetComponent->SetSlateWidget(RobotWidget);
 		WidgetComponent->SetVisibility(true);
+		WidgetComponent->SetWidgetSpace(EWidgetSpace::Screen);
+		WidgetComponent->bSelectable=true;
 	}
 }
 
@@ -82,12 +84,13 @@ void ARobotActorObject::UpdateLocation(float DeltaSeconds)
 {
 	if ((CurrentLoation-EndLoation).Size()>1.0f)
 	{
-		CurrentLoation=FMath::VInterpTo(CurrentLoation,EndLoation,DeltaSeconds,1.0f);
+		CurrentLoation=FMath::VInterpTo(CurrentLoation,EndLoation,DeltaSeconds,0.5f);
 		SetActorRelativeLocation(CurrentLoation);
 	}else
 	{
 		FVector TempLocation=EndLoation;
 		EndLoation=StartLoation;
 		StartLoation=TempLocation;
+		Destroy();
 	}
 }

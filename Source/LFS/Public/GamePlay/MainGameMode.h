@@ -12,6 +12,19 @@
 /**
  * 
  */
+USTRUCT()
+struct FActorMatStruct
+{
+	GENERATED_USTRUCT_BODY()
+	UStaticMesh *Mesh;
+	TArray<UMaterialInterface*> MatArray;
+};
+UENUM()
+enum class EWorldMode
+{
+	Mode1,//现实
+	Mode2,//水晶
+};
 UCLASS()
 class LFS_API AMainGameMode : public AGameModeBase
 {
@@ -31,14 +44,11 @@ class LFS_API AMainGameMode : public AGameModeBase
 	void ResetAllStatticMeshMaterial();
 	void RecordAllStatticMeshMaterial();
 	TArray<AActor*> AllActor;
-	TArray<class UMaterialInterface*> AllMaterials;
-	TArray<class UMaterialInterface*> NoChangeMaterials;
+	TArray<FActorMatStruct*> AllMaterials;
 	//将要更换的材质
 	UMaterialInterface* Materials;
-		
-	TArray<class AStaticMeshActor*> WorldAllActors;
-	TArray<UMaterialInterface*> UMaterials;
 
+	TArray<AActor*> HideActor;
 	
 	FTimerHandle TimerHandle;
 	float JumpTime=1.0f;
@@ -58,4 +68,16 @@ class LFS_API AMainGameMode : public AGameModeBase
 	void ChangeActorLocation(FString LocationName);
 
 	UClass *SpawnCharatorClass;
+
+	UPROPERTY()
+	EWorldMode WorldMode;
+	
+	void ChangeWorldMode(EWorldMode newMode);
+
+	//生成智能车
+	class ARobotActorObject *RobotActorObject;
+	void CreateCat();
+	void ShowAllWorkObject();
+
+	TArray<class AActor*>WorkObjectActors;
 };

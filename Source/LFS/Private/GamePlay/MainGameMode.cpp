@@ -11,6 +11,8 @@
 #include "GamePlay/MainMenuController.h"
 #include "Kismet/GameplayStatics.h"
 #include "Location/LocationTargetPoint.h"
+#include "Object/ItemObject/RobotActorObject.h"
+#include "Object/ItemObject/WorkObjectActor.h"
 #include "Object/TextObject/TextObjectActor.h"
 #include "UI/HUD/MainHUD.h"
 
@@ -23,6 +25,8 @@ AMainGameMode::AMainGameMode()
 	//变换后的材质
 	ConstructorHelpers::FObjectFinder<UMaterialInterface>Material(TEXT("MaterialInstanceConstant'/Game/ThirdPersonBP/ThirdPersonBP/NewMaterial_2_Inst.NewMaterial_2_Inst'"));
 	Materials=Material.Object;
+	
+	WorldMode=EWorldMode::Mode1;
 }
 
 void AMainGameMode::ChangePawn(AActor* actor)
@@ -54,37 +58,58 @@ void AMainGameMode::ChangeAllStaticMeshMaterial()
 {
 	UE_LOG(LogTemp,Warning,TEXT("AMainGameMode::ChangeAllStaticMeshMaterial()"));
 
-	/*for (int i=0;i<AllActor.Num();i++)
+	for (int i=0;i<AllActor.Num();i++)
 	{
 		for (int j=0;j<Cast<AStaticMeshActor>(AllActor[i])->GetStaticMeshComponent()->GetMaterials().Num();j++)
 		{
-			Cast<AStaticMeshActor>(AllActor[i])->GetStaticMeshComponent()->SetMaterial(j,Materials);
+			if (AllActor[i])
+			{
+				Cast<AStaticMeshActor>(AllActor[i])->GetStaticMeshComponent()->SetMaterial(j,Materials);
+			}
 		}
-		
-	}*/
-	
+	}
+	for (int i =0;i<HideActor.Num();i++)
+	{
+		HideActor[i]->SetActorHiddenInGame(true);
+	}
 }
 
 void AMainGameMode::ResetAllStatticMeshMaterial()
 {
-	/*for (int i=0;i<AllActor.Num();i++)
+	UE_LOG(LogTemp,Warning,TEXT("AMainGameMode::ResetAllStatticMeshMaterial()"));
+	for (int i=0;i<AllActor.Num();i++)
 	{
 		for (int j=0;j<Cast<AStaticMeshActor>(AllActor[i])->GetStaticMeshComponent()->GetMaterials().Num();j++)
 		{
-			Cast<AStaticMeshActor>(AllActor[i])->GetStaticMeshComponent()->SetMaterial(j,AllMaterials[j]);
+			if (AllMaterials.IsValidIndex(i)&&AllMaterials[i]->MatArray.IsValidIndex(j))
+			{
+				Cast<AStaticMeshActor>(AllActor[i])->GetStaticMeshComponent()->SetMaterial(j,AllMaterials[i]->MatArray[j]);
+			}
 		}
-	}*/
+	}
+	for (int i =0;i<HideActor.Num();i++)
+	{
+		HideActor[i]->SetActorHiddenInGame(false);
+	}
 }
 
 void AMainGameMode::RecordAllStatticMeshMaterial()
 {
-	/*UGameplayStatics::GetAllActorsOfClass(GetWorld(),AStaticMeshActor::StaticClass(),AllActor);
-
+	
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(),AStaticMeshActor::StaticClass(),AllActor);
+	AllMaterials.Reset(AllActor.Num());
 	for (int i=0;i<AllActor.Num();i++)
 	{
-		AllMaterials.Append(Cast<AStaticMeshActor>(AllActor[i])->GetStaticMeshComponent()->GetMaterials());
+		FActorMatStruct* ActorMatStruct = new FActorMatStruct();
+		//if (ActorMatStruct)
+		{
+			ActorMatStruct->Mesh=Cast<AStaticMeshActor>(AllActor[i])->GetStaticMeshComponent()->GetStaticMesh();
+			ActorMatStruct->MatArray=(Cast<AStaticMeshActor>(AllActor[i])->GetStaticMeshComponent()->GetMaterials());
+			AllMaterials.Add(ActorMatStruct);
+		}
 	}
-	*/
+	UGameplayStatics::GetAllActorsWithTag(GetWorld(),FName("Hide"),HideActor);
+	
 }
 
 void AMainGameMode::JumpActorLocation(AActor* LocationActor)
@@ -143,5 +168,52 @@ void AMainGameMode::ChangeActorLocation(FString LocationName)
 		{
 			JumpActorLocation(LocationTargetPoint);
 		}
+	}
+}
+
+void AMainGameMode::ChangeWorldMode(EWorldMode newMode)
+{
+	WorldMode=newMode;
+	switch (WorldMode)
+	{
+		case EWorldMode::Mode1:
+			ResetAllStatticMeshMaterial();
+			if (Cast<AMainHUD>(GetWorld()->GetFirstPlayerController()->GetHUD())->CurrentState==HUDStateEnum::MainState)
+			{
+				Cast<AMainHUD>(GetWorld()->GetFirstPlayerController()->GetHUD())->ChangeHUDState(HUDStateEnum::NullState);
+			}
+			break;
+		case EWorldMode::Mode2:
+			ChangeAllStaticMeshMaterial();
+			
+			if (Cast<AMainHUD>(GetWorld()->GetFirstPlayerController()->GetHUD())->CurrentState==HUDStateEnum::NullState)
+			{
+				Cast<AMainHUD>(GetWorld()->GetFirstPlayerController()->GetHUD())->ChangeHUDState(HUDStateEnum::MainState);
+			}
+			/*if (Cast<AMainHUD>(GetWorld()->GetFirstPlayerController()->GetHUD())->CurrentState==HUDStateEnum::InRoomState)
+			{
+				
+			}*/
+			break;
+		default: break;
+	}
+}
+
+void AMainGameMode::CreateCat()
+{
+	UE_LOG(LogTemp,Warning,TEXT("CreateCat()"));
+	FVector Vector1=FVector(88.9,-204.3,-328.4);
+	FRotator Rotator1=FRotator((0.0,269.9,0.0));
+	RobotActorObject=GetWorld()->SpawnActor<ARobotActorObject>(ARobotActorObject::StaticClass(),Vector1,Rotator1);
+	RobotActorObject->Show();
+	RobotActorObject->StartLoation=FVector((68.9,-204.3,-328.4));
+	RobotActorObject->EndLoation=FVector((-1011.0,-204.3,-328.4));
+}
+void AMainGameMode::ShowAllWorkObject()
+{
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(),AWorkObjectActor::StaticClass(),WorkObjectActors);
+	for (int i =0;i<WorkObjectActors.Num();i++)
+	{
+		Cast<AWorkObjectActor>(WorkObjectActors[i])->OnMouseButton_Left_OnClick();
 	}
 }
