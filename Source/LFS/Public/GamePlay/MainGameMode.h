@@ -46,7 +46,7 @@ class LFS_API AMainGameMode : public AGameModeBase
 	TArray<AActor*> AllActor;
 	TArray<FActorMatStruct*> AllMaterials;
 	//将要更换的材质
-	UMaterialInterface* Materials;
+	UMaterialInterface* MaterialInterface;
 
 	TArray<AActor*> HideActor;
 	

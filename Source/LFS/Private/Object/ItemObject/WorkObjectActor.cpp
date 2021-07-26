@@ -70,7 +70,7 @@ void AWorkObjectActor::State_DaiDian()
 	TextRenderComponent->SetText(FText::FromString(FString(TEXT("带W"))+FString(TEXT("<br>")+FString(TEXT("电A"))+FString(TEXT("<br>"))+FString(TEXT("状I"))+FString(TEXT("<br>"))+FString(TEXT("态T")))));
 	for (int i=0;i<StaticMeshComponent->GetMaterials().Num();i++)
 	{
-		//StaticMeshComponent->SetMaterial(i,MaterialInterface_R);
+		StaticMeshComponent->SetMaterial(i,MaterialInterface_R);
 	}
 }
 
@@ -80,6 +80,6 @@ void AWorkObjectActor::State_Working()
 	TextRenderComponent->SetText(FText::FromString(FString(TEXT("在W"))+FString(TEXT("<br>")+FString(TEXT("此O"))+FString(TEXT("<br>"))+FString(TEXT("作R"))+FString(TEXT("<br>"))+FString(TEXT("业K")))));
 	for (int i=0;i<StaticMeshComponent->GetMaterials().Num();i++)
 	{
-		//StaticMeshComponent->SetMaterial(i,MaterialInterface_G);
+		StaticMeshComponent->SetMaterial(i,MaterialInterface_G);
 	}
 }

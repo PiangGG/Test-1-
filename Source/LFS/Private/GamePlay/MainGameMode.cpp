@@ -23,8 +23,9 @@ AMainGameMode::AMainGameMode()
 	DefaultPawnClass=ADefaultPawn::StaticClass();
 
 	//变换后的材质
-	ConstructorHelpers::FObjectFinder<UMaterialInterface>Material(TEXT("MaterialInstanceConstant'/Game/ThirdPersonBP/ThirdPersonBP/NewMaterial_2_Inst.NewMaterial_2_Inst'"));
-	Materials=Material.Object;
+	//ConstructorHelpers::FObjectFinder<UMaterialInterface>Material(TEXT("MaterialInstanceConstant'/Game/Material/StaticMesh/MI_WorkBoxActor_G.MI_WorkBoxActor_G'"));
+	MaterialInterface=LoadObject<UMaterialInstance>(NULL,TEXT("MaterialInstanceConstant'/Game/Material/StaticMesh/MI_WorkBoxActor_R.MI_WorkBoxActor_R'"));
+	//MaterialInterface=Material.Object;
 	
 	WorldMode=EWorldMode::Mode1;
 }
@@ -64,7 +65,8 @@ void AMainGameMode::ChangeAllStaticMeshMaterial()
 		{
 			if (AllActor[i])
 			{
-				Cast<AStaticMeshActor>(AllActor[i])->GetStaticMeshComponent()->SetMaterial(j,Materials);
+				Cast<AStaticMeshActor>(AllActor[i])->GetStaticMeshComponent()->SetMaterial(j,MaterialInterface);
+				//Cast<AStaticMeshActor>(AllActor[i])->GetStaticMeshComponent()->SetMaterial(j,AllMaterials[i]->MatArray[0]);
 			}
 		}
 	}
