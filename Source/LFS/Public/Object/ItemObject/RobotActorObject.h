@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 
 #include "ItemObjectActor.h"
+#include "Engine/TargetPoint.h"
 #include "Object/BaseActorObject.h"
 #include "RobotActorObject.generated.h"
 
@@ -18,6 +19,8 @@ class LFS_API ARobotActorObject : public AItemObjectActor
 	public:
 	ARobotActorObject();
 	virtual void Tick(float DeltaSeconds) override;
+
+	virtual void BeginPlay() override;
 	public:
 	virtual EActorObjectEnum GetObjectEnum()override;
 
@@ -37,12 +40,14 @@ class LFS_API ARobotActorObject : public AItemObjectActor
 	bool bIsShow=false;
 
 	public:
+	TArray<AActor*> MoveTargetPoints;
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
-	FVector StartLoation;
+	class ATargetPoint *StartLoation;
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
-	FVector EndLoation;
+	class ATargetPoint* EndLoation;
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	FVector CurrentLoation;
 
 	void UpdateLocation(float DeltaSeconds);
 };
+

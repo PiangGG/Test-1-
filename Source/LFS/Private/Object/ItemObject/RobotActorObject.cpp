@@ -4,6 +4,7 @@
 #include "Object/ItemObject/RobotActorObject.h"
 
 #include "Components/WidgetComponent.h"
+#include "Kismet/GameplayStatics.h"
 #include "UI/Widget/ActorObjectInfo/SRobotWidget.h"
 
 ARobotActorObject::ARobotActorObject()
@@ -15,8 +16,7 @@ ARobotActorObject::ARobotActorObject()
 	WidgetComponent->SetupAttachment(StaticMeshComponent);
 	WidgetComponent->SetRelativeLocation(FVector(-200,0,400.0));
 
-	StartLoation=GetActorLocation();
-	CurrentLoation=StartLoation;
+
 }
 
 void ARobotActorObject::Tick(float DeltaSeconds)
@@ -29,7 +29,17 @@ void ARobotActorObject::Tick(float DeltaSeconds)
 	
 	UpdateLocation(DeltaSeconds);
 }
-
+void ARobotActorObject::BeginPlay()
+{
+	Super::BeginPlay();
+	UGameplayStatics::GetAllActorsOfClassWithTag(GetWorld(),ATargetPoint::StaticClass(),FName("RotMoveTarget"),MoveTargetPoints);
+	if (MoveTargetPoints[0]&&MoveTargetPoints[1])
+	{
+		StartLoation = Cast<ATargetPoint>(MoveTargetPoints[0]);
+		EndLoation = Cast<ATargetPoint>(MoveTargetPoints[1]);
+		CurrentLoation=StartLoation->GetActorLocation();
+	}
+}
 EActorObjectEnum ARobotActorObject::GetObjectEnum()
 {
 	return  EActorObjectEnum::Robot;
@@ -82,15 +92,16 @@ void ARobotActorObject::Hide()
 
 void ARobotActorObject::UpdateLocation(float DeltaSeconds)
 {
-	if ((CurrentLoation-EndLoation).Size()>1.0f)
+	
+	if ((StartLoation->GetActorLocation()-EndLoation->GetActorLocation()).Size()>1.0f)
 	{
-		CurrentLoation=FMath::VInterpTo(CurrentLoation,EndLoation,DeltaSeconds,0.5f);
+		CurrentLoation=FMath::VInterpTo(CurrentLoation,EndLoation->GetActorLocation(),DeltaSeconds,0.5f);
 		SetActorRelativeLocation(CurrentLoation);
 	}else
 	{
-		FVector TempLocation=EndLoation;
+		/*FVector TempLocation=EndLoation->GetActorLocation();
 		EndLoation=StartLoation;
-		StartLoation=TempLocation;
+		EndLoation->GetActorLocation()=TempLocation;*/
 		Destroy();
 	}
 }

@@ -23,9 +23,9 @@ AMainGameMode::AMainGameMode()
 	DefaultPawnClass=ADefaultPawn::StaticClass();
 
 	//变换后的材质
-	//ConstructorHelpers::FObjectFinder<UMaterialInterface>Material(TEXT("MaterialInstanceConstant'/Game/Material/StaticMesh/MI_WorkBoxActor_G.MI_WorkBoxActor_G'"));
-	MaterialInterface=LoadObject<UMaterialInstance>(NULL,TEXT("MaterialInstanceConstant'/Game/Material/StaticMesh/MI_WorkBoxActor_R.MI_WorkBoxActor_R'"));
-	//MaterialInterface=Material.Object;
+	ConstructorHelpers::FObjectFinder<UMaterialInterface>Material(TEXT("MaterialInstanceConstant'/Game/Material/StaticMesh/MI_WorkBoxActor_G.MI_WorkBoxActor_G'"));
+	//MaterialInterface=LoadObject<UMaterialInstance>(NULL,TEXT("MaterialInstanceConstant'/Game/Material/StaticMesh/MI_WorkBoxActor_R.MI_WorkBoxActor_R'"));
+	MaterialInterface=Material.Object;
 	
 	WorldMode=EWorldMode::Mode1;
 }
@@ -204,12 +204,12 @@ void AMainGameMode::ChangeWorldMode(EWorldMode newMode)
 void AMainGameMode::CreateCat()
 {
 	UE_LOG(LogTemp,Warning,TEXT("CreateCat()"));
-	FVector Vector1=FVector(88.9,-204.3,-328.4);
-	FRotator Rotator1=FRotator((0.0,269.9,0.0));
-	RobotActorObject=GetWorld()->SpawnActor<ARobotActorObject>(ARobotActorObject::StaticClass(),Vector1,Rotator1);
-	RobotActorObject->Show();
-	RobotActorObject->StartLoation=FVector((68.9,-204.3,-328.4));
-	RobotActorObject->EndLoation=FVector((-1011.0,-204.3,-328.4));
+	UGameplayStatics::GetAllActorsOfClassWithTag(GetWorld(),ATargetPoint::StaticClass(),FName("RotMoveTarget"),MoveTargetPoints);
+	if (MoveTargetPoints[0])
+	{
+		RobotActorObject=GetWorld()->SpawnActor<ARobotActorObject>(ARobotActorObject::StaticClass(),MoveTargetPoints[0]->GetActorLocation(),MoveTargetPoints[0]->GetActorRotation());
+		RobotActorObject->Show();
+	}
 }
 void AMainGameMode::ShowAllWorkObject()
 {

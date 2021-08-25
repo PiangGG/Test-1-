@@ -10,7 +10,9 @@ public class LFS : ModuleRules
 	
 		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore","Json",
 			"JsonUtilities","WebBrowser","WebBrowserWidget","UMG"});
-
+		
+		PublicDependencyModuleNames.Add("DatabaseConnector");
+		
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
 
 		// Uncomment if you are using Slate UI

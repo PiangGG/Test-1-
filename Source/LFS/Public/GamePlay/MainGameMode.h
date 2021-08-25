@@ -78,6 +78,6 @@ class LFS_API AMainGameMode : public AGameModeBase
 	class ARobotActorObject *RobotActorObject;
 	void CreateCat();
 	void ShowAllWorkObject();
-
+	TArray<AActor*>MoveTargetPoints;
 	TArray<class AActor*>WorkObjectActors;
 };
