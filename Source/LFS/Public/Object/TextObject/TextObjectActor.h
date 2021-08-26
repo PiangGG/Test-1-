@@ -61,7 +61,10 @@ public:
 	FVector TargetActorLocation;
 	FRotator TargetActorRotator;
 
+	UFUNCTION(BlueprintCallable)
 	void ShowWidget();
+
+	UFUNCTION(BlueprintCallable)
 	void HideWidget();
 
 	

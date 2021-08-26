@@ -40,7 +40,7 @@ void AMainGameMode::BeginPlay()
 {
 	Super::BeginPlay();
 	RecordAllStatticMeshMaterial();
-	ChangeActorLocation(FString("Start"));
+	//ChangeActorLocation(FString("Start"));
 }
 
 void AMainGameMode::ChangeCharacter(APawn *Pawn)
