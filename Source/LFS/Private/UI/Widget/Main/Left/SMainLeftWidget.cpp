@@ -15,7 +15,7 @@ BEGIN_SLATE_FUNCTION_BUILD_OPTIMIZATION
 void SMainLeftWidget::Construct(const FArguments& InArgs)
 {
 	MainStyle=&LFSStyle::Get().GetWidgetStyle<FMainSlateStyle>("BPMainStyle");
-	theState = LFSDataHandle::Get()->State;
+	/*theState = LFSDataHandle::Get()->State;
 	
 	DistributionNetworkStatus=FString(TEXT("配网状态"))+FString(*theState[0].Find(FString("State")));
 	DistributionNetworkStatusfloat=FString(*theState[0].Find(FString("percent")));
@@ -24,7 +24,7 @@ void SMainLeftWidget::Construct(const FArguments& InArgs)
 	OperationAndMaintenanceStatusfloat=FString(*theState[1].Find(FString("percent")));
 
 	PowerSupplyStatus=FString(TEXT("供电状态"))+FString(*theState[2].Find(FString("State")));
-	PowerSupplyStatusfloat=FString(*theState[2].Find(FString("percent")));
+	PowerSupplyStatusfloat=FString(*theState[2].Find(FString("percent")));*/
 	ChildSlot
 	[
 		// Populate the widget
