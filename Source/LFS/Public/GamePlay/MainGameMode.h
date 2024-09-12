@@ -40,8 +40,11 @@ class LFS_API AMainGameMode : public AGameModeBase
 	void ChangeCharacter(APawn *Pawn);
 	//virtual  void SetPlayerDefaults(APawn* PlayerPawn) override;
 
+	UFUNCTION(BlueprintCallable)
 	void ChangeAllStaticMeshMaterial();
+	UFUNCTION(BlueprintCallable)
 	void ResetAllStatticMeshMaterial();
+	UFUNCTION(BlueprintCallable)
 	void RecordAllStatticMeshMaterial();
 	TArray<AActor*> AllActor;
 	TArray<FActorMatStruct*> AllMaterials;
